@@ -140,12 +140,18 @@ namespace ProjectManagerSystem.Controllers
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
-        {
-
-            // var lstRole = (new MsContext()).Roles.ToList().Select(p=>new SelectListItem { Value=p.Name.ToString(),Text=p.Name});
+        { // var lstRole = (new MsContext()).Roles.ToList().Select(p=>new SelectListItem { Value=p.Name.ToString(),Text=p.Name});
             var lstRole = (new MsContext()).Roles.ToList();
-            ViewBag.lstRole = new SelectList(lstRole,"Id","Name");
+            ViewBag.lstRole = new SelectList(lstRole, "Id", "Name");
+            
+                
             return View();
+
+
+
+
+
+
         }
 
         //
