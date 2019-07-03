@@ -189,6 +189,8 @@ C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManag
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.DataAccess.dll
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Repository.dll
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Service.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\Newtonsoft.Json.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\Owin.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\System.Diagnostics.DiagnosticSource.dll
@@ -208,6 +210,10 @@ C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManag
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\WebGrease.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.DataAccess.pdb
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.DataAccess.dll.config
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Repository.pdb
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Repository.dll.config
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Service.pdb
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Service.dll.config
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\System.Web.Helpers.xml
@@ -244,9 +250,3 @@ C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManag
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\obj\Debug\ProjectManagerSystem.csproj.CopyComplete
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\obj\Debug\ProjectManagerSystem.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\obj\Debug\ProjectManagerSystem.pdb
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Repository.dll
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Service.dll
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Repository.pdb
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Repository.dll.config
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Service.pdb
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\ProjectManagerSystem\bin\MS.Service.dll.config

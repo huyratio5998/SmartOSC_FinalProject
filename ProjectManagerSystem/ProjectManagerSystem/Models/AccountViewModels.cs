@@ -49,9 +49,9 @@ namespace ProjectManagerSystem.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "User name")]
+        [StringLength(32, MinimumLength = 2)]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +64,11 @@ namespace ProjectManagerSystem.Models
 
     public class RegisterViewModel
     {
+        //[Required]
+        //[StringLength(32, MinimumLength = 2)]
+        //[Display(Name = "User Name")]
+        //public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

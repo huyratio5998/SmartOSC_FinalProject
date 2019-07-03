@@ -14,7 +14,6 @@ namespace MS.Repository
     {
         private readonly MsContext _context;
 
-
         public BaseRepository(MsContext context)
         {
             _context = context;

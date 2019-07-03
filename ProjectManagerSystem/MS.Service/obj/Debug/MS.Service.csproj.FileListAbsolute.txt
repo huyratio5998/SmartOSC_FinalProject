@@ -39,8 +39,14 @@ C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\b
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\Microsoft.Owin.Security.Cookies.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\Microsoft.Owin.Security.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.DataAccess.dll
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.Repository.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\Newtonsoft.Json.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\Owin.dll
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.DataAccess.pdb
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.DataAccess.dll.config
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.Repository.pdb
+C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.Repository.dll.config
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\EntityFramework.xml
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\Microsoft.AspNet.Identity.Core.xml
@@ -56,9 +62,3 @@ C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\o
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\obj\Debug\MS.Service.csproj.CopyComplete
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\obj\Debug\MS.Service.dll
 C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\obj\Debug\MS.Service.pdb
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.DataAccess.dll
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.Repository.dll
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.DataAccess.pdb
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.DataAccess.dll.config
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.Repository.pdb
-C:\Users\PC_KIEN\Desktop\SmartOSC_FinalProject\ProjectManagerSystem\MS.Service\bin\Debug\MS.Repository.dll.config
