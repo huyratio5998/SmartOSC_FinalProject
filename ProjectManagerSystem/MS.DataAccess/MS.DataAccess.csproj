@@ -75,9 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201907030218224_updateDB.cs" />
-    <Compile Include="Migrations\201907030218224_updateDB.Designer.cs">
-      <DependentUpon>201907030218224_updateDB.cs</DependentUpon>
+    <Compile Include="Migrations\201907030851095_update.cs" />
+    <Compile Include="Migrations\201907030851095_update.Designer.cs">
+      <DependentUpon>201907030851095_update.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetUsers.cs" />
@@ -92,8 +92,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907030218224_updateDB.resx">
-      <DependentUpon>201907030218224_updateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907030851095_update.resx">
+      <DependentUpon>201907030851095_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

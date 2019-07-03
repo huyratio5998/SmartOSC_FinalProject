@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MS.DataAccess;
 using MS.DataAccess.Models;
 using ProjectManagerSystem.Models;
 
@@ -140,9 +141,20 @@ namespace ProjectManagerSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.lstRole=
-                
+            MsContext msContext = new MsContext();
+
+            var list = msContext.Roles.OrderBy(r => r.Name)
+                .ToList()
+                .Select(c => new SelectListItem { Value = c.Name.ToString(), Text = c.Name })
+                .ToList();
+            ViewBag.Roles = list;
             return View();
+
+
+
+
+
+
         }
 
         //
@@ -155,7 +167,7 @@ namespace ProjectManagerSystem.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = new AspNetUsers { FullName = model.FullName,UserName = model.UserName, Email = model.Email , Roles=model.Role};
+                var user = new AspNetUsers { FullName = model.FullName,UserName = model.UserName, Email = model.Email};
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

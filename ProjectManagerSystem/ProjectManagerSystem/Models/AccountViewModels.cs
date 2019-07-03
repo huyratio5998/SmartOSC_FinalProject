@@ -97,7 +97,12 @@ namespace ProjectManagerSystem.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        public ICollection<IRole> Role { get; set; }
+        
+        public ICollection<IRole> Roles { get; set; }
+
+    }
+    public class role
+    {
 
     }
     
