@@ -1,6 +1,7 @@
+using ProjectManagerSystem.Controllers;
 using System;
-
 using Unity;
+using Unity.Injection;
 
 namespace ProjectManagerSystem
 {
@@ -36,12 +37,10 @@ namespace ProjectManagerSystem
         /// </remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-            // NOTE: To load from web.config uncomment the line below.
-            // Make sure to add a Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
-
-            // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            //var UnityContainer = new UnityContainer();
+            container.RegisterType<ManageController>(new InjectionConstructor());
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            
         }
     }
 }

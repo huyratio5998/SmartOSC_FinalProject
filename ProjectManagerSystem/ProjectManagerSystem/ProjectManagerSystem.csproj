@@ -277,6 +277,14 @@
       <Project>{070ADDB8-B410-42BE-9F1B-E4465EDDCC00}</Project>
       <Name>MS.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MS.Repository\MS.Repository.csproj">
+      <Project>{56316e34-2add-40f3-af07-794b99bcfcff}</Project>
+      <Name>MS.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MS.Service\MS.Service.csproj">
+      <Project>{59a7553d-d351-4308-9e8c-c4c1b4444437}</Project>
+      <Name>MS.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

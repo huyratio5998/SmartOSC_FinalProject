@@ -152,7 +152,7 @@ namespace ProjectManagerSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AspNetUsers { UserName = model.Email, Email = model.Email };
+                var user = new AspNetUsers { FullName = model.Email, UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

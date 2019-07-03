@@ -3,7 +3,7 @@ namespace MS.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updatemodel : DbMigration
+    public partial class updateDB : DbMigration
     {
         public override void Up()
         {
