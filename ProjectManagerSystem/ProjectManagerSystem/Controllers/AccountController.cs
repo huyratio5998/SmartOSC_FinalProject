@@ -140,6 +140,8 @@ namespace ProjectManagerSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.lstRole=
+                
             return View();
         }
 
@@ -152,7 +154,9 @@ namespace ProjectManagerSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AspNetUsers { FullName = model.Email, UserName = model.Email, Email = model.Email };
+
+                var user = new AspNetUsers { FullName = model.FullName,UserName = model.UserName, Email = model.Email , Roles=model.Role};
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

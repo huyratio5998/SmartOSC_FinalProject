@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManagerSystem.Models
@@ -69,6 +70,18 @@ namespace ProjectManagerSystem.Models
         //[Display(Name = "User Name")]
         //public string UserName { get; set; }
 
+        
+
+        [Required]
+        [StringLength(32, MinimumLength = 2)]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "FullName")]
+        public string FullName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -84,8 +97,10 @@ namespace ProjectManagerSystem.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-    }
+        public ICollection<IRole> Role { get; set; }
 
+    }
+    
     public class ResetPasswordViewModel
     {
         [Required]
