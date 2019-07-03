@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -7,7 +6,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MS.DataAccess;
@@ -143,10 +141,10 @@ namespace ProjectManagerSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            RegisterViewModel k=new RegisterViewModel();
-            List<IdentityRole> lstRole = (new MsContext()).Roles.ToList();
-            IdentityRole obj = new IdentityRole();
-            ViewBag.lstRole = new SelectList(lstRole,obj);
+
+            // var lstRole = (new MsContext()).Roles.ToList().Select(p=>new SelectListItem { Value=p.Name.ToString(),Text=p.Name});
+            var lstRole = (new MsContext()).Roles.ToList();
+            ViewBag.lstRole = new SelectList(lstRole,"Id","Name");
             return View();
         }
 
