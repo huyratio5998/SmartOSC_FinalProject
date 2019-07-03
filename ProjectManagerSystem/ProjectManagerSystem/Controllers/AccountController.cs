@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -6,8 +7,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MS.DataAccess;
 using MS.DataAccess.Models;
 using ProjectManagerSystem.Models;
 
@@ -140,8 +143,10 @@ namespace ProjectManagerSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.lstRole=
-                
+            RegisterViewModel k=new RegisterViewModel();
+            List<IdentityRole> lstRole = (new MsContext()).Roles.ToList();
+            IdentityRole obj = new IdentityRole();
+            ViewBag.lstRole = new SelectList(lstRole,obj);
             return View();
         }
 
@@ -155,7 +160,7 @@ namespace ProjectManagerSystem.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = new AspNetUsers { FullName = model.FullName,UserName = model.UserName, Email = model.Email , Roles=model.Role};
+                var user = new AspNetUsers { FullName = model.FullName,UserName = model.UserName, Email = model.Email};
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
