@@ -1,0 +1,14 @@
+﻿Huy : phân quyền, User, Project
+Tùng: MyAccount, Status.
+Hiếu: Task.
+
+Account: 
+- Admin: 
+username: Admin 
+pass: !Admin
+-Project Manager
+username: PM
+pass: !ProjectManager
+- User
+username: User
+pass: !NomalUser
