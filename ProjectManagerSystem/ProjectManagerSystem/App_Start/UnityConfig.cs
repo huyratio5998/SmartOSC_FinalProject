@@ -1,3 +1,4 @@
+using AutoMapper;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service;
@@ -44,12 +45,13 @@ namespace ProjectManagerSystem
         public static void RegisterTypes(IUnityContainer container)
         {
             //var UnityContainer = new UnityContainer();
+           // container.RegisterType<IMapper, Mapper>();
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IProjectService, ProjectService>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
-            //container.RegisterType<im, UnitOfWork>();
+            
             
 
         }

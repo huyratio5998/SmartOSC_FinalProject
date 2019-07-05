@@ -8,7 +8,7 @@ using System.Web;
 
 namespace ProjectManagerSystem.AutoMapper
 {
-    public class DomainToViewModelMapping : Profile
+    public  class DomainToViewModelMapping : Profile
     {
         public DomainToViewModelMapping()
         {
