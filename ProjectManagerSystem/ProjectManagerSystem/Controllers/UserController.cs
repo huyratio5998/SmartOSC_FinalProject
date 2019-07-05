@@ -17,7 +17,7 @@ namespace ProjectManagerSystem.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private  IMapper _mapper;
+       // private  IMapper _mapper;
         
         public UserController()
         { }

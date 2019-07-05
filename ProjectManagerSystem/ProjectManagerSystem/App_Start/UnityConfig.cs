@@ -51,7 +51,7 @@ namespace ProjectManagerSystem
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IProjectService, ProjectService>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
-            
+            container.RegisterType<ITasksService, TasksService>() ;
             
 
         }
