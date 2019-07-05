@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using ProjectManagerSystem.AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -13,17 +14,20 @@ namespace ProjectManagerSystem
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             // khởi tạo mapping
-            Mapper.Initialize(cfg =>
+           // MappingConfig.RegisterMaps();
+          
+           
+            Mapper.Initialize(p =>
             {
-                
-
-                cfg.AddProfile(new DomainToViewModelMapping());
-                cfg.AddProfile(new ViewModelToDomainMapping());
+                p.AddProfile(new DomainToViewModelMapping());
+                p.AddProfile(new ViewModelToDomainMapping());
             });
+
             UnityConfig.RegisterTypes(new UnityContainer());
             
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
