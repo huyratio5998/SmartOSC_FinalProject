@@ -508,3 +508,8 @@ A:\SmartOSC\ProjectManagerSystem\ProjectManagerSystem\obj\Debug\ProjectManagerSy
 A:\SmartOSC\ProjectManagerSystem\ProjectManagerSystem\obj\Debug\ProjectManagerSystem.csproj.CopyComplete
 A:\SmartOSC\ProjectManagerSystem\ProjectManagerSystem\obj\Debug\ProjectManagerSystem.dll
 A:\SmartOSC\ProjectManagerSystem\ProjectManagerSystem\obj\Debug\ProjectManagerSystem.pdb
+A:\SmartOSC\Final_Project\ProjectManagerSystem\ProjectManagerSystem\bin\AutoMapper.dll
+A:\SmartOSC\Final_Project\ProjectManagerSystem\ProjectManagerSystem\bin\System.ValueTuple.dll
+A:\SmartOSC\Final_Project\ProjectManagerSystem\ProjectManagerSystem\bin\AutoMapper.pdb
+A:\SmartOSC\Final_Project\ProjectManagerSystem\ProjectManagerSystem\bin\AutoMapper.xml
+A:\SmartOSC\Final_Project\ProjectManagerSystem\ProjectManagerSystem\bin\System.ValueTuple.xml

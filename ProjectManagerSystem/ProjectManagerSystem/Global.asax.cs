@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using ProjectManagerSystem.AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,10 +16,21 @@ namespace ProjectManagerSystem
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            // khởi tạo mapping
+            Mapper.Initialize(cfg =>
+            {
+                
+
+                cfg.AddProfile(new DomainToViewModelMapping());
+                cfg.AddProfile(new ViewModelToDomainMapping());
+            });
             UnityConfig.RegisterTypes(new UnityContainer());
+            
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            
         }
     }
 }

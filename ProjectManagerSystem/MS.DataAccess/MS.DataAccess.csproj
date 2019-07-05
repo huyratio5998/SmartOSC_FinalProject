@@ -87,12 +87,21 @@
     <Compile Include="Migrations\201907040843496_update dbset.Designer.cs">
       <DependentUpon>201907040843496_update dbset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907041708174_update auto mapping.cs" />
+    <Compile Include="Migrations\201907041708174_update auto mapping.Designer.cs">
+      <DependentUpon>201907041708174_update auto mapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907050158396_add projectmember.cs" />
+    <Compile Include="Migrations\201907050158396_add projectmember.Designer.cs">
+      <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetRole.cs" />
     <Compile Include="Models\AspNetUser.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectMember.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Tasks.cs" />
     <Compile Include="MsContext.cs" />
@@ -111,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907040843496_update dbset.resx">
       <DependentUpon>201907040843496_update dbset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907041708174_update auto mapping.resx">
+      <DependentUpon>201907041708174_update auto mapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907050158396_add projectmember.resx">
+      <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

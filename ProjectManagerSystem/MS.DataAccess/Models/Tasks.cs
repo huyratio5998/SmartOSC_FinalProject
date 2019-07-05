@@ -9,6 +9,22 @@ namespace MS.DataAccess.Models
 {
     public class Tasks
     {
+        public Tasks()
+        {
+        }
+
+        public Tasks(int id, int projectId, string userId, int statusId, string sortNameTask, string name, string description)
+        {
+            Id = id;
+            ProjectId = projectId;
+            UserId = userId;
+            StatusId = statusId;
+            SortNameTask = sortNameTask;
+            Name = name;
+            Description = description;
+            
+        }
+
         [Key]
         public int Id { get; set; }
 

@@ -9,11 +9,23 @@ namespace MS.DataAccess.Models
 {
     public class Project
     {
+        public Project()
+        {
+        }
+
+        public Project(int id, string name, string sortNameProject, DateTime? startDate, DateTime? endDate, bool isDeleted)
+        {
+            Id = id;            
+            Name = name;
+            SortNameProject = sortNameProject;
+            StartDate = startDate;
+            EndDate = endDate;
+            this.isDeleted = isDeleted;
+        }
+
         [Key]
         public int Id { get; set; }
-
-        [Required]
-        public int UserId { get; set; }
+        
 
         [Required, StringLength(120, MinimumLength = 2)]
         public string Name { get; set; }
@@ -28,7 +40,7 @@ namespace MS.DataAccess.Models
 
         public bool isDeleted { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual ICollection<AspNetUser> Usrs { get; set; }
+        
+        public virtual ICollection<ProjectMember> ProjectMembers { get; set; }
     }
 }

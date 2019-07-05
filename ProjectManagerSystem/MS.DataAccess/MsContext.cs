@@ -22,10 +22,11 @@ namespace MS.DataAccess
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<AspNetRole> AspNetRoles { get; set; }
-
+        public DbSet<ProjectMember> ProjectMembers { get; set; }
         public static MsContext Create()
         {
             return new MsContext();
         }
+       
     }
 }

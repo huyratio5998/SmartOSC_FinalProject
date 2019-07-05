@@ -8,6 +8,16 @@ namespace MS.DataAccess.Models
 {
     public class Status
     {
+        public Status()
+        {
+        }
+
+        public Status(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         [Key]
         public int Id { get; set; }
 

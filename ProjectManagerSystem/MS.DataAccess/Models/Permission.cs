@@ -11,6 +11,23 @@ namespace MS.DataAccess.Models
 {
     public class Permission
     {
+        public Permission()
+        {
+        }
+
+        public Permission(int id, string roleId, int functionID, bool canRead, bool canCreate, bool canUpdate, bool canDelete)
+        {
+            Id = id;
+            RoleId = roleId;
+            
+            FunctionID = functionID;
+            
+            CanRead = canRead;
+            CanCreate = canCreate;
+            CanUpdate = canUpdate;
+            CanDelete = canDelete;
+        }
+
         [Key]
         public int Id { get; set; }
         public string RoleId { get; set; }
