@@ -14,14 +14,27 @@ namespace MS.DataAccess.Models
     [Table("AspNetUsers")]
     public class AspNetUser : IdentityUser
     {
+        public AspNetUser()
+        {
+        }
+        public AspNetUser(string userName, string fullname, string password, string email, string urlAvatar)
+        {
+            UserName = userName;
+            PasswordHash = password;
+            Email = email;
+            UrlAvatar = urlAvatar;
+            FullName = fullname;
+            
+        }
+       
+
         public string UrlAvatar { get; set; }
 
         [Required, StringLength(32, MinimumLength = 2)]
         public string FullName { get; set; }
-
-        public int ProjectId { get; set; }
-        [ForeignKey("ProjectId")]
-        public virtual ICollection<Project> Prj { get; set; }
+        
+        
+        public virtual ICollection<ProjectMember> ProjectMembers { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AspNetUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

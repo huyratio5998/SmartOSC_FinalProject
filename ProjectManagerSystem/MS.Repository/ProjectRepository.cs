@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    class ProjectRepository : BaseRepository<Project>, IProjectRepository
+    public class ProjectRepository : BaseRepository<Project>, IProjectRepository
     {
         public ProjectRepository(MsContext context) : base(context)
         {
-
+            
         }
     }
 }

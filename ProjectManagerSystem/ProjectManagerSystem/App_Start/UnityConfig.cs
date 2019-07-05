@@ -1,3 +1,8 @@
+using AutoMapper;
+using MS.Repository;
+using MS.Repository.Interface;
+using MS.Service;
+using MS.Service.Interface;
 using ProjectManagerSystem.Controllers;
 using System;
 using Unity;
@@ -23,6 +28,8 @@ namespace ProjectManagerSystem
         /// Configured Unity Container.
         /// </summary>
         public static IUnityContainer Container => container.Value;
+
+        
         #endregion
 
         /// <summary>
@@ -38,9 +45,15 @@ namespace ProjectManagerSystem
         public static void RegisterTypes(IUnityContainer container)
         {
             //var UnityContainer = new UnityContainer();
+           // container.RegisterType<IMapper, Mapper>();
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IProjectService, ProjectService>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
             
+            
+
         }
     }
 }

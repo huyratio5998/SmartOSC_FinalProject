@@ -12,3 +12,5 @@ pass: !ProjectManager
 - User
 username: User
 pass: !NomalUser
+
+// tai su dung viewmodel: nên tách ra một library riêng. Nếu 

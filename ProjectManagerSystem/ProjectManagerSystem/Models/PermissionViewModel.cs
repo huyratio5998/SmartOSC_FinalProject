@@ -18,7 +18,7 @@ namespace ProjectManagerSystem.Models
 
         public bool CanDelete { set; get; }
 
-        public IdentityRole IdentityRole { get; set; }
+        public AspNetRolesViewModel AspNetRolesViewModel { get; set; }
 
         public FunctionViewModel Function { get; set; }
     }

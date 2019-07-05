@@ -63,7 +63,8 @@ namespace MS.Repository
                 var query = _context.Set<T>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
-                return query.AsQueryable();
+                //return query .AsQueryable();
+                return query.ToList();
             }
 
             return _context.Set<T>().AsQueryable();
@@ -129,6 +130,12 @@ namespace MS.Repository
             {
                 throw e;
             }
+        }
+
+        public T Get(string id)
+        {
+            var result = _context.Set<T>().Find(id);
+            return result;
         }
 
 

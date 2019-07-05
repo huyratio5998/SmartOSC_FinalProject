@@ -8,7 +8,7 @@ namespace ProjectManagerSystem.Models
 {
     public class FunctionViewModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(128)]
         public string Name { set; get; }

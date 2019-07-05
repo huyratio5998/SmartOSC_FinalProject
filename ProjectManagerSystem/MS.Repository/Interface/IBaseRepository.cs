@@ -25,6 +25,7 @@ namespace MS.Repository.Interface
 
         // tìm kiếm  bằng id
         T Get(int id);
+        T Get(string id);
         // lấy về các đối tượng và lấy thêm được cả đối tượng được nó chứa
         // ví dụ select ra bài viết và có thể lấy ra được cả danh danh mục
         IEnumerable<T> GetAll(string[] includes = null);

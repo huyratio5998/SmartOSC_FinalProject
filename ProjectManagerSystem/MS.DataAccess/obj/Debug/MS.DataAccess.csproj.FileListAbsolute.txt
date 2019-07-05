@@ -124,3 +124,7 @@ A:\SmartOSC\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migration
 A:\SmartOSC\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.csproj.GenerateResource.cache
 A:\SmartOSC\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.add_table_authorization.resources
 A:\SmartOSC\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.updatedbset.resources
+A:\SmartOSC\Final_Project\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.add_table_authorization.resources
+A:\SmartOSC\Final_Project\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.updatedbset.resources
+A:\SmartOSC\Final_Project\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.updateautomapping.resources
+A:\SmartOSC\Final_Project\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.addprojectmember.resources

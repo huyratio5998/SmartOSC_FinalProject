@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly MsContext _context;
 
