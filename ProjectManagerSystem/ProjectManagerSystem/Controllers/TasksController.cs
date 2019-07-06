@@ -9,17 +9,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace ProjectManagerSystem.Controllers
 {
     public class TasksController : Controller
     {
+        CustomTasksViewModels customTasksViewModels = new CustomTasksViewModels();
+
         private readonly ITasksService _TasksService;
         private readonly IProjectService _ProjectService;
         private readonly IUserService _UserService;
+        //private readonly IStatus _Status;
         private readonly IUnitOfWork _UnitOfWork;
 
-        public TasksController(ITasksService tasksService,IProjectService projectService,IUserService userService, IUnitOfWork unitOfWork)
+        public TasksController(ITasksService tasksService, IProjectService projectService, IUserService userService, IUnitOfWork unitOfWork)
         {
             _TasksService = tasksService;
             _ProjectService = projectService;
@@ -27,21 +31,40 @@ namespace ProjectManagerSystem.Controllers
             _UnitOfWork = unitOfWork;
         }
 
-        // GET: Tasks
         public ActionResult Index()
         {
-            CustomTasksViewModels customTasksViewModels = new CustomTasksViewModels();
-            
+            return GetData();
+        }
 
-            var listProject = _ProjectService.GetAll().ToList();
-            //customTasksViewModels.projectViewModels = Mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(listProject);
+        public ActionResult GetData()
+        {
+            var listProject = _ProjectService.GetAll();
+
+            customTasksViewModels.projectViewModels = Mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(listProject);
+
             ViewBag.listProject = new SelectList(listProject, "Id", "Name");
 
             var listAssignee = _UserService.GetAll().ToList();
-            //customTasksViewModels.aspNetUsersViewModels = Mapper.Map<IEnumerable<AspNetUser>, IEnumerable<AspNetUsersViewModel>>(listUser);
+
+            customTasksViewModels.aspNetUsersViewModels = Mapper.Map<IEnumerable<AspNetUser>, IEnumerable<AspNetUsersViewModel>>(listAssignee);
+
             ViewBag.listAssignee = new SelectList(listAssignee, "Id", "FullName");
 
-            return View();
+            return View(customTasksViewModels);
+
+        }
+
+        // GET: Tasks
+        public JsonResult GetData(int PjtId, string UId)
+        {
+            var getTask = _TasksService.GetAll().ToList();
+
+            getTask.Any(x => x.ProjectId == PjtId && x.UserId == UId);
+
+            return Json(new
+            {
+                data = getTask
+            }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Tasks/Details/5
