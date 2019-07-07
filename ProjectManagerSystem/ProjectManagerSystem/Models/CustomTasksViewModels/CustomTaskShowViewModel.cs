@@ -5,11 +5,10 @@ using System.Web;
 
 namespace ProjectManagerSystem.Models.CustomTasksViewModels
 {
-    public class CustomTasksViewModels
+    public class CustomTaskShowViewModel
     {
         public IEnumerable<ProjectViewModel> projectViewModels { get; set; }
         public IEnumerable<AspNetUsersViewModel> aspNetUsersViewModels { get; set; }
         public IEnumerable<StatusViewModel> statusViewModels { get; set; }
-        
     }
 }

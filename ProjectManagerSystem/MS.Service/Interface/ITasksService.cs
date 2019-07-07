@@ -14,7 +14,8 @@ namespace MS.Service.Interface
         bool UpdateTasks(Tasks item);
         Tasks GetTasks(int ID);
         Tasks GetTasks(string ID);
-        IEnumerable<Tasks> GetAll();
+      //  IEnumerable<Tasks> GetAll();
+        IEnumerable<Tasks> GetAll(string UserId,int projectId);
         void SaveChange();
     }
 }

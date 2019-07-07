@@ -8,7 +8,7 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/modernizr-2.8.3.js"></script>
 <script src="~/Scripts/mustache.min.js"></script>
-<script src="~/Scripts/TaskJSController.js"></script>
+<script src="~/Scripts/Tasks/TaskJSController.js"></script>
 
 <script>
     var tas = new TaskController();
@@ -43,16 +43,22 @@
                 <th>Status</th>
             </tr>
         </thead>
-        <tbody id=""></tbody>
+        <tbody id="tblData"></tbody>
     </table>
 
     <script id="data-template" type="x-tmpl-mustache">
-        <tr>
+        <tr id="LOL" >
             <td>{{TaskId}}</td>
             <td>{{TaskName}}</td>
             <td>{{Assignee}}</td>
+
+
+
+    </tr>
+    </script>
+
+    <script id="status" type="x-tmpl-mustache" >
             <td>{{Status}}</td>
-        </tr>
     </script>
 
     <button>@Html.ActionLink("Add", "AddTasks", "Tasks")</button>

@@ -20,6 +20,8 @@ namespace ProjectManagerSystem.Models
 
         [StringLength(500)]
         public string Description { get; set; }
+        public int ProjectId { get; set; }
+        public string UserId { get; set; }
 
         public virtual ProjectViewModel prt { get; set; }
 

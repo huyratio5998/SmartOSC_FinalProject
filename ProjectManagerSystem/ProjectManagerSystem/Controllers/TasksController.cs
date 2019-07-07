@@ -35,7 +35,6 @@ namespace ProjectManagerSystem.Controllers
         {
             return GetData();
         }
-
         public ActionResult GetData()
         {
             var listProject = _ProjectService.GetAll();
@@ -44,27 +43,53 @@ namespace ProjectManagerSystem.Controllers
 
             ViewBag.listProject = new SelectList(listProject, "Id", "Name");
 
-            var listAssignee = _UserService.GetAll().ToList();
+            var listAssignee = _UserService.GetAll();
 
             customTasksViewModels.aspNetUsersViewModels = Mapper.Map<IEnumerable<AspNetUser>, IEnumerable<AspNetUsersViewModel>>(listAssignee);
 
             ViewBag.listAssignee = new SelectList(listAssignee, "Id", "FullName");
 
             return View(customTasksViewModels);
-
+            
         }
 
-        // GET: Tasks
-        public JsonResult GetData(int PjtId, string UId)
+        public JsonResult LoadData(int projectId, string UserId)
         {
-            var getTask = _TasksService.GetAll().ToList();
+            // kiểm tra user đăng nhập có id là gì , quyền user đấy
+            // nếu là admin => hiển thị full
+            // project manager => hiển thị task mà project manager quản lý
+            // user => hiển thị task mà nó đang làm
 
-            getTask.Any(x => x.ProjectId == PjtId && x.UserId == UId);
+            //load task với id user
+
+            var customTaskShowViewModel = new CustomTaskShowViewModel();
+
+
+            var listTask = _TasksService.GetAll(UserId,projectId);
+
+
+           // var listAssigneeName = _UserService.GetAspNetUser(UserId).FullName;
+
+           // var listShortNameProject = _ProjectService.GetProject(projectId).SortNameProject;
+
+            //var shortNameTask = _ProjectService.GetProject(projectId).SortNameProject + _TasksService.GetAll().Where(x => x.ProjectId == projectId);
+
+            Mapper.Map<IEnumerable<Tasks>, IEnumerable<TasksViewModel>>(listTask);
 
             return Json(new
             {
-                data = getTask
+              //  data = listTask,listAssigneeName,shortNameTask
+                data = listTask
             }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult loadStatus(string userId, int projectId)
+        {
+            var status = _StatusService.get
+            return Json(new
+            {
+                data = status
+            }, JsonRequestBehavior.AllowGet); 
         }
 
         // GET: Tasks/Details/5

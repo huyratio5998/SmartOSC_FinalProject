@@ -38,12 +38,16 @@ namespace MS.Service
         }
 
         //Lấy tất cả tasks
-        public IEnumerable<Tasks> GetAll()
+        //public IEnumerable<Tasks> GetAll()
+        //{
+        //    var result = _TasksRepository.GetAll();
+        //    return result;
+        //}
+        public IEnumerable<Tasks> GetAll(string UserId, int projectId)
         {
-            var result = _TasksRepository.GetAll();
-            return result;
+            var query = _TasksRepository.GetMulti(x=>x.ProjectId == projectId && x.UserId == UserId).ToList();
+            return query;
         }
-
         //Lấy tasks theo ID kiểu int
         public Tasks GetTasks(int ID)
         {

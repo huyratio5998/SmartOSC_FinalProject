@@ -206,6 +206,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRolesViewModel.cs" />
+    <Compile Include="Models\CustomTasksViewModels\CustomTaskShowViewModel.cs" />
     <Compile Include="Models\CustomTasksViewModels\CustomTasksViewModels.cs" />
     <Compile Include="Models\FunctionViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -216,7 +217,7 @@
     <Compile Include="Models\StatusViewModel.cs" />
     <Compile Include="Models\TasksViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Scripts\TaskJSController.js" />
+    <Content Include="Scripts\Tasks\TaskJSController.js" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
