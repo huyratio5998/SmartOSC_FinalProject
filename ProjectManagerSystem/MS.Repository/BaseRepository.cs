@@ -139,7 +139,10 @@ namespace MS.Repository
             var result = _context.Set<T>().Find(id);
             return result;
         }
-
+        public virtual void Save()
+        {
+            _context.SaveChanges();
+        }
 
         //public T Add(T item, string Role, string Pass)
         //{

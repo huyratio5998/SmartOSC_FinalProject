@@ -12,54 +12,54 @@ namespace MS.Service
 {
     public class ProjectService : IProjectService
     {
-        private readonly ProjectRepository _ProjectRepository;
-        private IUnitOfWork _unitOfWork;
+        public IProjectRepository _projectRepository;
+        public IUnitOfWork _unitOfWork;
 
-        public ProjectService(IUnitOfWork unitOfWork, ProjectRepository ProjectRepository)
+        public ProjectService(IUnitOfWork unitOfWork, IProjectRepository projectRepository)
         {
             _unitOfWork = unitOfWork;
-            _ProjectRepository = ProjectRepository;          
+            _projectRepository = projectRepository;          
         }
 
         public Project AddProject(Project item)
         {
-            var result = _ProjectRepository.Add(item);
+            var result = _projectRepository.Add(item);
      
             return result;
         }
 
         public Project DeleteProject(Project item)
         {
-            var result = _ProjectRepository.Delete(item);
+            var result = _projectRepository.Delete(item);
             return result;
         }
 
         public IEnumerable<Project> GetAll()
         {
-            var result = _ProjectRepository.GetAll();
+            var result = _projectRepository.GetAll();
             return result;
         }
 
         public Project GetProject(int ID)
         {
-            var result = _ProjectRepository.Get(ID);
+            var result = _projectRepository.Get(ID);
             return result;
         }
 
         public Project GetProject(string ID)
         {
-            var result = _ProjectRepository.Get(ID);
+            var result = _projectRepository.Get(ID);
             return result;
         }
 
         public void SaveChange()
         {
-            _unitOfWork.Commit();
+            _projectRepository.Save();
         }
 
         public bool UpdateProject(Project item)
         {
-            bool result = _ProjectRepository.Update(item);
+            bool result = _projectRepository.Update(item);
             return result;
         }
     }

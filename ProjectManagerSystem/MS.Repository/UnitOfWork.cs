@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public sealed class UnitOfWork : IUnitOfWork
     {
         
-        private  MsContext _context;
-        public IProjectRepository _projectRepository;
+        private MsContext _context;
 
         public UnitOfWork(MsContext context)
         {

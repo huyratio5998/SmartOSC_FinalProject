@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository.Interface
 {
-    public interface IBaseRepository<T>
+    public interface IBaseRepository<T> where T : class
     {
         bool Update(T entity);
         T Add(T entity);
@@ -37,6 +37,6 @@ namespace MS.Repository.Interface
         //lay nhieu doi tuong, sau do phan trang
         IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null);
         bool CheckContains(Expression<Func<T, bool>> predicate);
-
+        void Save();
     }
 }
