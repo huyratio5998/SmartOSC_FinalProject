@@ -12,11 +12,13 @@ namespace MS.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly MsContext _context;
-
+        private  MsContext _context;
+        public IUnitOfWork _unitOfWork;
+        protected readonly IDbSet<T> _dbset;        
         public BaseRepository(MsContext context)
         {
             _context = context;
+            _dbset = _context.Set<T>();
         }
 
         // xóa 1 đối tượng trong entity
@@ -95,10 +97,10 @@ namespace MS.Repository
 
             return _context.Set<T>().Where<T>(predicate).AsQueryable<T>();
         }
-
-        public T Add(T entity)
+        
+        public virtual T Add(T entity)
         {
-            var result = _context.Set<T>().Add(entity);
+            var result = _dbset.Add(entity);            
             return result;
         }
 
@@ -137,6 +139,18 @@ namespace MS.Repository
             var result = _context.Set<T>().Find(id);
             return result;
         }
+
+
+        //public T Add(T item, string Role, string Pass)
+        //{
+        //    public AspNetUser Add(AspNetUser item, string Role, string Pass)
+        //    {
+        //        var store = new UserStore<AspNetUser>(_context);
+        //        var manager = new UserManager<AspNetUser>(store);
+        //        manager.Create(item, Pass);
+        //        manager.AddToRole(item.Id, Role);
+        //        return item;            
+        //}
 
 
 

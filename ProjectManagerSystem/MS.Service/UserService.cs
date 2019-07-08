@@ -1,4 +1,5 @@
-﻿using MS.DataAccess.Models;
+﻿using Microsoft.AspNet.Identity;
+using MS.DataAccess.Models;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service.Interface;
@@ -13,18 +14,28 @@ namespace MS.Service
     public class UserService : IUserService
     {
         private readonly UserRepository _userRepository;
-        private readonly IUnitOfWork _IunitOfWork;
+        private readonly UserManager<AspNetUser> _userManager;
+        
 
-        public UserService(UserRepository userRepository, IUnitOfWork IunitOfWork)
+      
+        public UserService(UserRepository userRepository, UserManager<AspNetUser> userManager)
         {
             _userRepository = userRepository;
-            _IunitOfWork = IunitOfWork;
+            _userManager = userManager;
         }
 
-        public AspNetUser AddAspNetUser(AspNetUser item)
+        public AspNetUser AddAspNetUser(AspNetUser item, string Role, string Pass)
         {
-            var result = _userRepository.Add(item);
+            var result = _userRepository.Add(item, Role, Pass);
             return result;
+        }
+
+        public async Task<AspNetUser> addUserAsync(AspNetUser aspNetUser, string Pass, string Role)
+        {
+
+            await _userManager.CreateAsync(aspNetUser, Pass);
+            await _userManager.AddToRoleAsync(aspNetUser.Id, Role);
+            return aspNetUser;
         }
 
         public AspNetUser DeleteAspNetUser(AspNetUser item)
@@ -49,11 +60,6 @@ namespace MS.Service
         {
             var result = _userRepository.Get(ID);
             return result;
-        }
-
-        public void SaveChange()
-        {
-            _IunitOfWork.Save();
         }
 
         public bool UpdateAspNetUser(AspNetUser item)

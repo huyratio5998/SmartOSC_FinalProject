@@ -11,6 +11,8 @@ namespace MS.Repository.Interface
     {
         bool Update(T entity);
         T Add(T entity);
+      //  T Add(T item, string Role, string Pass);
+      
         // xóa 1 đối tượng trong entity
         T Delete(T entity);
         // xóa bằng id

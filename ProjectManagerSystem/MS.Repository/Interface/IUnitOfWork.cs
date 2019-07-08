@@ -8,6 +8,7 @@ namespace MS.Repository.Interface
 {
     public interface IUnitOfWork
     {
-        void Save();
+        void Commit();
+        
     }
 }

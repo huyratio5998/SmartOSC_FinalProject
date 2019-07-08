@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using MS.DataAccess.Models;
 using MS.Service.Interface;
 using ProjectManagerSystem.Models;
@@ -17,15 +19,24 @@ namespace ProjectManagerSystem.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private  IMapper _mapper;
-        
+        //private  IMapper _mapper;
+        private ApplicationUserManager _userManager;
         public UserController()
-        { }
+        {
+        }
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ApplicationUserManager userManager)
         {
             _userService = userService;
+            _userManager = userManager;
         }
+
+        //public UserController(IUserService userService)
+        //{
+        //    _userService = userService;
+        //}
+
+
 
         // GET: User
         public ActionResult Index()
@@ -54,6 +65,8 @@ namespace ProjectManagerSystem.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
+            //var lstRole = (new MsContext()).Roles.ToList();
+            //ViewBag.lstRole = new SelectList(lstRole, "Id", "Name");
             return View();
         }
 
@@ -66,9 +79,15 @@ namespace ProjectManagerSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var model = _userService.AddAspNetUser(Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel));
+                var model = Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel);
+                var user = _userService.addUserAsync(model, aspNetUsersViewModel.Role, aspNetUsersViewModel.Password);
+                //var user=_userService.AddAspNetUser(model, aspNetUsersViewModel.Role, aspNetUsersViewModel.Password);
+
+                //var user = new AspNetUser { UserName = item.UserName, FullName = item.FullName, Email = item.Email, UrlAvatar = item.UrlAvatar };
+                //manager.Create(user, item.PasswordHash);
+                //manager.AddToRole(user.Id, );
                 //var  Mapper.Map<AspNetUser, AspNetUsersViewModel>(model);
-                _userService.SaveChange();
+            //    _userService.SaveChange();
                 return RedirectToAction("Index");
             }
 
@@ -100,7 +119,7 @@ namespace ProjectManagerSystem.Controllers
             if (ModelState.IsValid)
             {
                 _userService.UpdateAspNetUser(Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel));
-                _userService.SaveChange();                
+              //  _userService.SaveChange();                
                
                 return RedirectToAction("Index");
             }
@@ -129,7 +148,7 @@ namespace ProjectManagerSystem.Controllers
         {
             AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
             _userService.DeleteAspNetUser(Mapper.Map < AspNetUsersViewModel, AspNetUser > (aspNetUsersViewModel));
-            _userService.SaveChange();
+        //    _userService.SaveChange();
             return RedirectToAction("Index");
         }
 

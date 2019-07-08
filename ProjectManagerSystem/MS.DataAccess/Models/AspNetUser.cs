@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MS.DataAccess.Models
 {
-    [Table("AspNetUsers")]
+ 
     public class AspNetUser : IdentityUser
     {
         public AspNetUser()

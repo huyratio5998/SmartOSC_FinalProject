@@ -1,11 +1,18 @@
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using MS.DataAccess;
+using MS.DataAccess.Models;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service;
 using MS.Service.Interface;
 using ProjectManagerSystem.Controllers;
 using System;
+using System.Data.Entity;
+using System.Web.Mvc;
 using Unity;
+using Unity.AspNet.Mvc;
 using Unity.Injection;
 
 namespace ProjectManagerSystem
@@ -47,12 +54,16 @@ namespace ProjectManagerSystem
             //var UnityContainer = new UnityContainer();
            // container.RegisterType<IMapper, Mapper>();
             container.RegisterType<ManageController>(new InjectionConstructor());
-            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<AccountController>(new InjectionConstructor());            
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<DbContext, MsContext>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();            
             container.RegisterType<IProjectService, ProjectService>();
-            container.RegisterType<IUnitOfWork, UnitOfWork>();
-            
-            
+            container.RegisterType<ApplicationUserStore>().RegisterType<IUserStore<AspNetUser>>();
+            container.RegisterType<ApplicationUserManager>();
+
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+
 
         }
     }

@@ -11,6 +11,7 @@ namespace MS.Repository
 {
     public class PermissionRepository : BaseRepository<Permission>
     {
+        //public PermissionRepository(MsContext context) : base(context)
         public PermissionRepository(MsContext context) : base(context)
         {
 

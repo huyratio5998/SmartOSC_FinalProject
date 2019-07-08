@@ -11,9 +11,11 @@ namespace MS.Repository
 {
     public class ProjectRepository : BaseRepository<Project>, IProjectRepository
     {
+
         public ProjectRepository(MsContext context) : base(context)
         {
             
         }
+
     }
 }

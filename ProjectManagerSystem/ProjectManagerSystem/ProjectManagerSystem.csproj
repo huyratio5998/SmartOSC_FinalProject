@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,6 +210,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\AspNetUsersViewModel.cs" />
+    <Compile Include="Models\ProjectManagerSystemContext.cs" />
     <Compile Include="Models\ProjectMemberViewModel.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\StatusViewModel.cs" />
@@ -277,6 +279,8 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,7 +300,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MS.DataAccess\MS.DataAccess.csproj">
-      <Project>{070ADDB8-B410-42BE-9F1B-E4465EDDCC00}</Project>
+      <Project>{070addb8-b410-42be-9f1b-e4465eddcc00}</Project>
       <Name>MS.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\MS.Repository\MS.Repository.csproj">

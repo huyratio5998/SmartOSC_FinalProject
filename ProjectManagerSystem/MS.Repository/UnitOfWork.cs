@@ -10,14 +10,16 @@ namespace MS.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly MsContext _context;
+        
+        private  MsContext _context;
+        public IProjectRepository _projectRepository;
 
         public UnitOfWork(MsContext context)
         {
             _context = context;
-        }
-
-        public void Save()
+        }  
+        
+        public void Commit()
         {
             _context.SaveChanges();
         }
