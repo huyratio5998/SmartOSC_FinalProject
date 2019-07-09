@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MS.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace MS.Repository.Interface
     public interface IUnitOfWork
     {
         void Commit();
+
+        IProjectRepository ProjectRepository { get; }
         
     }
 }

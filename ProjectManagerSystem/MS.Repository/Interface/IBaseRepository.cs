@@ -37,6 +37,5 @@ namespace MS.Repository.Interface
         //lay nhieu doi tuong, sau do phan trang
         IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null);
         bool CheckContains(Expression<Func<T, bool>> predicate);
-        void Save();
     }
 }
