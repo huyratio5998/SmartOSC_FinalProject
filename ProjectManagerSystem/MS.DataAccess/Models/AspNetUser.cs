@@ -17,8 +17,9 @@ namespace MS.DataAccess.Models
         public AspNetUser()
         {
         }
-        public AspNetUser(string userName, string fullname, string password, string email, string urlAvatar)
+        public AspNetUser(string id,string userName, string fullname, string password, string email, string urlAvatar)
         {
+            Id = id;
             UserName = userName;
             PasswordHash = password;
             Email = email;

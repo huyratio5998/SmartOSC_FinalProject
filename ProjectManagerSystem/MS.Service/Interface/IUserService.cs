@@ -15,6 +15,6 @@ namespace MS.Service.Interface
         AspNetUser GetAspNetUser(int ID);
         AspNetUser GetAspNetUser(string ID);
         IEnumerable<AspNetUser> GetAll();        
-        Task<AspNetUser> addUserAsync(AspNetUser aspNetUser, string Role, string Pass);
+      //  Task<AspNetUser> addUserAsync(AspNetUser aspNetUser, string Role, string Pass);
     }
 }

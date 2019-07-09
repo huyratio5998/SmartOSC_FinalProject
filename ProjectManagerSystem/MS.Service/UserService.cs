@@ -13,30 +13,30 @@ namespace MS.Service
 {
     public class UserService : IUserService
     {
-        private readonly UserRepository _userRepository;
-        private readonly UserManager<AspNetUser> _userManager;
-        
+        private readonly IUserRepository _userRepository;        
+        public IUnitOfWork _unitOfWork;
 
-      
-        public UserService(UserRepository userRepository, UserManager<AspNetUser> userManager)
+        public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
+            _unitOfWork = unitOfWork;
             _userRepository = userRepository;
-            _userManager = userManager;
         }
+
+        
 
         public AspNetUser AddAspNetUser(AspNetUser item, string Role, string Pass)
         {
-            var result = _userRepository.Add(item, Role, Pass);
+            var result = _unitOfWork.UserRepository.Add(item, Role, Pass);
             return result;
         }
 
-        public async Task<AspNetUser> addUserAsync(AspNetUser aspNetUser, string Pass, string Role)
-        {
+        //public async Task<AspNetUser> addUserAsync(AspNetUser aspNetUser, string Pass, string Role)
+        //{
 
-            await _userManager.CreateAsync(aspNetUser, Pass);
-            await _userManager.AddToRoleAsync(aspNetUser.Id, Role);
-            return aspNetUser;
-        }
+        //    await _userManager.CreateAsync(aspNetUser, Pass);
+        //    await _userManager.AddToRoleAsync(aspNetUser.Id, Role);
+        //    return aspNetUser;
+        //}
 
         public AspNetUser DeleteAspNetUser(AspNetUser item)
         {
@@ -66,6 +66,10 @@ namespace MS.Service
         {
             bool result = _userRepository.Update(item);
             return result;
+        }
+        public void SaveChange()
+        {
+            _unitOfWork.Commit();
         }
     }
 }

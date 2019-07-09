@@ -12,6 +12,7 @@ namespace MS.Repository.Interface
         void Commit();
 
         IProjectRepository ProjectRepository { get; }
-        
+        IUserRepository UserRepository { get; }
+
     }
 }

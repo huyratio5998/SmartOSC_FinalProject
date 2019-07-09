@@ -59,7 +59,7 @@ namespace MS.Service
 
         public bool UpdateProject(Project item)
         {
-            bool result = _projectRepository.Update(item);
+            bool result = _unitOfWork.ProjectRepository.Update(item);
             return result;
         }
     }

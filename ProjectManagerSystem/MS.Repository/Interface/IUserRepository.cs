@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository.Interface
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<AspNetUser>
     {
         AspNetUser Add(AspNetUser item, string Role, string Pass);
     }

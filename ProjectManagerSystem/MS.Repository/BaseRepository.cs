@@ -1,4 +1,7 @@
-﻿using MS.DataAccess;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using MS.DataAccess;
+using MS.DataAccess.Models;
 using MS.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -140,47 +143,46 @@ namespace MS.Repository
             return result;
         }
 
-        //public T Add(T item, string Role, string Pass)
-        //{
-        //    public AspNetUser Add(AspNetUser item, string Role, string Pass)
-        //    {
-        //        var store = new UserStore<AspNetUser>(_context);
-        //        var manager = new UserManager<AspNetUser>(store);
-        //        manager.Create(item, Pass);
-        //        manager.AddToRole(item.Id, Role);
-        //        return item;            
-        //}
+     
+            public AspNetUser Add(AspNetUser item, string Role, string Pass)
+            {
+                var store = new UserStore<AspNetUser>(_context);
+                var manager = new UserManager<AspNetUser>(store);
+                manager.Create(item, Pass);
+                manager.AddToRole(item.Id, Role);
+                return item;
+            }
 
 
 
 
-        // lấy về nhiều đối tượng sau đó phân trang
-        //public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
-        //{
-        //    int skipCount = index * size;
-        //    IQueryable<T> _resetSet;
+            // lấy về nhiều đối tượng sau đó phân trang
+            //public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
+            //{
+            //    int skipCount = index * size;
+            //    IQueryable<T> _resetSet;
 
-        //    //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
-        //    if (includes != null && includes.Count() > 0)
-        //    {
-        //        var query = _context.Set<T>().Include(includes.First());
-        //        foreach (var include in includes.Skip(1))
-        //            query = query.Include(include);
-        //        _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable() : query.AsQueryable();
-        //    }
-        //    else
-        //    {
-        //        _resetSet = predicate != null ? _context.Set<T>().Where<T>(predicate).AsQueryable() : _context.Set<T>().AsQueryable();
-        //    }
+            //    //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
+            //    if (includes != null && includes.Count() > 0)
+            //    {
+            //        var query = _context.Set<T>().Include(includes.First());
+            //        foreach (var include in includes.Skip(1))
+            //            query = query.Include(include);
+            //        _resetSet = predicate != null ? query.Where<T>(predicate).AsQueryable() : query.AsQueryable();
+            //    }
+            //    else
+            //    {
+            //        _resetSet = predicate != null ? _context.Set<T>().Where<T>(predicate).AsQueryable() : _context.Set<T>().AsQueryable();
+            //    }
 
-        //    resetSet = skipCount == 0 ? resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
-        //    total = _resetSet.Count();
-        //    return _resetSet.AsQueryable();
-        //}
+            //    resetSet = skipCount == 0 ? resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
+            //    total = _resetSet.Count();
+            //    return _resetSet.AsQueryable();
+            //}
 
-        //public bool CheckContains(Expression<Func<T, bool>> predicate)
-        //{
-        //    return _context.Set<T>().Count<T>(predicate) > 0;
-        //}
-    }
+            //public bool CheckContains(Expression<Func<T, bool>> predicate)
+            //{
+            //    return _context.Set<T>().Count<T>(predicate) > 0;
+            //}
+        }
 }

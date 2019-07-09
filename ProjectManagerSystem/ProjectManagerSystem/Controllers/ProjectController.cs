@@ -45,8 +45,8 @@ namespace ProjectManagerSystem.Controllers
         }
         public ActionResult Edit(int id)
         {
-            Mapper.Map<Project,ProjectViewModel >(projectService.GetProject(id));
-            return View(projectService);
+            var model=Mapper.Map<Project,ProjectViewModel >(projectService.GetProject(id));
+            return View(model);
         }
         [HttpPost]
         public ActionResult Edit(ProjectViewModel Project)

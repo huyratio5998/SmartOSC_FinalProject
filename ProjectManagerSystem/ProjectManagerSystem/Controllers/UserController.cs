@@ -19,22 +19,15 @@ namespace ProjectManagerSystem.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        //private  IMapper _mapper;
-        private ApplicationUserManager _userManager;
+       
         public UserController()
         {
         }
 
-        public UserController(IUserService userService, ApplicationUserManager userManager)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _userManager = userManager;
         }
-
-        //public UserController(IUserService userService)
-        //{
-        //    _userService = userService;
-        //}
 
 
 
@@ -75,19 +68,13 @@ namespace ProjectManagerSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,Password,UserName,Avatar,Role")] AspNetUsersViewModel aspNetUsersViewModel)
+        public ActionResult Create( AspNetUsersViewModel aspNetUsersViewModel)
         {
             if (ModelState.IsValid)
             {
                 var model = Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel);
-                var user = _userService.addUserAsync(model, aspNetUsersViewModel.Role, aspNetUsersViewModel.Password);
-                //var user=_userService.AddAspNetUser(model, aspNetUsersViewModel.Role, aspNetUsersViewModel.Password);
-
-                //var user = new AspNetUser { UserName = item.UserName, FullName = item.FullName, Email = item.Email, UrlAvatar = item.UrlAvatar };
-                //manager.Create(user, item.PasswordHash);
-                //manager.AddToRole(user.Id, );
-                //var  Mapper.Map<AspNetUser, AspNetUsersViewModel>(model);
-            //    _userService.SaveChange();
+                _userService.AddAspNetUser(model, aspNetUsersViewModel.Role, aspNetUsersViewModel.Password);
+                
                 return RedirectToAction("Index");
             }
 

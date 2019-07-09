@@ -13,7 +13,7 @@ namespace ProjectManagerSystem.AutoMapper
         public ViewModelToDomainMapping()
         {
             CreateMap<ProjectViewModel, Project>().ConstructUsing(p => new Project(p.Id, p.Name, p.SortNameProject, p.StartDate, p.EndDate, p.isDeleted));
-            CreateMap<AspNetUsersViewModel, AspNetUser>().ConstructUsing(p => new AspNetUser(p.UserName,p.FullName,p.Password,p.Email,p.UserName));
+            CreateMap<AspNetUsersViewModel, AspNetUser>().ConstructUsing(p => new AspNetUser(p.Id,p.UserName,p.FullName,p.Password,p.Email, p.Avatar));
             CreateMap<AspNetRolesViewModel, AspNetRole>().ConstructUsing(p => new AspNetRole(p.Name));
             CreateMap<FunctionViewModel, Function>().ConstructUsing(p => new Function(p.Id,p.Name,p.URL,p.ParentId,p.IconCss,p.SortOrder));
             CreateMap<PermissionViewModel, Permission>().ConstructUsing(p => new Permission(p.Id,p.AspNetRolesViewModel.Id,p.Function.Id,p.CanRead,p.CanCreate,p.CanUpdate,p.CanDelete));

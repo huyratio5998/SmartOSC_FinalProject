@@ -14,18 +14,23 @@ namespace MS.Repository
         
         private readonly MsContext _context;
         private IProjectRepository _projectRepository;
+        private IUserRepository _userRepository;
         private bool disposed = false;
 
 
 
-        public UnitOfWork(MsContext context, IProjectRepository projectRepository)
+        public UnitOfWork(MsContext context)
         {
             _context = context;
-            _projectRepository = projectRepository;
+          
         }
         public IProjectRepository ProjectRepository
         {
             get { return _projectRepository ?? (_projectRepository = new ProjectRepository(_context)); }
+        }
+        public IUserRepository UserRepository
+        {
+            get { return _userRepository ?? (_userRepository = new UserRepository(_context)); }
         }
 
         public void Commit()
