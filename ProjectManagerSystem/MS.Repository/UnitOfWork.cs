@@ -18,9 +18,10 @@ namespace MS.Repository
 
 
 
-        public UnitOfWork(MsContext context)
+        public UnitOfWork(MsContext context, IProjectRepository projectRepository)
         {
             _context = context;
+            _projectRepository = projectRepository;
         }
         public IProjectRepository ProjectRepository
         {

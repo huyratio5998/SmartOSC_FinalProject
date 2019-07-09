@@ -43,5 +43,20 @@ namespace ProjectManagerSystem.Controllers
 
             return RedirectToAction("Index", "Project");
         }
+        public ActionResult Edit(int id)
+        {
+            Mapper.Map<Project,ProjectViewModel >(projectService.GetProject(id));
+            return View(projectService);
+        }
+        [HttpPost]
+        public ActionResult Edit(ProjectViewModel Project)
+        {
+
+            projectService.UpdateProject(Mapper.Map<ProjectViewModel, Project>(Project));
+            projectService.SaveChange();
+
+
+            return RedirectToAction("Index", "Project");
+        }
     }
 }
