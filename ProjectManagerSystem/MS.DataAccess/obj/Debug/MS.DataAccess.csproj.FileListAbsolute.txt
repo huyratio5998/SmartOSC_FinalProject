@@ -198,3 +198,38 @@ C:\Users\admin\Desktop\New folder\ProjectManagerSystem\MS.DataAccess\obj\Debug\M
 C:\Users\admin\Desktop\New folder\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.csproj.CopyComplete
 C:\Users\admin\Desktop\New folder\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.dll
 C:\Users\admin\Desktop\New folder\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.pdb
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\MS.DataAccess.dll.config
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\MS.DataAccess.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\MS.DataAccess.pdb
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Newtonsoft.Json.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Owin.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.Security.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\bin\Debug\Newtonsoft.Json.xml
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.updatedb.resources
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.add_table_authorization.resources
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.updatedbset.resources
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.updateautomapping.resources
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.Migrations.addprojectmember.resources
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.csproj.CopyComplete
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.dll
+C:\Users\admin\Desktop\HieuFinal\ProjectManagerSystem\MS.DataAccess\obj\Debug\MS.DataAccess.pdb

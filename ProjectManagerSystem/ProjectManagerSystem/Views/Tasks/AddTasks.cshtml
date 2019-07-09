@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "AddTasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/mustache.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/TasksJsController/AddTasks.js"></script>
+
+<script>
+    var tas = new TaskController();
+    tas.intialize();
+</script>
+
+<h2>Create New Task</h2>
+
+<div class="form-group">
+    <input type="hidden" class="form-control" id="TasksIdData">
+    <div class="col-md-10">
+        <select class="form-control" id="ProjectData" style="margin-top:10px"></select>
+    </div>
+    <div class="col-md-10">
+        <select class="form-control" id="AssigneeData" style="margin-top:10px"></select>
+    </div>
+    <div class="col-md-10">
+        <select class="form-control" id="StatusData" style="margin-top:10px ; margin-bottom : 10px"></select>
+    </div>
+    <div class="col-md-10">
+        <input class="col-md-10" placeholder="Tasks Name" type="text" style="margin-bottom:10px" id="AddNameTask" />
+
+    </div>
+
+    <div class="col-md-10" style="margin-top: 10px">
+        <textarea style="margin-top:10px" class="form-control" id="Description" rows="5" placeholder="Description"></textarea>
+
+        <button class="form-group" id="AddTasks" style="margin-top:10px">Add</button>
+    </div>
+</div>
+
+<script id="OptionProject" type="x-tmpl-mustache">
+    <option id="ProjectId" value="{{projectId}}">
+        {{projectName}}
+    </option>
+</script>
+<script id="OptionAssignee" type="x-tmpl-mustache">
+    <option id="AssigneeId" value="{{assigneeId}}">
+        {{assigneeName}}
+    </option>
+</script>
+<script id="OptionStatus" type="x-tmpl-mustache">
+    <option id="AssigneeId" value="{{statusId}}">
+        {{statusName}}
+    </option>
+</script>
+<br />

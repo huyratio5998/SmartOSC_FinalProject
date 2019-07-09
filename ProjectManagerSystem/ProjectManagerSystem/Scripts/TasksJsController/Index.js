@@ -1,9 +1,7 @@
 ﻿var TaskController = function () {
 
     this.intialize = function () {
-        
         loadDataSelectList();
-        loadPage();
         registerEvent();
     }
 
@@ -56,14 +54,7 @@
 
     function registerEvent() {
         changeSelect();
-    }
-
-    function loadPage() {
-        $(document).ready(function () {
-                projectId = $('#ProjectData').val();
-                UserId = $('#AssigneeData').val();
-                GetTasks(projectId, UserId);
-        })
+        SearchEvent();
     }
 
     function changeSelect() {
@@ -81,7 +72,6 @@
         $(document).ready(function () {
             var render = '';
             var template = $('#dataTasks').html();
-            var statusId;
             $.ajax({
                 url: "/Tasks/GetTasks",
                 data: {
@@ -103,5 +93,42 @@
             })
         })
 
+    }
+
+    function SearchEvent() {
+        var TasksName;
+        $(document).ready(function () {
+           
+            $('#SearchTasks').click(function (e) {
+                e.preventDefault();
+                TasksName = $('#InputSearch').val();
+                GetTasksFromName(TasksName);
+            })
+        })
+    }
+
+    function GetTasksFromName(TasksName) {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#dataTasks').html();
+            $.ajax({
+                url: "/Tasks/SearchTasks",
+                data: {
+                    tasksName : TasksName
+                },
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            TaskId: item.Id,
+                            TaskName: item.Name,
+                            Status: item.sts.Name
+                        })
+                    })
+                    $('#tblTasks').html(render);
+                }
+            })
+        })
     }
 }

@@ -52,12 +52,14 @@ namespace ProjectManagerSystem
             
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IProjectService, ProjectService>();
-            
-            container.RegisterType<IMyAccountService, MyAccountService>();
-            container.RegisterType<IStatusService, StatusService>();
+            container.RegisterType<IProjectRepository, ProjectRepository>();
 
+            container.RegisterType<IMyAccountService, MyAccountService>();
+            container.RegisterType<IMyAccountRepository, MyAccountRepository>();
+            container.RegisterType<IStatusService, StatusService>();
+            container.RegisterType<IStatusRepository, StatusRepository>();
             container.RegisterType<ITasksService, TasksService>();
-            container.RegisterType<ITasksRepository, TasksRepository() >;
+            container.RegisterType<ITasksRepository, TasksRepository>();
 
 
         }

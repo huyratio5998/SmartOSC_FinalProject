@@ -8,6 +8,7 @@ using ProjectManagerSystem.Models.CustomTasksViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -63,6 +64,17 @@ namespace ProjectManagerSystem.Controllers
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult LoadStatus()
+        {
+            var listStatus = _StatusService.GetAll();
+
+            var models = Mapper.Map<IEnumerable<Status>, IEnumerable<StatusViewModel>>(listStatus);
+
+            return Json(new
+            {
+                data = models
+            }, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult GetTasks(int projectId, string userId)
         {
@@ -75,6 +87,71 @@ namespace ProjectManagerSystem.Controllers
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SearchTasks(string tasksName)
+        {
+            var TasksResult = _TasksService.GetAll().Where(x => x.Name == tasksName);
+
+            var models = Mapper.Map<IEnumerable<Tasks>, IEnumerable<TasksViewModel>>(TasksResult);
+
+            return Json(new
+            {
+                data = models
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult AddTasks()
+        {
+            return View();
+        }
+
+        public JsonResult CreateTasks(TasksViewModel tasksView)
+        {
+            //TasksViewModel tasksView = new TasksViewModel();
+
+            tasksView.SortNameTask = "ChuaNghiRa";
+            //tasksView.Id = TasksId;
+            //tasksView.ProjectId = ProjectId;
+            //tasksView.UserId = UserId;
+            //tasksView.StatusId = StatusId;
+            //tasksView.Name = TasksName;
+            //tasksView.Description = TasksDescription;
+
+            var status = false;
+
+            if (tasksView.Id == 0)
+            {
+                var models = Mapper.Map<TasksViewModel, Tasks>(tasksView);
+                if (true)
+                {
+                    _TasksService.AddTasks(models);
+                    _TasksService.SaveChange();
+                }
+            }
+            else
+            {
+                status = true;
+            }
+            return Json(new
+            {
+                data = status
+            });
+        }
+
+        public ActionResult EditTasks()
+        {
+            return View();
+        }
+
+        //public JsonResult EditTasksData(TasksViewModel tasksView)
+        //{
+
+        //    return Json(new
+        //    {
+        //        data = models
+        //    });
+        //}
+
         public ActionResult Details(int id)
         {
             return View();

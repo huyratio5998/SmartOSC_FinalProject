@@ -20,5 +20,7 @@ namespace ProjectManagerSystem.Models
         }
 
         public System.Data.Entity.DbSet<ProjectManagerSystem.Models.MyAccountViewModels> MyAccountViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<ProjectManagerSystem.Models.TasksViewModel> TasksViewModels { get; set; }
     }
 }

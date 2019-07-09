@@ -74,8 +74,6 @@ namespace ProjectManagerSystem.Controllers
                         status = status
                     });
                 }
-                    
-                
                 _statusService.AddStatus(Mapper.Map<StatusViewModel, Status>(statusView));
                 _statusService.SaveChange();
                 status = true;

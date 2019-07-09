@@ -18,7 +18,7 @@ namespace ProjectManagerSystem.AutoMapper
             CreateMap<FunctionViewModel, Function>().ConstructUsing(p => new Function(p.Id,p.Name,p.URL,p.ParentId,p.IconCss,p.SortOrder));
             CreateMap<PermissionViewModel, Permission>().ConstructUsing(p => new Permission(p.Id,p.AspNetRolesViewModel.Id,p.Function.Id,p.CanRead,p.CanCreate,p.CanUpdate,p.CanDelete));
             CreateMap<StatusViewModel, Status>().ConstructUsing(p => new Status(p.Id,p.Name));
-            CreateMap<TasksViewModel, Tasks>().ConstructUsing(p => new Tasks(p.Id,p.prt.Id,p.usr.Id,p.StatusId,p.SortNameTask,p.Name,p.Description));
+            CreateMap<TasksViewModel, Tasks>().ConstructUsing(p => new Tasks(p.Id,p.ProjectId,p.UserId,p.StatusId,p.SortNameTask,p.Name,p.Description));
             CreateMap<MyAccountViewModels, AspNetUser>().ConstructUsing(p => new AspNetUser(p.Password, p.FullName, p.Email, p.UrlAvatar,p.UserName));
         }   
     }

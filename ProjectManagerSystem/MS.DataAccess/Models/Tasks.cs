@@ -55,5 +55,6 @@ namespace MS.DataAccess.Models
 
         [ForeignKey("StatusId")]
         public virtual Status sts { get; set; }
+
     }
 }
