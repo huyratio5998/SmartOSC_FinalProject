@@ -12,13 +12,11 @@ namespace MS.Service
 {
     public class ProjectService : IProjectService
     {
-        private readonly ProjectRepository _ProjectRepository;
-        private readonly IUnitOfWork _IunitOfWork;
+        private readonly IProjectRepository _ProjectRepository;
 
-        public ProjectService(ProjectRepository ProjectRepository, IUnitOfWork IunitOfWork)
+        public ProjectService(IProjectRepository ProjectRepository)
         {
             _ProjectRepository = ProjectRepository;
-            _IunitOfWork = IunitOfWork;
         }
 
         public Project AddProject(Project item)
@@ -53,7 +51,7 @@ namespace MS.Service
 
         public void SaveChange()
         {
-            _IunitOfWork.Save();
+            _ProjectRepository.Save();
         }
 
         public bool UpdateProject(Project item)

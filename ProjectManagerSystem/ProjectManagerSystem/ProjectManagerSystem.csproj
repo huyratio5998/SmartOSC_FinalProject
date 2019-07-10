@@ -199,16 +199,24 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRolesViewModel.cs" />
+    <Compile Include="Models\CustomTasksViewModels\AddTasksViewModel.cs" />
+    <Compile Include="Models\CustomTasksViewModels\DropDownListViewModels.cs" />
+    <Compile Include="Models\CustomTasksViewModels\SelectDataViewModels.cs" />
     <Compile Include="Models\FunctionViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MyAccountViewModels.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\AspNetUsersViewModel.cs" />
+    <Compile Include="Models\ProjectManagerSystemContext.cs" />
     <Compile Include="Models\ProjectMemberViewModel.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\StatusViewModel.cs" />
@@ -238,6 +246,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\mustache.min.js" />
+    <Content Include="Scripts\MyAccount\Index.js" />
+    <Content Include="Scripts\plugins\mustache.min.js" />
+    <Content Include="Scripts\share\common.js" />
+    <Content Include="Scripts\Status\Index.js" />
+    <Content Include="Scripts\TasksJsController\AddTasks.js" />
+    <Content Include="Scripts\TasksJsController\Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -277,6 +292,11 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Status\StatusInfomation.cshtml" />
+    <Content Include="Views\MyAccount\Index.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\AddTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

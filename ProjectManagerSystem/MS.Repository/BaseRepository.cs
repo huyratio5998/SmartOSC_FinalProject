@@ -13,12 +13,13 @@ namespace MS.Repository
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly MsContext _context;
-
+        protected readonly IDbSet<T> _dbset;
         public BaseRepository(MsContext context)
         {
             _context = context;
+            _dbset = _context.Set<T>();
         }
-
+        
         // xóa 1 đối tượng trong entity
         public virtual T Delete(T entity)
         {
@@ -101,14 +102,16 @@ namespace MS.Repository
             var result = _context.Set<T>().Add(entity);
             return result;
         }
-
-
         public T Get(int id)
         {
             var result = _context.Set<T>().Find(id);
             return result;
         }
-
+        public T Get(string id)
+        {
+            var result = _context.Set<T>().Find(id);
+            return result;
+        }
         public IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
         {
             throw new NotImplementedException();
@@ -132,14 +135,10 @@ namespace MS.Repository
             }
         }
 
-        public T Get(string id)
+        public virtual void Save()
         {
-            var result = _context.Set<T>().Find(id);
-            return result;
+            _context.SaveChanges();
         }
-
-
-
 
         // lấy về nhiều đối tượng sau đó phân trang
         //public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)

@@ -6,9 +6,11 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <script src="~/Scripts/plugins/mustache.min.js"></script>
+    @*<script src="~/Scripts/share/common.js"></script>*@
 </head>
 <body>
+    <script src="~/Scripts/plugins/mustache.min.js"></script>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,8 +24,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Status", "Index", "Status")</li>
+                    <li>@Html.ActionLink("MyAccount", "Index", "MyAccount")</li>
+                    <li>@Html.ActionLink("Tasks", "Index", "Tasks")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -31,6 +34,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        
+
+    </div>
+    <div class="container body-content">
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -40,5 +47,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

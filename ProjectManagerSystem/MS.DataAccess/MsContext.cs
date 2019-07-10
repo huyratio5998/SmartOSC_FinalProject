@@ -12,6 +12,9 @@ namespace MS.DataAccess
 {  
         public class MsContext : IdentityDbContext
         {
+        // 1. Enable-Migrations
+        // 2. Add-Migration
+        // 3. Update-Database
         public MsContext() : base("ManageProjectDB")
         {
         }

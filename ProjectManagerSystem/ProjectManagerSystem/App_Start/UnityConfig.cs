@@ -45,14 +45,22 @@ namespace ProjectManagerSystem
         public static void RegisterTypes(IUnityContainer container)
         {
             //var UnityContainer = new UnityContainer();
-           // container.RegisterType<IMapper, Mapper>();
+            // container.RegisterType<IMapper, Mapper>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<AccountController>(new InjectionConstructor());
+            
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IProjectService, ProjectService>();
-            container.RegisterType<IUnitOfWork, UnitOfWork>();
-            
-            
+            container.RegisterType<IProjectRepository, ProjectRepository>();
+
+            container.RegisterType<IMyAccountService, MyAccountService>();
+            container.RegisterType<IMyAccountRepository, MyAccountRepository>();
+            container.RegisterType<IStatusService, StatusService>();
+            container.RegisterType<IStatusRepository, StatusRepository>();
+            container.RegisterType<ITasksService, TasksService>();
+            container.RegisterType<ITasksRepository, TasksRepository>();
+
 
         }
     }
