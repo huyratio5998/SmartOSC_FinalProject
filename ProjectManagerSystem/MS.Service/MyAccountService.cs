@@ -47,7 +47,7 @@ namespace MS.Service
 
         public void SaveChange()
         {
-            _IunitOfWork.Save();
+            _IunitOfWork.Commit();
         }
 
         public bool UpdateAspNetUser(AspNetUser item)

@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using MS.DataAccess.Models;
 using MS.Service.Interface;
 using ProjectManagerSystem.Models;
@@ -17,11 +19,12 @@ namespace ProjectManagerSystem.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-       
-        public UserController()
-        { }
 
-        public UserController(IUserService userService, ApplicationUserManager userManager)
+        public UserController()
+        {
+        }
+
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -44,7 +47,7 @@ namespace ProjectManagerSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsersViewModel aspNetUsersViewModel =Mapper.Map< AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
+            AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
             if (aspNetUsersViewModel == null)
             {
                 return HttpNotFound();
@@ -65,13 +68,13 @@ namespace ProjectManagerSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( AspNetUsersViewModel aspNetUsersViewModel)
+        public ActionResult Create(AspNetUsersViewModel aspNetUsersViewModel)
         {
             if (ModelState.IsValid)
             {
                 var model = Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel);
                 _userService.AddAspNetUser(model, aspNetUsersViewModel.Role, aspNetUsersViewModel.Password);
-                
+
                 return RedirectToAction("Index");
             }
 
@@ -85,7 +88,7 @@ namespace ProjectManagerSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map< AspNetUser, AspNetUsersViewModel>( _userService.GetAspNetUser(id));
+            AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
             if (aspNetUsersViewModel == null)
             {
                 return HttpNotFound();
@@ -103,8 +106,8 @@ namespace ProjectManagerSystem.Controllers
             if (ModelState.IsValid)
             {
                 _userService.UpdateAspNetUser(Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel));
-              //  _userService.SaveChange();                
-               
+                //  _userService.SaveChange();                
+
                 return RedirectToAction("Index");
             }
             return View(aspNetUsersViewModel);
@@ -131,8 +134,8 @@ namespace ProjectManagerSystem.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
-            _userService.DeleteAspNetUser(Mapper.Map < AspNetUsersViewModel, AspNetUser > (aspNetUsersViewModel));
-        //    _userService.SaveChange();
+            _userService.DeleteAspNetUser(Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel));
+            //    _userService.SaveChange();
             return RedirectToAction("Index");
         }
 

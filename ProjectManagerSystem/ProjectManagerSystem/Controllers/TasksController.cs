@@ -19,12 +19,12 @@ namespace ProjectManagerSystem.Controllers
     public class TasksController : Controller
     {
 
-        private readonly ITasksService _TasksService;
+        private readonly ITaskService _TasksService;
         private readonly IProjectService _ProjectService;
         private readonly IUserService _UserService;
         private readonly IStatusService _StatusService;
 
-        public TasksController(ITasksService tasksService, IProjectService projectService, IUserService userService, IStatusService statusService)
+        public TasksController(ITaskService tasksService, IProjectService projectService, IUserService userService, IStatusService statusService)
         {
             _TasksService = tasksService;
             _ProjectService = projectService;

@@ -12,11 +12,13 @@ namespace MS.Service
 {
     public class ProjectService : IProjectService
     {
-        private readonly IProjectRepository _ProjectRepository;
+        private readonly IProjectRepository _projectRepository;
+        public IUnitOfWork _unitOfWork;
 
-        public ProjectService(IProjectRepository ProjectRepository)
+        public ProjectService(IUnitOfWork unitOfWork, IProjectRepository projectRepository)
         {
-            _ProjectRepository = ProjectRepository;
+            _unitOfWork = unitOfWork;
+            _projectRepository = projectRepository;
         }
 
         public Project AddProject(Project item)

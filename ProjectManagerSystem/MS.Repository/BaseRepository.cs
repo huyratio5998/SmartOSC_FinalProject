@@ -138,11 +138,7 @@ namespace MS.Repository
             }
         }
 
-        public T Get(string id)
-        {
-            var result = _context.Set<T>().Find(id);
-            return result;
-        }
+      
 
      
             public AspNetUser Add(AspNetUser item, string Role, string Pass)

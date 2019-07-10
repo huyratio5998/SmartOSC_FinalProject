@@ -61,10 +61,7 @@ namespace MS.Service
             return result;
         }
 
-        public void SaveChange()
-        {
-            _IunitOfWork.Save();
-        }
+
 
         public bool UpdateAspNetUser(AspNetUser item)
         {

@@ -9,5 +9,6 @@ namespace MS.Repository.Interface
 {
     public interface ITasksRepository : IBaseRepository<Tasks>
     {
+
     }
 }
