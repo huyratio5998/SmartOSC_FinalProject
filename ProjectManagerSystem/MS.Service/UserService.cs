@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using MS.DataAccess.Models;
+﻿using MS.DataAccess.Models;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service.Interface;
@@ -60,6 +59,11 @@ namespace MS.Service
         {
             var result = _userRepository.Get(ID);
             return result;
+        }
+
+        public void SaveChange()
+        {
+            _IunitOfWork.Save();
         }
 
         public bool UpdateAspNetUser(AspNetUser item)

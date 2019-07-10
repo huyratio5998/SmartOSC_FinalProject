@@ -13,7 +13,8 @@ namespace MS.Repository
     {
         public TasksRepository(MsContext context) : base(context)
         {
-
+           
         }
     }
+
 }

@@ -95,14 +95,6 @@
     <Compile Include="Migrations\201907050158396_add projectmember.Designer.cs">
       <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907080404021_sua dbcontext aspnetusser.cs" />
-    <Compile Include="Migrations\201907080404021_sua dbcontext aspnetusser.Designer.cs">
-      <DependentUpon>201907080404021_sua dbcontext aspnetusser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907080429238_sua connection.cs" />
-    <Compile Include="Migrations\201907080429238_sua connection.Designer.cs">
-      <DependentUpon>201907080429238_sua connection.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetRole.cs" />
     <Compile Include="Models\AspNetUser.cs" />
@@ -135,15 +127,6 @@
     <EmbeddedResource Include="Migrations\201907050158396_add projectmember.resx">
       <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907080404021_sua dbcontext aspnetusser.resx">
-      <DependentUpon>201907080404021_sua dbcontext aspnetusser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907080429238_sua connection.resx">
-      <DependentUpon>201907080429238_sua connection.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Interface\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

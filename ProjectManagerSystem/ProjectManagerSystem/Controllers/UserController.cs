@@ -8,8 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using MS.DataAccess.Models;
 using MS.Service.Interface;
 using ProjectManagerSystem.Models;
@@ -21,10 +19,9 @@ namespace ProjectManagerSystem.Controllers
         private readonly IUserService _userService;
        
         public UserController()
-        {
-        }
+        { }
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ApplicationUserManager userManager)
         {
             _userService = userService;
         }

@@ -201,14 +201,21 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRolesViewModel.cs" />
+    <Compile Include="Models\CustomTasksViewModels\AddTasksViewModel.cs" />
+    <Compile Include="Models\CustomTasksViewModels\DropDownListViewModels.cs" />
+    <Compile Include="Models\CustomTasksViewModels\SelectDataViewModels.cs" />
     <Compile Include="Models\FunctionViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MyAccountViewModels.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\AspNetUsersViewModel.cs" />
     <Compile Include="Models\ProjectManagerSystemContext.cs" />
@@ -241,6 +248,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\mustache.min.js" />
+    <Content Include="Scripts\MyAccount\Index.js" />
+    <Content Include="Scripts\plugins\mustache.min.js" />
+    <Content Include="Scripts\share\common.js" />
+    <Content Include="Scripts\Status\Index.js" />
+    <Content Include="Scripts\TasksJsController\AddTasks.js" />
+    <Content Include="Scripts\TasksJsController\Index.js" />
     <Content Include="Scripts\Project\Project.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -281,6 +295,11 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Status\StatusInfomation.cshtml" />
+    <Content Include="Views\MyAccount\Index.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\AddTasks.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
@@ -304,7 +323,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MS.DataAccess\MS.DataAccess.csproj">
-      <Project>{070addb8-b410-42be-9f1b-e4465eddcc00}</Project>
+      <Project>{070ADDB8-B410-42BE-9F1B-E4465EDDCC00}</Project>
       <Name>MS.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\MS.Repository\MS.Repository.csproj">

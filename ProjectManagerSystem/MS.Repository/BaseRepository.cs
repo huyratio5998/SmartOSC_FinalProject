@@ -15,15 +15,14 @@ namespace MS.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private  MsContext _context;
-        public IUnitOfWork _unitOfWork;
-        protected readonly IDbSet<T> _dbset;        
+        private readonly MsContext _context;
+        protected readonly IDbSet<T> _dbset;
         public BaseRepository(MsContext context)
         {
             _context = context;
             _dbset = _context.Set<T>();
         }
-
+        
         // xóa 1 đối tượng trong entity
         public virtual T Delete(T entity)
         {
@@ -100,20 +99,22 @@ namespace MS.Repository
 
             return _context.Set<T>().Where<T>(predicate).AsQueryable<T>();
         }
-        
-        public virtual T Add(T entity)
+
+        public T Add(T entity)
         {
-            var result = _dbset.Add(entity);            
+            var result = _context.Set<T>().Add(entity);
             return result;
         }
-
-
         public T Get(int id)
         {
             var result = _context.Set<T>().Find(id);
             return result;
         }
-
+        public T Get(string id)
+        {
+            var result = _context.Set<T>().Find(id);
+            return result;
+        }
         public IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
         {
             throw new NotImplementedException();

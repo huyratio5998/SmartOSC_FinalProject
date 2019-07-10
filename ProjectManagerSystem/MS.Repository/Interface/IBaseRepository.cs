@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace MS.Repository.Interface
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T>
     {
         bool Update(T entity);
         T Add(T entity);
-      //  T Add(T item, string Role, string Pass);
-      
         // xóa 1 đối tượng trong entity
         T Delete(T entity);
         // xóa bằng id

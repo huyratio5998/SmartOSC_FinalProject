@@ -9,7 +9,7 @@ namespace MS.Service.Interface
 {
     public interface IUserService 
     {
-        AspNetUser AddAspNetUser(AspNetUser item,string Role,string Pass);
+        AspNetUser AddAspNetUser(AspNetUser item);
         AspNetUser DeleteAspNetUser(AspNetUser item);
         bool UpdateAspNetUser(AspNetUser item);
         AspNetUser GetAspNetUser(int ID);

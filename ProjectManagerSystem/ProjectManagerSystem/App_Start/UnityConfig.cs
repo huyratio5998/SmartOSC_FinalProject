@@ -1,18 +1,11 @@
 using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using MS.DataAccess;
-using MS.DataAccess.Models;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service;
 using MS.Service.Interface;
 using ProjectManagerSystem.Controllers;
 using System;
-using System.Data.Entity;
-using System.Web.Mvc;
 using Unity;
-using Unity.AspNet.Mvc;
 using Unity.Injection;
 
 namespace ProjectManagerSystem

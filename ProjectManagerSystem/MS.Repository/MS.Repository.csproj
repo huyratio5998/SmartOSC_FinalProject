@@ -77,6 +77,9 @@
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />
+    <Compile Include="Interface\IMyAccountRepository.cs" />
+    <Compile Include="Interface\IStatusRepository.cs" />
+    <Compile Include="Interface\ITasksRepository.cs" />
     <Compile Include="Interface\IPermissionRepository.cs" />
     <Compile Include="Interface\IProjectMemberRepository.cs" />
     <Compile Include="Interface\ITasksRepository.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Interface\IProjectRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
+    <Compile Include="MyAccountRepository.cs" />
     <Compile Include="RoleRepository.cs" />
     <Compile Include="FunctionRepository.cs" />
     <Compile Include="PermissionRepository.cs" />
