@@ -1,0 +1,5 @@
+*.ldf
+*.mdf
+*.ide-wal
+*.ide-shm
+*.ide
