@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    public class RoleRepository : BaseRepository<AspNetRole>
+    public class RoleRepository : BaseRepository<AspNetRole>, IRoleRepository
     {
         public RoleRepository(MsContext context) : base(context)
         {

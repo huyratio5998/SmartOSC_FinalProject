@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    public class FunctionRepository : BaseRepository<Function>
+    public class FunctionRepository : BaseRepository<Function>, IFunctionRepository
     {
         public FunctionRepository(MsContext context) : base(context)
         {

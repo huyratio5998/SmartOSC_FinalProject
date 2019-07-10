@@ -22,7 +22,8 @@ namespace ProjectManagerSystem.Models
         public DateTime? EndDate { get; set; }
 
         public bool isDeleted { get; set; }
-        public AspNetUsersViewModel User { get; set; }
-        
+        public ProjectMemberViewModel ProjectMember { get; set; }
+        public string ProjectManager { get; set; }
+        public int Tasks { get; set; }
     }
 }

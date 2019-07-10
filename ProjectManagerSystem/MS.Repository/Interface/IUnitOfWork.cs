@@ -13,6 +13,9 @@ namespace MS.Repository.Interface
 
         IProjectRepository ProjectRepository { get; }
         IUserRepository UserRepository { get; }
-
+        IFunctionRepository FunctionRepository { get; }
+        IPermissionRepository PermissionRepository { get; }
+        IRoleRepository RoleRepository { get; }
+        ITasksRepository TasksRepository { get; }
     }
 }

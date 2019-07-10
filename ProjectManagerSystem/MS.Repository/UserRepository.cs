@@ -23,6 +23,7 @@ namespace MS.Repository
         {
             var store = new UserStore<AspNetUser>(_context);
             var manager = new UserManager<AspNetUser>(store);
+            item.Id = Guid.NewGuid().ToString();
             manager.Create(item, Pass);
             manager.AddToRole(item.Id, Role);
             return item;

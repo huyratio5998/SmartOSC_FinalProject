@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    public class TasksRepository : BaseRepository<Tasks>
+    public class TasksRepository : BaseRepository<Tasks>,ITasksRepository
     {
         public TasksRepository(MsContext context) : base(context)
         {

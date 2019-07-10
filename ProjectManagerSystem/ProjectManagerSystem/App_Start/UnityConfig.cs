@@ -62,6 +62,10 @@ namespace ProjectManagerSystem
             container.RegisterType<IProjectRepository, ProjectRepository>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IUserRepository, UserRepository>();
+
+            container.RegisterType<ITasksRepository, TasksRepository>();
+            container.RegisterType<ITaskService, TasksService>();
+
             container.RegisterType<ApplicationUserStore>().RegisterType<IUserStore<AspNetUser>>();
             container.RegisterType<ApplicationUserManager>();
 
