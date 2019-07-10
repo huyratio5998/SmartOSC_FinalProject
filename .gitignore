@@ -1,0 +1,9 @@
+*.dll
+*.pdb
+*.ldf
+*.mdf
+*.cache
+*.ide-wal
+*.ide-shm
+*.ide
+*.suo
