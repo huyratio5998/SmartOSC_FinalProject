@@ -51,11 +51,11 @@
             {
                 var store = new UserStore<AspNetUser>(context);
                 var manager = new UserManager<AspNetUser>(store);
-                var user = new AspNetUser { UserName = "Admin" ,FullName="Administrator"};
+                var user = new AspNetUser { UserName = "Admin", FullName = "Administrator" };
                 manager.Create(user, "!Admin");
                 manager.AddToRole(user.Id, "Admin");
             }
-           
+
             //Thêm quyền cho account đó.
             if (!context.Users.Any(p => p.UserName == "PM"))
             {

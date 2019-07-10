@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MS.Service.Interface
 {
-    public interface ITasksService
+    public interface ITaskService
     {
         Tasks AddTasks(Tasks item);
         Tasks DeleteTasks(Tasks item);

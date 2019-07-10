@@ -12,14 +12,14 @@ namespace MS.Service
 {
     public class StatusService:IStatusService
     {
-        private readonly StatusRepository _statusRepository;
+        private readonly IStatusRepository _statusRepository;
         private readonly IUnitOfWork _IunitOfWork;
         //public StatusService(int ID)
         //{
         //    var result = _statusRepository.Get(ID);
         //    return result;
         //}
-        public StatusService(StatusRepository statusRepository, IUnitOfWork IunitOfWork)
+        public StatusService(IStatusRepository statusRepository, IUnitOfWork IunitOfWork)
         {
             _statusRepository = statusRepository;
             _IunitOfWork = IunitOfWork;
@@ -51,7 +51,7 @@ namespace MS.Service
 
         public void SaveChange()
         {
-            _IunitOfWork.Save();
+            _IunitOfWork.Commit();
         }
 
         public bool UpdateStatus(Status item)

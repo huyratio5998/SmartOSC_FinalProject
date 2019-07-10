@@ -6,66 +6,60 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MS.Service
 {
-    public class TasksService : ITasksService
+    public class TasksService : ITaskService
     {
-        // gọi đến tầng Repository
-        private readonly ITasksRepository _TasksRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        public ITasksRepository _tasksRepository;
+        public IUnitOfWork _unitOfWork;
 
-        //khai báo constructor
-        public TasksService(ITasksRepository tasksRepository, IUnitOfWork iunitOfWork)
+        public TasksService(IUnitOfWork unitOfWork, ITasksRepository tasksRepository)
         {
-            _TasksRepository = tasksRepository;
-            _unitOfWork = iunitOfWork;
+            _unitOfWork = unitOfWork;
+            _tasksRepository = tasksRepository;          
         }
 
-        // thêm tasks
         public Tasks AddTasks(Tasks item)
         {
-            var result = _TasksRepository.Add(item);
+            var result = _unitOfWork.TasksRepository.Add(item);
+     
             return result;
         }
 
-        //xóa tasks
         public Tasks DeleteTasks(Tasks item)
         {
-            var result = _TasksRepository.Delete(item);
+            var result = _unitOfWork.TasksRepository.Delete(item);
             return result;
         }
 
-        //Lấy tất cả tasks
         public IEnumerable<Tasks> GetAll()
         {
-            var result = _TasksRepository.GetAll().ToList();
+            var result = _unitOfWork.TasksRepository.GetAll();
             return result;
         }
 
-        // Lấy nhiều taskso ID kiểu int
         public Tasks GetTasks(int ID)
         {
-            var result = _TasksRepository.Get(ID);
+            var result = _unitOfWork.TasksRepository.Get(ID);
             return result;
         }
 
-        //Lấy tasks theo ID kiểu string
         public Tasks GetTasks(string ID)
         {
-            var result = _TasksRepository.Get(ID);
+            var result = _unitOfWork.TasksRepository.Get(ID);
             return result;
         }
-        //Luu lai
+
         public void SaveChange()
         {
-            _TasksRepository.Save();
+            _unitOfWork.Commit();
         }
 
-        // Update
         public bool UpdateTasks(Tasks item)
         {
-            bool result = _TasksRepository.Update(item);
+            bool result = _unitOfWork.TasksRepository.Update(item);
             return result;
         }
     }

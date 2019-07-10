@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    public class PermissionRepository : BaseRepository<Permission>
+    public class PermissionRepository : BaseRepository<Permission>, IPermissionRepository
     {
         public PermissionRepository(MsContext context) : base(context)
         {

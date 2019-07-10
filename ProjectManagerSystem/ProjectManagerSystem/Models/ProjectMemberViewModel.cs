@@ -8,6 +8,6 @@ namespace ProjectManagerSystem.Models
     public class ProjectMemberViewModel
     {
         public string UserId { get; set; }
-        public int ProjectId { get; set; }
+        public string ProjectId { get; set; }
     }
 }

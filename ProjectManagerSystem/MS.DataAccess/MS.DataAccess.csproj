@@ -75,25 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201907040439070_update-db.cs" />
-    <Compile Include="Migrations\201907040439070_update-db.Designer.cs">
-      <DependentUpon>201907040439070_update-db.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907040441439_add_table_authorization.cs" />
-    <Compile Include="Migrations\201907040441439_add_table_authorization.Designer.cs">
-      <DependentUpon>201907040441439_add_table_authorization.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907040843496_update dbset.cs" />
-    <Compile Include="Migrations\201907040843496_update dbset.Designer.cs">
-      <DependentUpon>201907040843496_update dbset.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907041708174_update auto mapping.cs" />
-    <Compile Include="Migrations\201907041708174_update auto mapping.Designer.cs">
-      <DependentUpon>201907041708174_update auto mapping.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907050158396_add projectmember.cs" />
-    <Compile Include="Migrations\201907050158396_add projectmember.Designer.cs">
-      <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
+    <Compile Include="Migrations\201907100814519_update_after_merch.cs" />
+    <Compile Include="Migrations\201907100814519_update_after_merch.Designer.cs">
+      <DependentUpon>201907100814519_update_after_merch.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetRole.cs" />
@@ -112,20 +96,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907040439070_update-db.resx">
-      <DependentUpon>201907040439070_update-db.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907040441439_add_table_authorization.resx">
-      <DependentUpon>201907040441439_add_table_authorization.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907040843496_update dbset.resx">
-      <DependentUpon>201907040843496_update dbset.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907041708174_update auto mapping.resx">
-      <DependentUpon>201907041708174_update auto mapping.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907050158396_add projectmember.resx">
-      <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907100814519_update_after_merch.resx">
+      <DependentUpon>201907100814519_update_after_merch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,17 @@
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using MS.DataAccess;
+using MS.DataAccess.Models;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service;
 using MS.Service.Interface;
 using ProjectManagerSystem.Controllers;
 using System;
+using System.Data.Entity;
+using System.Web.Mvc;
 using Unity;
+using Unity.AspNet.Mvc;
 using Unity.Injection;
 
 namespace ProjectManagerSystem
@@ -45,21 +51,24 @@ namespace ProjectManagerSystem
         public static void RegisterTypes(IUnityContainer container)
         {
             //var UnityContainer = new UnityContainer();
-            // container.RegisterType<IMapper, Mapper>();
-            container.RegisterType<IUnitOfWork, UnitOfWork>();
+           // container.RegisterType<IMapper, Mapper>();
             container.RegisterType<ManageController>(new InjectionConstructor());
-            container.RegisterType<AccountController>(new InjectionConstructor());
-            
+            container.RegisterType<AccountController>(new InjectionConstructor());            
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<DbContext, MsContext>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();            
             container.RegisterType<IProjectService, ProjectService>();
             container.RegisterType<IProjectRepository, ProjectRepository>();
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IUserRepository, UserRepository>();
 
-            container.RegisterType<IMyAccountService, MyAccountService>();
-            container.RegisterType<IMyAccountRepository, MyAccountRepository>();
-            container.RegisterType<IStatusService, StatusService>();
-            container.RegisterType<IStatusRepository, StatusRepository>();
-            container.RegisterType<ITasksService, TasksService>();
             container.RegisterType<ITasksRepository, TasksRepository>();
+            container.RegisterType<ITaskService, TasksService>();
+
+         //   container.RegisterType<ApplicationUserStore>().RegisterType<IUserStore<AspNetUser>>();
+            container.RegisterType<ApplicationUserManager>();
+
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
 
         }

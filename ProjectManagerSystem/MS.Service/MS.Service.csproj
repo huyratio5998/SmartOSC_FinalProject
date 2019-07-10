@@ -75,14 +75,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FunctionService.cs" />
     <Compile Include="Interface\IMyAccountService.cs" />
     <Compile Include="Interface\IProjectService.cs" />
+    <Compile Include="Interface\IFunctionService.cs" />
+    <Compile Include="Interface\IPermissionService.cs" />
+    <Compile Include="Interface\IRoleService.cs" />
     <Compile Include="Interface\IStatusService.cs" />
-    <Compile Include="Interface\ITasksService.cs" />
+    <Compile Include="Interface\ITaskService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="MyAccountService.cs" />
+    <Compile Include="PermissionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectService.cs" />
+    <Compile Include="RoleService.cs" />
     <Compile Include="StatusService.cs" />
     <Compile Include="TasksService.cs" />
     <Compile Include="UserService.cs" />

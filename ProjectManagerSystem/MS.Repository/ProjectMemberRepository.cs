@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    public class ProjectMemberRepository : BaseRepository<ProjectMember>
+    public class ProjectMemberRepository : BaseRepository<ProjectMember>, IProjectMemberRepository
     {
         public ProjectMemberRepository(MsContext context) : base(context)
         {

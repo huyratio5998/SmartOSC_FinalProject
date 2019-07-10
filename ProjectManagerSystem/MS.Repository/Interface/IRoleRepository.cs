@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository.Interface
 {
-    public interface IStatusRepository : IBaseRepository<Status>
+    public interface IRoleRepository : IBaseRepository<AspNetRole>
     {
-
     }
 }
