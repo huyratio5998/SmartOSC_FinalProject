@@ -1,6 +1,7 @@
 ﻿var TaskController = function () {
 
     this.intialize = function () {
+        GetTasks("1","b6c9e836-6085-459f-bc1a-7097512efada");
         loadDataSelectList();
         registerEvent();
     }
@@ -8,7 +9,10 @@
     function loadDataSelectList() {
         loadProject();
         loadAssignee()
+        loadAssigneeToModal();
+        loadStatusToModal();
     }
+
     function loadProject() {
         $(document).ready(function () {
             var render = '';
@@ -29,7 +33,6 @@
             })
         })
     }
-
     function loadAssignee() {
         $(document).ready(function () {
             var render = '';
@@ -50,16 +53,63 @@
             })
         })
     }
+    function loadAssigneeToModal() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#OptionAssignee').html();
+            $.ajax({
+                url: "/Tasks/LoadAssignee",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            assigneeName: item.FullName,
+                            assigneeId: item.Id
+                        })
+                    })
+                    $('#AssigneeNameModalData').html(render);
+                }
+            })
+        })
+    }
+    function loadStatusToModal() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#OptionStatus').html();
+            $.ajax({
+                url: "/Tasks/LoadStatus",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            statusName: item.Name,
+                            statusId: item.Id
+                        })
+                    })
+                    $('#StatusNameModalData').html(render);
+                }
+            })
+        })
+    }
 
     function registerEvent() {
         changeSelect();
         searchEvent();
+        modalEvent();
+        UpdateEvent();
     }
 
     function changeSelect() {
         var projectId, UserId;
         $(document).ready(function () {
-            $('#ShowData').click(function () {
+            $('#AssigneeData').change(function (e) {
+                projectId = $('#ProjectData').val();
+                UserId = $('#AssigneeData').val();
+                GetTasks(projectId, UserId);
+            })
+            $('#ProjectData').change(function (e) {
                 projectId = $('#ProjectData').val();
                 UserId = $('#AssigneeData').val();
                 GetTasks(projectId, UserId);
@@ -84,85 +134,46 @@
                 e.preventDefault();
                 var id = $(this).data("id");
                 GetTasksById(id);
-                loadAssigneeToModal();
-                loadStatusToModal();
-                $("#myModal").modal();
-
-            })
-        });
-    }
-
-    function updateEvent() {
-        $(document).ready(function () {
-            $('body').on('click', '#UpdateModalData', function (e) {
-                e.preventDefault();
-                updateTasks();
-            })
-        });
-    }
-
-    function updateTasks() {
-        $(document).ready(function () {
-            var render = '';
-            var template = $('#OptionProject').html();
-            $.ajax({
-                url: "/Tasks/LoadProject",
-                type: 'GET',
-                datatype: 'json',
-                success: function (response) {
-                    $.each(response.data, function (i, item) {
-                        render += Mustache.render(template, {
-                            projectName: item.Name,
-                            projectId: item.Id,
-                        })
-                    })
-                    $('#AssigneeNameModal').html(render);
-                }
+                $("#myModal").modal('show');
             })
         })
     }
 
-    function loadAssigneeToModal() {
-        $(document).ready(function () {
-            var render = '';
-            var template = $('#OptionProject').html();
-            $.ajax({
-                url: "/Tasks/LoadProject",
-                type: 'GET',
-                datatype: 'json',
-                success: function (response) {
-                    $.each(response.data, function (i, item) {
-                        render += Mustache.render(template, {
-                            projectName: item.Name,
-                            projectId: item.Id,
-                        })
-                    })
-                    $('#AssigneeNameModal').html(render);
-                }
-            })
-        })
-    }
-    function loadStatusToModal() {
-        $(document).ready(function () {
-            var render = '';
-            var template = $('#OptionProject').html();
-            $.ajax({
-                url: "/Tasks/LoadStatus",
-                type: 'GET',
-                datatype: 'json',
-                success: function (response) {
-                    $.each(response.data, function (i, item) {
-                        render += Mustache.render(template, {
-                            projectName: item.Name,
-                            projectId: item.Id,
-                        })
-                    })
-                    $('#StatusNameModal').html(render);
-                }
-            })
+    function UpdateEvent() {
+        $('body').on('click', '#UpdateModalData', function (e) {
+            e.preventDefault();
+            var tasksId = $("#testTaskId").data("id");
+            var projectId = $('#ProjectData').val();
+            var UserId = $('#AssigneeNameModalData').val();
+            var statusId = $('#StatusNameModalData').val();
+            var tasksName = $('#TasksNameModalData').val();
+            var descriptionTasks = $('#DescriptionModalData').val();
+            UpdateTasks(tasksId, projectId, UserId, statusId, tasksName, descriptionTasks);
         })
     }
 
+    function UpdateTasks(tasksId, projectId, UserId, statusId, tasksName, descriptionTasks) {
+        $.ajax({
+            url: '/Tasks/UpdateTasks',
+            data: {
+                Id: tasksId,
+                ProjectId: projectId,
+                UserId: UserId,
+                StatusId: statusId,
+                Name: tasksName,
+                Description: descriptionTasks
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                restform();
+                alert('Update Success !');
+                $('#AddNameTask').val("");
+                $('#Description').val("");
+                $("#myModal").modal('hide');
+            }
+        })
+    }
 
     function GetTasksById(id) {
         $.ajax({
@@ -177,6 +188,7 @@
                 var template = $('#TasksNameModal').html();
                 $.each(response.data, function (i, item) {
                     render += Mustache.render(template, {
+                        Id: item.Id,
                         tasksNameModal: item.Name,
                         projectNameModal: item.prt.Name,
                         statusNameModal: item.sts.Name,
@@ -187,8 +199,9 @@
             }
         })
     }
-
-
+    function restform() {
+        $("#TasksIdData").val(' ')
+    }
     function GetTasks(projectId, UserId) {
         $(document).ready(function () {
             var render = '';
@@ -210,13 +223,10 @@
                         })
                     })
                     $('#tblTasks').html(render);
-                    modalEvent();
                 }
             })
         })
-
     }
-
     function GetTasksFromName(TasksName) {
         $(document).ready(function () {
             var render = '';

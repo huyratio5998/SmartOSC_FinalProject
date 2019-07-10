@@ -1,59 +1,49 @@
 ﻿
+
 <div class="modal fade" id="myModal" role="dialog">
+
     <div class="modal-dialog" style="margin-left:100px">
         <!-- Modal content-->
         <div class="modal-content" style="width:1200px;">
             <div style="padding:35px 50px;">
                 <h2 style="margin-left:200px">------------------------Update Task-----------------------</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <div id="DetailsTasksModal"></div>
             </div>
             <div class="modal-body">
+                <input type="hidden" class="form-control" id="TasksIdData" value="">
                 <label>Input new Data</label>
                 <table id="TaskTableModal" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th style="width :300px">Assignee</th>
-                            <th style="width :300px">TasksName</th>
                             <th style="width :300px">Status</th>
+                            <th style="width :300px">TasksName</th>
                             <th style="width :300px">Description</th>
                         </tr>
                     </thead>
                     <tbody id="tblTasksModal">
                         <tr>
                             <td>
-                                <select class="form-control" id="AssigneeNameModal"></select>
+                                <select class="form-control" id="AssigneeNameModalData"></select>
                             </td>
                             <td>
-                                <select class="form-control" id="StatusNameModal"></select>
+                                <select class="form-control" id="StatusNameModalData"></select>
                             </td>
                             <td>
-                                <input class="form-control" type="text" value="" />
+                                <input class="form-control" type="text" id="TasksNameModalData" />
                             </td>
                             <td>
-                                <textarea style="width :400px; height: 100px"></textarea>
+                                <textarea style="width :400px; height: 100px" id="DescriptionModalData"></textarea>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <button id="UpdateModalData" style="margin-left : 1000px">Update</button>
+                <button id="CloseModalForm" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-
-<script id="OptionAssignee" type="x-tmpl-mustache">
-    <option id="AssigneeId" value="{{assigneeId}}">
-        {{assigneeName}}
-    </option>
-</script>
-<script id="OptionStatus" type="x-tmpl-mustache">
-    <option id="StatusId" value="{{statusId}}">
-        {{statusName}}
-    </option>
-</script>
-<script id="TasksNameModal" type="x-tmpl-mustache">
-    <h3>Project Name : {{projectNameModal}}</h3>
-    <h4>Task Name : {{tasksNameModal}}</h4>
-    <h5>Status : {{statusNameModal}}</h5>
-    <h5>Description: {{description}}</h5>
-</script>

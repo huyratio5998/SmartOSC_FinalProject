@@ -1,4 +1,5 @@
 ﻿@model ProjectManagerSystem.Models.CustomTasksViewModels.DropDownListViewModels
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +10,6 @@
 <script src="~/Scripts/TasksJsController/Index.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
 <script>
     var tas = new TaskController();
     tas.intialize();
@@ -24,7 +24,6 @@
     </div>
     <div class="col-md-8">
         <select class="form-control" id="AssigneeData" style="margin-top:10px ; margin-bottom : 10px"></select>
-        <button class="form-group" id="ShowData">Show</button>
     </div>
     <div class="col-md-12">
         <input class="form-group" style="margin-left:795px;margin-bottom:0px" id="InputSearch" />
@@ -52,7 +51,7 @@
         <td>{{TaskName}}</td>
         <td>{{Status}}</td>
         <td id="edittasksbutton">
-            <button type="button" id="myBtn" data-id="{{TaskId}}">Edit</button>
+            <button type="button" data-toggle="modal" id="myBtn" data-id="{{TaskId}}">Edit</button>
         </td>
 
     </tr>
@@ -69,6 +68,20 @@
     <option id="AssigneeId" value="{{assigneeId}}">
         {{assigneeName}}
     </option>
+</script>
+
+<script id="OptionStatus" type="x-tmpl-mustache">
+    <option id="StatusId" value="{{statusId}}">
+        {{statusName}}
+    </option>
+</script>
+
+<script id="TasksNameModal" type="x-tmpl-mustache">
+    <input type="hidden" class="form-control" id="testTaskId" data-id="{{Id}}">
+    <h3>Project Name : {{projectNameModal}}</h3>
+    <h4>Task Name : {{tasksNameModal}}</h4>
+    <h5>Status : {{statusNameModal}}</h5>
+    <h5>Description: {{description}}</h5>
 </script>
 
 <p style="margin-left:1000px"> @Html.ActionLink("Create New Task", "AddTasks", "Tasks")</p>
