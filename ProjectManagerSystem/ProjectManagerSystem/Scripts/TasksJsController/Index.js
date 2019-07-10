@@ -9,7 +9,6 @@
         loadProject();
         loadAssignee()
     }
-
     function loadProject() {
         $(document).ready(function () {
             var render = '';
@@ -54,7 +53,7 @@
 
     function registerEvent() {
         changeSelect();
-        SearchEvent();
+        searchEvent();
     }
 
     function changeSelect() {
@@ -67,6 +66,128 @@
             })
         })
     }
+
+    function searchEvent() {
+        var TasksName;
+        $(document).ready(function () {
+            $('#SearchTasks').click(function (e) {
+                e.preventDefault();
+                TasksName = $('#InputSearch').val();
+                GetTasksFromName(TasksName);
+            })
+        })
+    }
+
+    function modalEvent() {
+        $(document).ready(function () {
+            $('body').on('click', '#myBtn', function (e) {
+                e.preventDefault();
+                var id = $(this).data("id");
+                GetTasksById(id);
+                loadAssigneeToModal();
+                loadStatusToModal();
+                $("#myModal").modal();
+
+            })
+        });
+    }
+
+    function updateEvent() {
+        $(document).ready(function () {
+            $('body').on('click', '#UpdateModalData', function (e) {
+                e.preventDefault();
+                updateTasks();
+            })
+        });
+    }
+
+    function updateTasks() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#OptionProject').html();
+            $.ajax({
+                url: "/Tasks/LoadProject",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            projectName: item.Name,
+                            projectId: item.Id,
+                        })
+                    })
+                    $('#AssigneeNameModal').html(render);
+                }
+            })
+        })
+    }
+
+    function loadAssigneeToModal() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#OptionProject').html();
+            $.ajax({
+                url: "/Tasks/LoadProject",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            projectName: item.Name,
+                            projectId: item.Id,
+                        })
+                    })
+                    $('#AssigneeNameModal').html(render);
+                }
+            })
+        })
+    }
+    function loadStatusToModal() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#OptionProject').html();
+            $.ajax({
+                url: "/Tasks/LoadStatus",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            projectName: item.Name,
+                            projectId: item.Id,
+                        })
+                    })
+                    $('#StatusNameModal').html(render);
+                }
+            })
+        })
+    }
+
+
+    function GetTasksById(id) {
+        $.ajax({
+            url: "/Tasks/GetTasksbyId",
+            data: {
+                tasksId: id,
+            },
+            type: 'GET',
+            datatype: 'json',
+            success: function (response) {
+                var render = '';
+                var template = $('#TasksNameModal').html();
+                $.each(response.data, function (i, item) {
+                    render += Mustache.render(template, {
+                        tasksNameModal: item.Name,
+                        projectNameModal: item.prt.Name,
+                        statusNameModal: item.sts.Name,
+                        description: item.Description
+                    })
+                })
+                $('#DetailsTasksModal').html(render);
+            }
+        })
+    }
+
 
     function GetTasks(projectId, UserId) {
         $(document).ready(function () {
@@ -89,22 +210,11 @@
                         })
                     })
                     $('#tblTasks').html(render);
+                    modalEvent();
                 }
             })
         })
 
-    }
-
-    function SearchEvent() {
-        var TasksName;
-        $(document).ready(function () {
-           
-            $('#SearchTasks').click(function (e) {
-                e.preventDefault();
-                TasksName = $('#InputSearch').val();
-                GetTasksFromName(TasksName);
-            })
-        })
     }
 
     function GetTasksFromName(TasksName) {
@@ -114,7 +224,7 @@
             $.ajax({
                 url: "/Tasks/SearchTasks",
                 data: {
-                    tasksName : TasksName
+                    tasksName: TasksName
                 },
                 type: 'GET',
                 datatype: 'json',

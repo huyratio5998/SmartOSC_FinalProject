@@ -107,16 +107,8 @@ namespace ProjectManagerSystem.Controllers
 
         public JsonResult CreateTasks(TasksViewModel tasksView)
         {
-            //TasksViewModel tasksView = new TasksViewModel();
-
             tasksView.SortNameTask = "ChuaNghiRa";
-            //tasksView.Id = TasksId;
-            //tasksView.ProjectId = ProjectId;
-            //tasksView.UserId = UserId;
-            //tasksView.StatusId = StatusId;
-            //tasksView.Name = TasksName;
-            //tasksView.Description = TasksDescription;
-
+            
             var status = false;
 
             if (tasksView.Id == 0)
@@ -138,19 +130,24 @@ namespace ProjectManagerSystem.Controllers
             });
         }
 
+        public JsonResult GetTasksbyId(int tasksId)
+        {
+
+            var listTask = _TasksService.GetAll().Where(x => x.Id == tasksId);
+
+            var models = Mapper.Map<IEnumerable<Tasks>, IEnumerable<TasksViewModel>>(listTask);
+
+            return Json(new
+            {
+                data = models
+            },JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult EditTasks()
         {
             return View();
         }
 
-        //public JsonResult EditTasksData(TasksViewModel tasksView)
-        //{
-
-        //    return Json(new
-        //    {
-        //        data = models
-        //    });
-        //}
 
         public ActionResult Details(int id)
         {
