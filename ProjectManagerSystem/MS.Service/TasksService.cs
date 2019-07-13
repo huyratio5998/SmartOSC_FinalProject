@@ -36,6 +36,12 @@ namespace MS.Service
             return result;
         }
 
+        public Tasks DeleteTasksbyId(int ID)
+        {
+            var result = _TasksRepository.Delete(ID);
+            return result;
+        }
+
         //Lấy tất cả tasks
         public IEnumerable<Tasks> GetAll()
         {
@@ -61,6 +67,7 @@ namespace MS.Service
         {
             _TasksRepository.Save();
         }
+        
 
         // Update
         public bool UpdateTasks(Tasks item)
@@ -68,5 +75,6 @@ namespace MS.Service
             bool result = _TasksRepository.Update(item);
             return result;
         }
+        
     }
 }

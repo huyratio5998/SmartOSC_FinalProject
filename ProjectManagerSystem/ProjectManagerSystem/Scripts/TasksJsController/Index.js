@@ -1,7 +1,7 @@
 ﻿var TaskController = function () {
 
     this.intialize = function () {
-        GetTasks("1","b6c9e836-6085-459f-bc1a-7097512efada");
+        GetTasks("1", "3eb180b0-8b1d-4d25-8418-086262b7404b");
         loadDataSelectList();
         registerEvent();
     }
@@ -99,6 +99,7 @@
         searchEvent();
         modalEvent();
         UpdateEvent();
+        DeleteModalEvent();
     }
 
     function changeSelect() {
@@ -124,6 +125,17 @@
                 e.preventDefault();
                 TasksName = $('#InputSearch').val();
                 GetTasksFromName(TasksName);
+
+            })
+        })
+    }
+
+    function refreshEnvent() {
+        $(document).ready(function (e) {
+            $('#Refresh').click(function (e) {
+            projectId = $('#ProjectData').val();
+            UserId = $('#AssigneeData').val();
+            GetTasks(projectId, UserId);
             })
         })
     }
@@ -135,7 +147,33 @@
                 var id = $(this).data("id");
                 GetTasksById(id);
                 $("#myModal").modal('show');
+                refreshEnvent();
             })
+        })
+    }
+
+    function DeleteModalEvent() {
+        $(document).ready(function () {
+            $('body').on('click', '#DeleteModalbtn', function (e) {
+                e.preventDefault();
+                var id = $(this).data("id");
+                $("#DeleteModal").modal('show');
+                DeleteTasksbyId(id);
+            })
+        })
+    }
+
+    function DeleteTasksbyId(id) {
+        $.ajax({
+            url: '/Tasks/DeleteTasks',
+            data: {
+                id: taskId,
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                alert("HHH")
+            }
         })
     }
 

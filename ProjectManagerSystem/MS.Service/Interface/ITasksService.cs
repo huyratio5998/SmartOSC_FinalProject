@@ -1,5 +1,6 @@
 ﻿using MS.DataAccess.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,6 @@ namespace MS.Service.Interface
         Tasks GetTasks(string ID);
         IEnumerable<Tasks> GetAll();
         void SaveChange();
+        Tasks DeleteTasksbyId(int ID);
     }
 }
