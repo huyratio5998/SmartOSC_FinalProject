@@ -1,6 +1,7 @@
 ﻿var TaskController = function () {
 
     this.intialize = function () {
+        GetTasks("1", "8e32afeb-f538-4a76-9d3b-c8d77f371ded");
         loadDataSelectList();
         registerEvent();
     }
@@ -8,7 +9,10 @@
     function loadDataSelectList() {
         loadProject();
         loadAssignee()
+        loadAssigneeToModal();
+        loadStatusToModal();
     }
+
     function loadProject() {
         $(document).ready(function () {
             var render = '';
@@ -29,7 +33,6 @@
             })
         })
     }
-
     function loadAssignee() {
         $(document).ready(function () {
             var render = '';
@@ -50,23 +53,70 @@
             })
         })
     }
+    function loadAssigneeToModal() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#OptionAssignee').html();
+            $.ajax({
+                url: "/Tasks/LoadAssignee",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            assigneeName: item.FullName,
+                            assigneeId: item.Id
+                        })
+                    })
+                    $('#AssigneeNameModalData').html(render);
+                }
+            })
+        })
+    }
+    function loadStatusToModal() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#OptionStatus').html();
+            $.ajax({
+                url: "/Tasks/LoadStatus",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            statusName: item.Name,
+                            statusId: item.Id
+                        })
+                    })
+                    $('#StatusNameModalData').html(render);
+                }
+            })
+        })
+    }
 
     function registerEvent() {
         changeSelect();
         searchEvent();
+        modalEvent();
+        UpdateEvent();
+        DeleteModalEvent();
     }
 
     function changeSelect() {
         var projectId, UserId;
         $(document).ready(function () {
-            $('#ShowData').click(function () {
+            $('#AssigneeData').change(function (e) {
+                projectId = $('#ProjectData').val();
+                UserId = $('#AssigneeData').val();
+                GetTasks(projectId, UserId);
+            })
+            $('#ProjectData').change(function (e) {
                 projectId = $('#ProjectData').val();
                 UserId = $('#AssigneeData').val();
                 GetTasks(projectId, UserId);
             })
         })
     }
-
     function searchEvent() {
         var TasksName;
         $(document).ready(function () {
@@ -78,91 +128,92 @@
         })
     }
 
+    function refreshEnvent() {
+        $(document).ready(function (e) {
+            $('#Refresh').click(function (e) {
+                projectId = $('#ProjectData').val();
+                UserId = $('#AssigneeData').val();
+                GetTasks(projectId, UserId);
+            })
+        })
+    }
+
     function modalEvent() {
         $(document).ready(function () {
             $('body').on('click', '#myBtn', function (e) {
                 e.preventDefault();
                 var id = $(this).data("id");
                 GetTasksById(id);
-                loadAssigneeToModal();
-                loadStatusToModal();
-                $("#myModal").modal();
-
+                $("#myModal").modal('show');
+                refreshEnvent();
             })
-        });
+        })
     }
 
-    function updateEvent() {
+    function DeleteModalEvent() {
         $(document).ready(function () {
-            $('body').on('click', '#UpdateModalData', function (e) {
+            $('body').on('click', '#DeleteModalbtn', function (e) {
                 e.preventDefault();
-                updateTasks();
-            })
-        });
-    }
-
-    function updateTasks() {
-        $(document).ready(function () {
-            var render = '';
-            var template = $('#OptionProject').html();
-            $.ajax({
-                url: "/Tasks/LoadProject",
-                type: 'GET',
-                datatype: 'json',
-                success: function (response) {
-                    $.each(response.data, function (i, item) {
-                        render += Mustache.render(template, {
-                            projectName: item.Name,
-                            projectId: item.Id,
-                        })
-                    })
-                    $('#AssigneeNameModal').html(render);
-                }
+                var id = $(this).data("id");
+                $("#DeleteModal").modal('show');
+                $('body').on('click', '#AcceptDeleteTasks', function (e) {
+                    DeleteTasksbyId(id);
+                    $("#DeleteModal").modal('hide');
+                })
             })
         })
     }
 
-    function loadAssigneeToModal() {
-        $(document).ready(function () {
-            var render = '';
-            var template = $('#OptionProject').html();
-            $.ajax({
-                url: "/Tasks/LoadProject",
-                type: 'GET',
-                datatype: 'json',
-                success: function (response) {
-                    $.each(response.data, function (i, item) {
-                        render += Mustache.render(template, {
-                            projectName: item.Name,
-                            projectId: item.Id,
-                        })
-                    })
-                    $('#AssigneeNameModal').html(render);
-                }
-            })
-        })
-    }
-    function loadStatusToModal() {
-        $(document).ready(function () {
-            var render = '';
-            var template = $('#OptionProject').html();
-            $.ajax({
-                url: "/Tasks/LoadStatus",
-                type: 'GET',
-                datatype: 'json',
-                success: function (response) {
-                    $.each(response.data, function (i, item) {
-                        render += Mustache.render(template, {
-                            projectName: item.Name,
-                            projectId: item.Id,
-                        })
-                    })
-                    $('#StatusNameModal').html(render);
-                }
-            })
+    function DeleteTasksbyId(id) {
+        $.ajax({
+            url: '/Tasks/DeleteTasks',
+            data: {
+                taskId: id,
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                alert("Delete Success !")
+            }
         })
     }
 
+    function UpdateEvent() {
+        $('body').on('click', '#UpdateModalData', function (e) {
+            e.preventDefault();
+            var tasksId = $("#testTaskId").data("id");
+            var projectId = $('#ProjectData').val();
+            var UserId = $('#AssigneeNameModalData').val();
+            var statusId = $('#StatusNameModalData').val();
+            var tasksName = $('#TasksNameModalData').val();
+            var descriptionTasks = $('#DescriptionModalData').val();
+            UpdateTasks(tasksId, projectId, UserId, statusId, tasksName, descriptionTasks);
+        })
+    }
+
+    function UpdateTasks(tasksId, projectId, UserId, statusId, tasksName, descriptionTasks) {
+        $.ajax({
+            url: '/Tasks/UpdateTasks',
+            data: {
+                Id: tasksId,
+                ProjectId: projectId,
+                UserId: UserId,
+                StatusId: statusId,
+                Name: tasksName,
+                Description: descriptionTasks
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                restform();
+                alert('Update Success !');
+                $('#AddNameTask').val("");
+                $('#Description').val("");
+                $("#myModal").modal('hide');
+                GetTasks(projectId, UserId);
+            }
+        })
+    }
 
     function GetTasksById(id) {
         $.ajax({
@@ -177,6 +228,7 @@
                 var template = $('#TasksNameModal').html();
                 $.each(response.data, function (i, item) {
                     render += Mustache.render(template, {
+                        Id: item.Id,
                         tasksNameModal: item.Name,
                         projectNameModal: item.prt.Name,
                         statusNameModal: item.sts.Name,
@@ -187,8 +239,9 @@
             }
         })
     }
-
-
+    function restform() {
+        $("#TasksIdData").val(' ')
+    }
     function GetTasks(projectId, UserId) {
         $(document).ready(function () {
             var render = '';
@@ -205,18 +258,17 @@
                     $.each(response.data, function (i, item) {
                         render += Mustache.render(template, {
                             TaskId: item.Id,
+                            DeleteId: item.Id,
+                            TasksCode: item.SortNameTask,
                             TaskName: item.Name,
                             Status: item.sts.Name
                         })
                     })
                     $('#tblTasks').html(render);
-                    modalEvent();
                 }
             })
         })
-
     }
-
     function GetTasksFromName(TasksName) {
         $(document).ready(function () {
             var render = '';

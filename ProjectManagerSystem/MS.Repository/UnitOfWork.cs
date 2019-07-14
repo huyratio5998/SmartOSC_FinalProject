@@ -21,6 +21,11 @@ namespace MS.Repository
         private IUserRepository _userRepository;
         private IRoleRepository _roleRepository;
         private IUserRoleRepository _userRoleRepository;
+        private IMyAccountRepository _myAccountRepository;
+        private IStatusRepository _statusRepository;
+
+        private IAspNetRolesRepository _aspNetRolesRepository;
+        private IAspNetUserRolesRepository _aspNetUserRolesRepository;
         private bool disposed = false;
 
 
@@ -29,6 +34,23 @@ namespace MS.Repository
         {
             _context = context;
           
+        }
+        public IAspNetRolesRepository AspNetRolesRepository
+        {
+            get { return _aspNetRolesRepository ?? (_aspNetRolesRepository = new AspNetRolesRepository(_context)); }
+        }
+        public IAspNetUserRolesRepository AspNetUserRolesRepository
+        {
+            get { return _aspNetUserRolesRepository ?? (_aspNetUserRolesRepository = new AspNetUserRolesRepository(_context)); }
+        }
+
+        public IStatusRepository StatusRepository
+        {
+            get { return _statusRepository ?? (_statusRepository = new StatusRepository(_context)); }
+        }
+        public IMyAccountRepository MyAccountRepository
+        {
+            get { return _myAccountRepository ?? (_myAccountRepository = new MyAccountRepository(_context)); }
         }
         public IProjectRepository ProjectRepository
         {

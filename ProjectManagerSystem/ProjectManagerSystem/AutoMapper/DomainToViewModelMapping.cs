@@ -22,6 +22,7 @@ namespace ProjectManagerSystem.AutoMapper
             CreateMap<Status, StatusViewModel>();
             CreateMap<Tasks, TasksViewModel>();
             CreateMap<AspNetUser,MyAccountViewModels>();
+            
         }
         
     }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MS.Service
 {
-    public class TasksService : ITaskService
+    public class TasksService : ITasksService
     {
         public ITasksRepository _tasksRepository;
         public IUnitOfWork _unitOfWork;
@@ -36,7 +36,7 @@ namespace MS.Service
 
         public IEnumerable<Tasks> GetAll()
         {
-            var result = _unitOfWork.TasksRepository.GetAll();
+            var result = _unitOfWork.TasksRepository.GetAll().ToList();
             return result;
         }
 
@@ -56,7 +56,11 @@ namespace MS.Service
         {
             _unitOfWork.Commit();
         }
-
+        public Tasks DeleteTasksbyId(int ID)
+        {
+            var result = _unitOfWork.TasksRepository.Delete(ID);
+            return result;
+        }
         public bool UpdateTasks(Tasks item)
         {
             bool result = _unitOfWork.TasksRepository.Update(item);

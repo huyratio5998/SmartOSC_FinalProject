@@ -75,8 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetRolesRepository.cs" />
+    <Compile Include="AspNetUserRolesRepository.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />
+    <Compile Include="Interface\IAspNetRolesRepository.cs" />
+    <Compile Include="Interface\IAspNetUserRolesRepository.cs" />
     <Compile Include="Interface\IMyAccountRepository.cs" />
     <Compile Include="Interface\IUserRoleRepository.cs" />
     <Compile Include="Interface\ITasksRepository.cs" />

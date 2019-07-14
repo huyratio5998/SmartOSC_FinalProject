@@ -5,48 +5,86 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SortNameProject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            Project Manager
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tasks)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-xs-12">
+        <h3 class="header smaller lighter blue">jQuery dataTables</h3>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SortNameProject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectManagerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tasks)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+        <div class="clearfix">
+            <div class="pull-right tableTools-container"></div>
+        </div>
+       
 
-</table>
+        <!-- div.table-responsive -->
+        <!-- div.dataTables_borderWrap -->
+        <div>
+            <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.SortNameProject)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            Project Manager
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tasks)
+                        </th>
+                    
+
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SortNameProject)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProjectManagerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tasks)
+                        </td>
+                        <td>
+                            
+                           
+                            <div class="hidden-sm hidden-xs action-buttons">                               
+
+                                <a class="green" href="@Url.Action("Edit", "Project",new {  id = item.Id})">
+                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                </a>
+
+                                <a class="red" href="@Url.Action("Delete", "Project",new {  id = item.Id})">
+                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                </a>
+                            </div>
+
+                        </td>
+                       
+                    </tr>
+                    }
+
+
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

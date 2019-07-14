@@ -15,16 +15,15 @@ using System.Web.Script.Serialization;
 
 namespace ProjectManagerSystem.Controllers
 {
-
     public class TasksController : Controller
     {
 
-        private readonly ITaskService _TasksService;
+        private readonly ITasksService _TasksService;
         private readonly IProjectService _ProjectService;
         private readonly IUserService _UserService;
         private readonly IStatusService _StatusService;
 
-        public TasksController(ITaskService tasksService, IProjectService projectService, IUserService userService, IStatusService statusService)
+        public TasksController(ITasksService tasksService, IProjectService projectService, IUserService userService, IStatusService statusService)
         {
             _TasksService = tasksService;
             _ProjectService = projectService;
@@ -55,7 +54,7 @@ namespace ProjectManagerSystem.Controllers
 
         public JsonResult LoadAssignee()
         {
-            var listUser = _UserService.GetAll();
+            var listUser = _UserService.GetAll().ToList();
 
             var models = Mapper.Map<IEnumerable<AspNetUser>, IEnumerable<AspNetUsersViewModel>>(listUser);
 
@@ -90,10 +89,9 @@ namespace ProjectManagerSystem.Controllers
 
         public JsonResult SearchTasks(string tasksName)
         {
-            var TasksResult = _TasksService.GetAll().Where(x => x.Name == tasksName);
+            var Result = _TasksService.GetAll().Where(x => x.Name.Contains(tasksName) || x.Description.Contains(tasksName) || x.prt.Name.Contains(tasksName) || x.sts.Name.Contains(tasksName));
 
-            var models = Mapper.Map<IEnumerable<Tasks>, IEnumerable<TasksViewModel>>(TasksResult);
-
+            var models = Mapper.Map<IEnumerable<Tasks>, IEnumerable<TasksViewModel>>(Result);
             return Json(new
             {
                 data = models
@@ -107,8 +105,11 @@ namespace ProjectManagerSystem.Controllers
 
         public JsonResult CreateTasks(TasksViewModel tasksView)
         {
-            tasksView.SortNameTask = "ChuaNghiRa";
-            
+
+
+
+            tasksView.SortNameTask = _ProjectService.GetProject(tasksView.ProjectId).SortNameProject + "- Hieu";
+
             var status = false;
 
             if (tasksView.Id == 0)
@@ -140,86 +141,46 @@ namespace ProjectManagerSystem.Controllers
             return Json(new
             {
                 data = models
-            },JsonRequestBehavior.AllowGet);
+            }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EditTasks()
-        {
-            return View();
-        }
-
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Tasks/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Tasks/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public JsonResult UpdateTasks(TasksViewModel model)
         {
+            var Oldtasks = _TasksService.GetTasks(model.Id);
+
+            Oldtasks.UserId = model.UserId;
+            Oldtasks.StatusId = model.StatusId;
+            if (model.Name != null)
+            {
+                Oldtasks.Name = model.Name;
+            }
+            if (model.Description != null)
+            {
+                Oldtasks.Description = model.Description;
+            }
+
             _TasksService.SaveChange();
 
-            try
+            return Json(new
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                data = model
+            });
         }
 
-        // GET: Tasks/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Tasks/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public JsonResult DeleteTasks(int taskId)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var TasksTarget = _TasksService.DeleteTasksbyId(taskId);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var models = Mapper.Map<Tasks, TasksViewModel>(TasksTarget);
 
-        // GET: Tasks/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            _TasksService.SaveChange();
 
-        // POST: Tasks/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            return Json(new
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                data = models
+            });
         }
     }
 }

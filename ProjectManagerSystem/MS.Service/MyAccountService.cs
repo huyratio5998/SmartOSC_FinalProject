@@ -12,47 +12,47 @@ namespace MS.Service
 {
     public class MyAccountService : IMyAccountService
     {
-        private readonly MyAccountRepository _myAccountRepository;
-        private readonly IUnitOfWork _IunitOfWork;
+        private readonly IMyAccountRepository _myAccountRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MyAccountService(MyAccountRepository myAccountRepository, IUnitOfWork IunitOfWork)
+        public MyAccountService(IMyAccountRepository myAccountRepository, IUnitOfWork IunitOfWork)
         {
             _myAccountRepository = myAccountRepository;
-            _IunitOfWork = IunitOfWork;
+            _unitOfWork = IunitOfWork;
         }
 
         public AspNetUser AddAspNetUser(AspNetUser item)
         {
-            var result = _myAccountRepository.Add(item);
+            var result = _unitOfWork.MyAccountRepository.Add(item);
             return result;
         }
 
         public AspNetUser DeleteAspNetUser(AspNetUser item)
         {
-            var result = _myAccountRepository.Delete(item);
+            var result = _unitOfWork.MyAccountRepository.Delete(item);
             return result;
         }
 
         public IEnumerable<AspNetUser> GetAll()
         {
-            var result = _myAccountRepository.GetAll();
+            var result = _unitOfWork.MyAccountRepository.GetAll();
             return result;
         }
 
         public AspNetUser GetAspNetUser(string ID)
         {
-            var result = _myAccountRepository.Get(ID);
+            var result = _unitOfWork.MyAccountRepository.Get(ID);
             return result;
         }
 
         public void SaveChange()
         {
-            _IunitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public bool UpdateAspNetUser(AspNetUser item)
         {
-            bool result = _myAccountRepository.Update(item);
+            bool result = _unitOfWork.MyAccountRepository.Update(item);
             return result;
         }
     }

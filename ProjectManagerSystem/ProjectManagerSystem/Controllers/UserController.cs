@@ -25,13 +25,13 @@ namespace ProjectManagerSystem.Controllers
         private readonly IRoleService _roleService;
         private readonly IProjectMemberService _projectMemberService;
         private readonly IProjectService _projectService;
-        private readonly ITaskService _taskService;
+        private readonly ITasksService _taskService;
 
         public UserController()
         {
         }
 
-        public UserController(IUserService userService, IUserRoleService userRoleService, IRoleService roleService, IProjectMemberService projectMemberService, IProjectService projectService, ITaskService taskService)
+        public UserController(IUserService userService, IUserRoleService userRoleService, IRoleService roleService, IProjectMemberService projectMemberService, IProjectService projectService, ITasksService taskService)
         {
             _userService = userService;
             _userRoleService = userRoleService;

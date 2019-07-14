@@ -19,5 +19,10 @@ namespace MS.Repository.Interface
         IRoleRepository RoleRepository { get; }
         ITasksRepository TasksRepository { get; }
         IUserRoleRepository UserRoleRepository { get; }
+        IMyAccountRepository MyAccountRepository { get; }
+        IStatusRepository StatusRepository { get; }
+
+        IAspNetRolesRepository AspNetRolesRepository { get; }
+        IAspNetUserRolesRepository AspNetUserRolesRepository { get; }
     }
 }

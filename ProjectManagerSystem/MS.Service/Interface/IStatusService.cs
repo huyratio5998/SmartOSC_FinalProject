@@ -9,7 +9,7 @@ namespace MS.Service.Interface
 {
     public interface IStatusService
     {
-        //Status FindStatus(int ID);
+        Status FindStatus(string Name);
         Status AddStatus(Status item);
         Status DeleteStatus(Status item);
         bool UpdateStatus(Status item);

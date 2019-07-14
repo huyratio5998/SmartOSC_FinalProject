@@ -8,6 +8,10 @@ namespace ProjectManagerSystem.Models
 {
     public class TasksViewModel
     {
+        public TasksViewModel()
+        {
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -31,10 +35,10 @@ namespace ProjectManagerSystem.Models
         public string Description { get; set; }
         public virtual ProjectViewModel prt { get; set; }
 
-     
+
         public virtual AspNetUsersViewModel usr { get; set; }
 
-     
+
         public virtual StatusViewModel sts { get; set; }
     }
 }

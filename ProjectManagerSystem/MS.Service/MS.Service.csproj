@@ -75,7 +75,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetRolesService.cs" />
+    <Compile Include="AspNetUserRolesService.cs" />
     <Compile Include="FunctionService.cs" />
+    <Compile Include="Interface\IAspNetRolesService.cs" />
+    <Compile Include="Interface\IAspNetUserRolesService.cs" />
     <Compile Include="Interface\IMyAccountService.cs" />
     <Compile Include="Interface\IProjectMemberService.cs" />
     <Compile Include="Interface\IProjectService.cs" />
@@ -84,7 +88,7 @@
     <Compile Include="Interface\IRoleService.cs" />
     <Compile Include="Interface\IStatusService.cs" />
     <Compile Include="Interface\IUserRoleService.cs" />
-    <Compile Include="Interface\ITaskService.cs" />
+    <Compile Include="Interface\ITasksService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="MyAccountService.cs" />
     <Compile Include="PermissionService.cs" />

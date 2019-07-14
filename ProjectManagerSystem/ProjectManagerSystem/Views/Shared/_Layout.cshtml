@@ -37,6 +37,13 @@
     <script src="~/assets/js/html5shiv.min.js"></script>
     <script src="~/assets/js/respond.min.js"></script>
     <![endif]-->
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/plugins/mustache.min.js"></script>
+    <script src="~/Scripts/ckfinder/ckfinder.js"></script>
+    <script src="~/Scripts/share/notify.js"></script>
 </head>
 
 <body class="no-skin">
@@ -148,7 +155,7 @@
 
             <ul class="nav nav-list">
                 <li class="">
-                    <a href="index.html">
+                    <a href="@Url.Action("Index", "Tasks")">
                         <i class="menu-icon fa fa-tachometer"></i>
                         <span class="menu-text"> Tasks </span>
                     </a>
@@ -172,7 +179,7 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="">
-                    <a href="index.html">
+                    <a href="@Url.Action("Index", "Status")">
                         <i class="menu-icon fa fa-tachometer"></i>
                         <span class="menu-text"> Configuration </span>
                     </a>
@@ -187,14 +194,7 @@
 
                     <b class="arrow"></b>
                 </li>
-                <li class="">
-                    <a href="@Url.Action("Index", "Status")">
-                        <i class="menu-icon fa fa-tachometer"></i>
-                        <span class="menu-text"> Status </span>
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
+              
                 <li class="">
                     <a href="index.html">
                         <i class="menu-icon fa fa-tachometer"></i>
@@ -279,8 +279,6 @@
     </div><!-- /.main-container -->
     <!-- basic scripts -->
     <!--[if !IE]> -->
-  
-
     <!-- <![endif]-->
     <!--[if IE]>
     <script src="~/assets/js/jquery-1.11.3.min.js"></script>
@@ -288,13 +286,15 @@
     <script type="text/javascript">
         if ('ontouchstart' in document.documentElement) document.write("<script src='~/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
-    <script src="~/assets/js/bootstrap.min.js"></script>
+    @*<script src="~/assets/js/bootstrap.min.js"></script>*@
 
     <!-- page specific plugin scripts -->
     <!-- ace scripts -->
     <script src="~/assets/js/ace-elements.min.js"></script>
     <script src="~/assets/js/ace.min.js"></script>
-    @RenderSection("scripts", required: false)
+    @*@RenderSection("scripts", required: false)*@
     <!-- inline scripts related to this page -->
+  
+
 </body>
 </html>

@@ -17,12 +17,12 @@ namespace ProjectManagerSystem.Controllers
     {
         private IProjectService _projectService;
         private IProjectMemberService _projectMemberService;
-        private ITaskService _taskService;
+        private ITasksService _taskService;
         private IUserService _userService;
         private IUserRoleService _userRoleService;
         private IRoleService _roleService;
 
-        public ProjectController(IProjectService projectService, IProjectMemberService projectMemberService, ITaskService taskService, IUserService userService, IUserRoleService userRoleService, IRoleService roleService)
+        public ProjectController(IProjectService projectService, IProjectMemberService projectMemberService, ITasksService taskService, IUserService userService, IUserRoleService userRoleService, IRoleService roleService)
         {
             _projectService = projectService;
             _projectMemberService = projectMemberService;

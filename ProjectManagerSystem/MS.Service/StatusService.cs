@@ -24,28 +24,32 @@ namespace MS.Service
             _statusRepository = statusRepository;
             _IunitOfWork = IunitOfWork;
         }
-
+        public Status FindStatus(string Name)
+        {
+            var result = _IunitOfWork.StatusRepository.Get(Name);
+            return result;
+        }
         public Status AddStatus(Status item)
         {
-            var result = _statusRepository.Add(item);
+            var result = _IunitOfWork.StatusRepository.Add(item);
             return result;
         }
 
         public Status DeleteStatus(Status item)
         {
-            var result = _statusRepository.Delete(item);
+            var result = _IunitOfWork.StatusRepository.Delete(item);
             return result;
         }
 
         public IEnumerable<Status> GetAll()
         {
-            var result = _statusRepository.GetAll();
+            var result = _IunitOfWork.StatusRepository.GetAll();
             return result;
         }
 
         public Status GetStatus(int ID)
         {
-            var result = _statusRepository.Get(ID);
+            var result = _IunitOfWork.StatusRepository.Get(ID);
             return result;
         }
 
@@ -56,7 +60,7 @@ namespace MS.Service
 
         public bool UpdateStatus(Status item)
         {
-            bool result = _statusRepository.Update(item);
+            bool result = _IunitOfWork.StatusRepository.Update(item);
             return result;
         }
     }

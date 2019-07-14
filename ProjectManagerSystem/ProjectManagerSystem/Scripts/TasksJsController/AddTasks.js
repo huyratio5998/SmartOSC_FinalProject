@@ -84,15 +84,15 @@
                 var statusId = $('#StatusData').val();
                 var tasksName = $('#AddNameTask').val();
                 var descriptionTasks = $('#Description').val();
-                AddTasks(tasksId,projectId, UserId, statusId, tasksName, descriptionTasks);
+                AddTasks(tasksId, projectId, UserId, statusId, tasksName, descriptionTasks);
             })
         })
     }
-    function AddTasks(tasksId,projectId, UserId, statusId, tasksName, descriptionTasks) {
+    function AddTasks(tasksId, projectId, UserId, statusId, tasksName, descriptionTasks) {
         $.ajax({
             url: '/Tasks/CreateTasks',
             data: {
-                Id : tasksId,
+                Id: tasksId,
                 ProjectId: projectId,
                 UserId: UserId,
                 StatusId: statusId,

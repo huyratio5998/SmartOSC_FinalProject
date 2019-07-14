@@ -79,15 +79,20 @@ namespace ProjectManagerSystem
             container.RegisterType<IUserRepository, UserRepository>();
 
             container.RegisterType<ITasksRepository, TasksRepository>();
-            container.RegisterType<ITaskService, TasksService>();
+            container.RegisterType<ITasksService, TasksService>();
 
             container.RegisterType<IUserRoleService, UserRoleService>();
             container.RegisterType<IUserRoleRepository, UserRoleRepository>();
 
             container.RegisterType<IRoleService, RoleService>();
             container.RegisterType<IRoleRepository, RoleRepository>();
+
+            container.RegisterType<IMyAccountService, MyAccountService>();
+            container.RegisterType<IMyAccountRepository, MyAccountRepository>();
+            container.RegisterType<IStatusRepository, StatusRepository>();
+            container.RegisterType<IStatusService, StatusService>();
             //   container.RegisterType<ApplicationUserStore>().RegisterType<IUserStore<AspNetUser>>();
-            
+
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
