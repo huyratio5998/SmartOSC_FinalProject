@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity.EntityFramework;
 using MS.DataAccess.Models;
 using ProjectManagerSystem.Models;
 using System;
@@ -13,13 +14,16 @@ namespace ProjectManagerSystem.AutoMapper
         public DomainToViewModelMapping()
         {
             CreateMap<AspNetUser, AspNetUsersViewModel>();
-            CreateMap<AspNetRole, AspNetRolesViewModel>();
+            CreateMap<IdentityRole, AspNetRolesViewModel>();
+            CreateMap<IdentityUserRole, AspNetUserRolesViewModel>();
             CreateMap<Function, FunctionViewModel>();
             CreateMap<Permission, PermissionViewModel>();
             CreateMap<Project, ProjectViewModel>();
             CreateMap<Status, StatusViewModel>();
             CreateMap<Tasks, TasksViewModel>();
             CreateMap<AspNetUser,MyAccountViewModels>();
+            
+            
         }
         
     }

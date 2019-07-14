@@ -13,7 +13,8 @@ namespace MS.Repository
     {
         public MyAccountRepository(MsContext context):base(context)
         {
-
+            
         }
+        
     }
 }

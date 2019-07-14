@@ -1,11 +1,11 @@
 ﻿using MS.DataAccess.Models;
-using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MS.Service
 {
@@ -67,7 +67,7 @@ namespace MS.Service
         {
             _TasksRepository.Save();
         }
-        
+
 
         // Update
         public bool UpdateTasks(Tasks item)
@@ -75,6 +75,6 @@ namespace MS.Service
             bool result = _TasksRepository.Update(item);
             return result;
         }
-        
+
     }
 }

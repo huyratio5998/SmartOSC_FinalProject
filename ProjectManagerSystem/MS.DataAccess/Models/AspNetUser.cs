@@ -17,13 +17,15 @@ namespace MS.DataAccess.Models
         public AspNetUser()
         {
         }
-        public AspNetUser(string userName, string fullname, string password, string email, string urlAvatar)
+        public AspNetUser(string id,string userName, string fullname, string password, string email, string urlAvatar)
         {
+            Id = id;
             UserName = userName;
+            FullName = fullname;
             PasswordHash = password;
             Email = email;
             UrlAvatar = urlAvatar;
-            FullName = fullname;
+            
             
         }
        
@@ -32,6 +34,8 @@ namespace MS.DataAccess.Models
 
         [Required, StringLength(32, MinimumLength = 2)]
         public string FullName { get; set; }
+
+        
         
         
         public virtual ICollection<ProjectMember> ProjectMembers { get; set; }

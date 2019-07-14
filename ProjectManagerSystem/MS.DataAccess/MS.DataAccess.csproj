@@ -95,6 +95,10 @@
     <Compile Include="Migrations\201907050158396_add projectmember.Designer.cs">
       <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907110253275_update.cs" />
+    <Compile Include="Migrations\201907110253275_update.Designer.cs">
+      <DependentUpon>201907110253275_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetRole.cs" />
     <Compile Include="Models\AspNetUser.cs" />
@@ -126,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907050158396_add projectmember.resx">
       <DependentUpon>201907050158396_add projectmember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907110253275_update.resx">
+      <DependentUpon>201907110253275_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,7 +15,6 @@ using System.Web.Script.Serialization;
 
 namespace ProjectManagerSystem.Controllers
 {
-
     public class TasksController : Controller
     {
 
@@ -149,21 +148,21 @@ namespace ProjectManagerSystem.Controllers
 
             Oldtasks.UserId = model.UserId;
             Oldtasks.StatusId = model.StatusId;
-            if (model.Name!=null)
+            if (model.Name != null)
             {
                 Oldtasks.Name = model.Name;
             }
-            if (model.Description!=null)
+            if (model.Description != null)
             {
                 Oldtasks.Description = model.Description;
             }
 
             _TasksService.SaveChange();
 
-           return Json(new
-           {
-               data = model
-           });
+            return Json(new
+            {
+                data = model
+            });
         }
 
         [HttpPost]
@@ -171,7 +170,7 @@ namespace ProjectManagerSystem.Controllers
         {
             var TasksTarget = _TasksService.DeleteTasksbyId(taskId);
 
-            var models = Mapper.Map<Tasks,TasksViewModel>(TasksTarget);
+            var models = Mapper.Map<Tasks, TasksViewModel>(TasksTarget);
 
             return Json(new
             {

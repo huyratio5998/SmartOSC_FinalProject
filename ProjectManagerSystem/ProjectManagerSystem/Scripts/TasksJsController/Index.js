@@ -133,9 +133,9 @@
     function refreshEnvent() {
         $(document).ready(function (e) {
             $('#Refresh').click(function (e) {
-            projectId = $('#ProjectData').val();
-            UserId = $('#AssigneeData').val();
-            GetTasks(projectId, UserId);
+                projectId = $('#ProjectData').val();
+                UserId = $('#AssigneeData').val();
+                GetTasks(projectId, UserId);
             })
         })
     }
@@ -157,8 +157,8 @@
             $('body').on('click', '#DeleteModalbtn', function (e) {
                 e.preventDefault();
                 var id = $(this).data("id");
-                $("#DeleteModal").modal('show');
                 DeleteTasksbyId(id);
+                $("#DeleteModal").modal('show');
             })
         })
     }

@@ -18,7 +18,7 @@ namespace ProjectManagerSystem.Models.CustomTasksViewModels
         public int StatusId { get; set; }
 
         // sornametask = projectsortname + task.count trong project do.
-        
+
         [Required, StringLength(10, MinimumLength = 1)]
         public string SortNameTask { get; set; }
 

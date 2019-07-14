@@ -1,4 +1,5 @@
-﻿using MS.DataAccess.Models;
+﻿using Microsoft.AspNet.Identity;
+using MS.DataAccess.Models;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service.Interface;
@@ -12,13 +13,15 @@ namespace MS.Service
 {
     public class MyAccountService : IMyAccountService
     {
+        //private readonly UserManager<AspNetUser> _userManager;
+        //private readonly RoleManager<AspNetRole> _roleManager;
         private readonly MyAccountRepository _myAccountRepository;
         private readonly IUnitOfWork _IunitOfWork;
-
         public MyAccountService(MyAccountRepository myAccountRepository, IUnitOfWork IunitOfWork)
         {
             _myAccountRepository = myAccountRepository;
             _IunitOfWork = IunitOfWork;
+            
         }
 
         public AspNetUser AddAspNetUser(AspNetUser item)
@@ -41,13 +44,17 @@ namespace MS.Service
 
         public AspNetUser GetAspNetUser(string ID)
         {
+            //var user = _userManager.FindByIdAsync(ID);
+            //var roless = _roleManager.FindByIdAsync();
+            //var roles = _userManager.GetRolesAsync(ID);
             var result = _myAccountRepository.Get(ID);
+            //result.Roles = roles.;
             return result;
         }
 
         public void SaveChange()
         {
-            _IunitOfWork.Save();
+            _myAccountRepository.Save();
         }
 
         public bool UpdateAspNetUser(AspNetUser item)

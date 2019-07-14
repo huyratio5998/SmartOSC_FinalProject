@@ -36,7 +36,6 @@ namespace MS.DataAccess.Models
 
         [Required]
         public int StatusId { get; set; }
-
         // sornametask = projectsortname + task.count trong project do.
         [Required, StringLength(10, MinimumLength = 1)]
         public string SortNameTask { get; set; }
@@ -55,6 +54,5 @@ namespace MS.DataAccess.Models
 
         [ForeignKey("StatusId")]
         public virtual Status sts { get; set; }
-
     }
 }

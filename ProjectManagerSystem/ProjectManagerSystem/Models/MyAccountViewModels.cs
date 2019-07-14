@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using MS.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,8 +14,11 @@ namespace ProjectManagerSystem.Models
         public string FullName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string ConfirmPassword { get; set; }
-        public string Role { get; set; }
+
         public string UrlAvatar { get; set; }
+        //public string Role { get; set; }
+        
+
+
     }
 }

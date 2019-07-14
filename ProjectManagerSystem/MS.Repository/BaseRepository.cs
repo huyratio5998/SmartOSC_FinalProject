@@ -3,6 +3,7 @@ using MS.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -19,7 +20,7 @@ namespace MS.Repository
             _context = context;
             _dbset = _context.Set<T>();
         }
-        
+
         // xóa 1 đối tượng trong entity
         public virtual T Delete(T entity)
         {
@@ -70,6 +71,14 @@ namespace MS.Repository
 
             return _context.Set<T>().AsQueryable();
         }
+        public IEnumerable<T> GetAllData(string[] includes = null)
+        {
+            if (includes != null && includes.Count() > 0)
+            {
+               
+            }
+            return _context.Set<T>().AsQueryable();
+        }
         // lấy về 1 đối tượng với điều kiện 
         public T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null)
         {
@@ -102,6 +111,8 @@ namespace MS.Repository
             var result = _context.Set<T>().Add(entity);
             return result;
         }
+
+
         public T Get(int id)
         {
             var result = _context.Set<T>().Find(id);
@@ -134,11 +145,14 @@ namespace MS.Repository
                 throw e;
             }
         }
-
         public virtual void Save()
-        {
-            _context.SaveChanges();
+        {      
+                _context.SaveChanges();       
         }
+       
+
+
+
 
         // lấy về nhiều đối tượng sau đó phân trang
         //public virtual IEnumerable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)

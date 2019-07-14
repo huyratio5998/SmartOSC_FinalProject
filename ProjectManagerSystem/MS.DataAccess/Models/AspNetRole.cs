@@ -12,9 +12,14 @@ namespace MS.DataAccess.Models
         public AspNetRole()
         {
         }
-
+        public AspNetRole(string id,string name)
+        {
+            Id = id;
+            Name = name;
+        }
         public AspNetRole(string roleName) : base(roleName)
         {
         }
+        
     }
 }

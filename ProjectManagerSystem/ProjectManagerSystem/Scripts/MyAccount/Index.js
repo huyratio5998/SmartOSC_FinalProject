@@ -4,8 +4,16 @@
         registerEvents();
     }
     var registerEvents = function () {
+        $('body').on('click', '#changepass', function (e) {
+            e.preventDefault();
+            $('#exampleModal1').modal('show');
+        });
         $('#btnSelectImg').on('click', function () {
-            $('#fileInputImageM').click();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtUrlAvatar').val(url);
+            };
+            finder.popup();
         });
 
         $("#fileInputImageM").on('change', function () {
@@ -14,7 +22,17 @@
             var data = new FormData();
             fileInputImage(files, data);
         });
-
+        $('body').on('click', '#Savechanges', function (e) {
+            e.preventDefault();
+            var Id = $('#hidId').val();
+            var UserName = $('#txtUserName').val();
+            var FullName = $('#txtFullName').val();            
+            var Password = $('#txtOldPassword').val();
+            var Email = $('#txtEmail').val();
+            var UrlAvatar = $('#txtUrlAvatar').val();
+            save(Id, UserName, FullName, Password, UrlAvatar, Email);
+        });
+        
     }
     function resetFormMaintainance() {
         $//('#txtUserName').prop('disabled', disabled);
@@ -24,47 +42,51 @@
         $('input[name="ckRoles"]').removeAttr('checked');
 
     }
-    
+    function save(Id, UserName, FullName, Password, UrlAvatar, Email) {
+        $.ajax({
+            url: '/MyAccount/save',
+            data: {
+                Id: Id,
+                UserName: UserName,
+                FullName: FullName,
+                Password: Password,
+                UrlAvatar: UrlAvatar,
+                Email: Email
+                
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                $.notify("save data done", "success");
+                loadData();
+            },
+            error: function (err) {
+                $.notify("save error", "error");
+            }
+        });
+    }
     function loadData() {
         $.ajax({
             type: "GET",
             url: "/MyAccount/GetAccount",
             dataType: "json",
             success: function (response) {
-                var data = response;
+                var data = response.data;
+                console.log(data);
                 $('#hidId').val(data.Id);
                 $('#txtFullName').val(data.FullName);
                 $('#txtUserName').val(data.UserName);
+                $('#txtOldPassword').val(data.Password);
                 $('#txtEmail').val(data.Email);
-                $('#txtImageM').val(data.UrlAvatar);
-                resetFormMaintainance();
+                $('#txtUrlAvatar').val(data.UrlAvatar);
+                $('#txtRole').val(data.Role);
+                //$.notify("load data done", "success");
                 
             },
-            error: function (err) {
-                alert('error')
+            error: function () {
+                $.notify('Có lỗi xảy ra', 'error');
             }
         });
        
     };
-    function fileInputImage(files, data) {
-
-        for (var i = 0; i < files.length; i++) {
-            data.append(files[i].name, files[i]);
-        }
-        $.ajax({
-            type: "POST",
-            url: "Upload/UploadImage",
-            contentType: false,
-            processData: false,
-            data: data,
-            success: function (path) {
-                $('#txtImageM').val(path);
-                common.notify('Upload image succesful!', 'success');
-
-            },
-            error: function () {
-                common.notify('There was error uploading files!', 'error');
-            }
-        });
-    }
 }
