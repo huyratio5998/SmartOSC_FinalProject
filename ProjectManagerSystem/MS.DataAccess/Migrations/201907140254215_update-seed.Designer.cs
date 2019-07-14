@@ -7,13 +7,13 @@ namespace MS.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class update_after_merch : IMigrationMetadata
+    public sealed partial class updateseed : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(update_after_merch));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateseed));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907100814519_update_after_merch"; }
+            get { return "201907140254215_update-seed"; }
         }
         
         string IMigrationMetadata.Source

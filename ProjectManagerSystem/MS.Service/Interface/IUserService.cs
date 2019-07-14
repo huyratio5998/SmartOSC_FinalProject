@@ -14,7 +14,8 @@ namespace MS.Service.Interface
         bool UpdateAspNetUser(AspNetUser item);
         AspNetUser GetAspNetUser(int ID);
         AspNetUser GetAspNetUser(string ID);
-        IEnumerable<AspNetUser> GetAll();        
+        IEnumerable<AspNetUser> GetAll();
+        void SaveChange();
       //  Task<AspNetUser> addUserAsync(AspNetUser aspNetUser, string Role, string Pass);
     }
 }

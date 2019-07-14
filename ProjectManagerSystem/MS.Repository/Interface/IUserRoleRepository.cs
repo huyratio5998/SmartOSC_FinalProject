@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MS.Repository.Interface
 {
-    public interface IRoleRepository : IBaseRepository<IdentityRole>
+    public interface IUserRoleRepository : IBaseRepository<IdentityUserRole>
     {
     }
 }

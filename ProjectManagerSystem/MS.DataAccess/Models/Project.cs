@@ -13,7 +13,7 @@ namespace MS.DataAccess.Models
         {
         }
 
-        public Project(int id, string name, string sortNameProject, DateTime? startDate, DateTime? endDate, bool isDeleted)
+        public Project(int id, string name, string sortNameProject, DateTime? startDate, DateTime? endDate, bool isDeleted, string pmId)
         {
             Id = id;            
             Name = name;
@@ -21,12 +21,12 @@ namespace MS.DataAccess.Models
             StartDate = startDate;
             EndDate = endDate;
             this.isDeleted = isDeleted;
+            PmId = PmId;
         }
 
         [Key]
         public int Id { get; set; }
         
-
         [Required, StringLength(120, MinimumLength = 2)]
         public string Name { get; set; }
 
@@ -40,7 +40,7 @@ namespace MS.DataAccess.Models
 
         public bool isDeleted { get; set; }
 
-        
+        public string PmId { get; set; }
         public virtual ICollection<ProjectMember> ProjectMembers { get; set; }
     }
 }

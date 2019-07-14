@@ -5,10 +5,9 @@ using System.Web;
 
 namespace ProjectManagerSystem.Models
 {
-    public class ProjectMemberViewModel
+    public class AspNetUserRoleViewModel
     {
-        public int Id { get; set; }
         public string UserId { get; set; }
-        public int ProjectId { get; set; }
+        public string RoleId { get; set; }
     }
 }

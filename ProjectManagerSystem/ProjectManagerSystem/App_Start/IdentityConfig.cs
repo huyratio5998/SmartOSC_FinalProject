@@ -108,4 +108,14 @@ namespace ProjectManagerSystem
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+    public class ApplicationRoleManager : RoleManager<AspNetRole>
+    {
+        public ApplicationRoleManager(IRoleStore<AspNetRole, string> roleStore) : base(roleStore) { }
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            var applicationRoleManager = new ApplicationRoleManager(new RoleStore<AspNetRole>(context.Get<MsContext>()));
+
+            return applicationRoleManager;
+        }
+    }
 }

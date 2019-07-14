@@ -1,4 +1,5 @@
-﻿using MS.DataAccess.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using MS.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace MS.Service.Interface
 {
     public interface IRoleService
     {
-        AspNetRole AddAspNetRole(AspNetRole item,string Role,string Pass);
-        AspNetRole DeleteAspNetRole(AspNetRole item);
-        bool UpdateAspNetRole(AspNetRole item);
-        AspNetRole GetAspNetRole(int ID);
-        AspNetRole GetAspNetRole(string ID);
-        IEnumerable<AspNetRole> GetAll();        
+        IdentityRole AddAspNetRole(IdentityRole item,string Role,string Pass);
+        IdentityRole DeleteAspNetRole(IdentityRole item);
+        bool UpdateAspNetRole(IdentityRole item);
+        IdentityRole GetAspNetRole(int ID);
+        IdentityRole GetAspNetRole(string ID);
+        IEnumerable<IdentityRole> GetAll();        
       //  Task<AspNetRole> addUserAsync(AspNetRole AspNetRole, string Role, string Pass);
     }
 }

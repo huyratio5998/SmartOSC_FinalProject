@@ -78,6 +78,7 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />
     <Compile Include="Interface\IMyAccountRepository.cs" />
+    <Compile Include="Interface\IUserRoleRepository.cs" />
     <Compile Include="Interface\ITasksRepository.cs" />
     <Compile Include="Interface\IStatusRepository.cs" />
     <Compile Include="Interface\IPermissionRepository.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="ProjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
+    <Compile Include="UserRoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MS.DataAccess\MS.DataAccess.csproj">

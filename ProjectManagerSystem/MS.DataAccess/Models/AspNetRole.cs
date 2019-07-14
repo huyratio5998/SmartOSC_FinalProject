@@ -9,12 +9,13 @@ namespace MS.DataAccess.Models
 {
     public class AspNetRole : IdentityRole
     {
-        public AspNetRole()
+        public AspNetRole() : base()
         {
         }
 
         public AspNetRole(string roleName) : base(roleName)
         {
         }
+
     }
 }

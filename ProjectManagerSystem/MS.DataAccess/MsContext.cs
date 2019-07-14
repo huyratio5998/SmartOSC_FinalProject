@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace MS.DataAccess
 {  
-        public class MsContext : IdentityDbContext
+        public class MsContext : IdentityDbContext<AspNetUser>
         {
         // 1. Enable-Migrations
         // 2. Add-Migration
         // 3. Update-Database
-        public MsContext() : base("ManageProjectDB")
+        public MsContext() : base("ManageProjectDB", throwIfV1Schema: false)
         {
         }
         public DbSet<Tasks> Tasks { get; set; }
@@ -23,8 +23,9 @@ namespace MS.DataAccess
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Function> Functions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<AspNetUser> AspNetUsers { get; set; }
+        //public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<AspNetRole> AspNetRoles { get; set; }
+        public DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public DbSet<ProjectMember> ProjectMembers { get; set; }
         public static MsContext Create()
         {

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -19,15 +21,28 @@ namespace ProjectManagerSystem.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationRoleManager _roleManager;
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -143,8 +158,13 @@ namespace ProjectManagerSystem.Controllers
         {
 
             // var lstRole = (new MsContext()).Roles.ToList().Select(p=>new SelectListItem { Value=p.Name.ToString(),Text=p.Name});
-            var lstRole = (new MsContext()).Roles.ToList();
-            ViewBag.lstRole = new SelectList(lstRole,"Id","Name");
+            //var lstRole = (new MsContext()).Roles.ToList();
+            var list = new List<SelectListItem>();
+            foreach (var item in RoleManager.Roles)
+            {
+                list.Add(new SelectListItem { Value = item.Name, Text = item.Name });
+            }
+            ViewBag.lstRole = list;
             return View();
         }
 
@@ -158,11 +178,15 @@ namespace ProjectManagerSystem.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = new AspNetUser { FullName = model.FullName,UserName = model.UserName, Email = model.Email};
-
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new AspNetUser {UserName = model.UserName, FullName = model.FullName, Email = model.Email};             
+                try
+                {
+                    var result = await UserManager.CreateAsync(user, model.Password);
+               
+                
                 if (result.Succeeded)
                 {
+                    result = await UserManager.AddToRoleAsync(user.Id, model.Role);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -174,12 +198,104 @@ namespace ProjectManagerSystem.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        //Edit
+        
+        public ActionResult Edit(string id)
+        {
+            
+            var list = new List<SelectListItem>();
+            foreach (var item in RoleManager.Roles)
+            {
+                list.Add(new SelectListItem { Value = item.Name, Text = item.Name });
+            }
+            ViewBag.lstRole = list;
+            var user =  UserManager.FindById(id);            
+            var x = Mapper.Map<AspNetUser, RegisterViewModel>(user);            
+            var oldRoleId = user.Roles.SingleOrDefault().RoleId;
+            var roleName = RoleManager.Roles.SingleOrDefault(p => p.Id == oldRoleId).Name;        
+            x.Role = roleName;
+            return View(x);
+        }  
+        // POST: /Account/Register
+        [HttpPost]        
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(AspNetUsersViewModel model )
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(model.Id);
+                user.UrlAvatar = model.Avatar;
+                user.UserName = model.UserName;
+                user.FullName = model.FullName;
+                user.Email = model.Email;
+                                               
+                try
+                {
+                    if(model.Password != user.PasswordHash)
+                    {
+                        //UserManager.RemovePassword(model.Id);
+                        //var x=UserManager.AddPassword(model.Id, model.Password);
+                        var token = await UserManager.GeneratePasswordResetTokenAsync(model.Id);
+                        var result1 = await UserManager.ResetPasswordAsync(model.Id, token, model.Password);
+                    }
+                                    
+                    
+                    // update user
+                    var result = await UserManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    { 
+                        // update role
+                        var oldUser =  UserManager.FindById(model.Id);
+                        var oldRoleId = oldUser.Roles.First().RoleId;
+                        var oldRoleName = RoleManager.Roles.SingleOrDefault(p => p.Id == oldRoleId).Name;
+                        if(oldRoleName != model.Role)
+                        {
+                            UserManager.RemoveFromRole(user.Id, oldRoleName);
+                            UserManager.AddToRole(user.Id, model.Role);
+                        }   
+                        //
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                     
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    AddErrors(result);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        
+        public async Task<ActionResult> Delete(string id)
+        {
+            try
+            {
+                var user = await UserManager.FindByIdAsync(id);
+                await UserManager.DeleteAsync(user);
+                return RedirectToAction("Index", "User");
+            }catch(Exception e)
+            {
+                throw e;
+            }
+            
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

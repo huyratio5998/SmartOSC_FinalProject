@@ -12,10 +12,12 @@ namespace MS.Repository.Interface
         void Commit();
 
         IProjectRepository ProjectRepository { get; }
+        IProjectMemberRepository ProjectMemberRepository { get; }
         IUserRepository UserRepository { get; }
         IFunctionRepository FunctionRepository { get; }
         IPermissionRepository PermissionRepository { get; }
         IRoleRepository RoleRepository { get; }
         ITasksRepository TasksRepository { get; }
+        IUserRoleRepository UserRoleRepository { get; }
     }
 }

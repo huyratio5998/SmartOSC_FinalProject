@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace MS.Repository
 {
-    public class RoleRepository : BaseRepository<IdentityRole>, IRoleRepository
+    public class UserRoleRepository : BaseRepository<IdentityUserRole>, IUserRoleRepository
     {
-        public RoleRepository(MsContext context) : base(context)
+        public UserRoleRepository(MsContext context) : base(context)
         {
-
         }
     }
 }

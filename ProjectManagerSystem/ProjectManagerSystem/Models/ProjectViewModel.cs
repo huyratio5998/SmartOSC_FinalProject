@@ -21,9 +21,9 @@ namespace ProjectManagerSystem.Models
         [Required]
         public DateTime? EndDate { get; set; }
 
-        public bool isDeleted { get; set; }
-        public ProjectMemberViewModel ProjectMember { get; set; }
-        public string ProjectManager { get; set; }
+        public bool isDeleted { get; set; }        
+        public string PmId { get; set; }
+        public string ProjectManagerName { get; set; }
         public int Tasks { get; set; }
     }
 }

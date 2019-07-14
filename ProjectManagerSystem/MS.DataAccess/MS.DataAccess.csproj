@@ -75,13 +75,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201907100814519_update_after_merch.cs" />
-    <Compile Include="Migrations\201907100814519_update_after_merch.Designer.cs">
-      <DependentUpon>201907100814519_update_after_merch.cs</DependentUpon>
+    <Compile Include="Migrations\201907140254215_update-seed.cs" />
+    <Compile Include="Migrations\201907140254215_update-seed.Designer.cs">
+      <DependentUpon>201907140254215_update-seed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetRole.cs" />
     <Compile Include="Models\AspNetUser.cs" />
+    <Compile Include="Models\AspNetUserRole.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Project.cs" />
@@ -96,8 +97,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907100814519_update_after_merch.resx">
-      <DependentUpon>201907100814519_update_after_merch.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907140254215_update-seed.resx">
+      <DependentUpon>201907140254215_update-seed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

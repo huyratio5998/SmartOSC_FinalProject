@@ -1,14 +1,20 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using MS.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MS.Repository.Interface
+namespace MS.DataAccess.Models
 {
-    public interface IRoleRepository : IBaseRepository<IdentityRole>
+    public class AspNetUserRole : IdentityUserRole
     {
+        public AspNetUserRole( ) : base() 
+        {
+         
+        }
+        
+        
+
     }
 }

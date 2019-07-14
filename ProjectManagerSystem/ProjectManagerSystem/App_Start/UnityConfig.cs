@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using MS.DataAccess;
 using MS.DataAccess.Models;
 using MS.Repository;
@@ -11,8 +12,10 @@ using System;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Unity;
+
 using Unity.AspNet.Mvc;
 using Unity.Injection;
+using Unity.Lifetime;
 
 namespace ProjectManagerSystem
 {
@@ -51,22 +54,40 @@ namespace ProjectManagerSystem
         public static void RegisterTypes(IUnityContainer container)
         {
             //var UnityContainer = new UnityContainer();
-           // container.RegisterType<IMapper, Mapper>();
+            // container.RegisterType<IMapper, Mapper>();
+            container.RegisterType<IUserStore<AspNetUser>, UserStore<AspNetUser>>();
+            container.RegisterType(typeof(IUserStore<>), typeof(UserStore<>));
+            //container.RegisterType<IUserStore<AspNetRole>, UserStore<AspNetRole>>();
+            container.RegisterType<UserManager<AspNetUser>>();            
+            container.RegisterType<ApplicationUserManager>();
+            
+           
+
             container.RegisterType<ManageController>(new InjectionConstructor());
-            container.RegisterType<AccountController>(new InjectionConstructor());            
-            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<RoleController>(new InjectionConstructor());
             container.RegisterType<DbContext, MsContext>();
-            container.RegisterType<IUnitOfWork, UnitOfWork>();            
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            
+                //container.RegisterType<IRoleStore, RoleStore>();
             container.RegisterType<IProjectService, ProjectService>();
             container.RegisterType<IProjectRepository, ProjectRepository>();
+            container.RegisterType<IProjectMemberRepository, ProjectMemberRepository>();
+            container.RegisterType<IProjectMemberService, ProjectMemberService>();
+
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IUserRepository, UserRepository>();
 
             container.RegisterType<ITasksRepository, TasksRepository>();
             container.RegisterType<ITaskService, TasksService>();
 
-         //   container.RegisterType<ApplicationUserStore>().RegisterType<IUserStore<AspNetUser>>();
-            container.RegisterType<ApplicationUserManager>();
+            container.RegisterType<IUserRoleService, UserRoleService>();
+            container.RegisterType<IUserRoleRepository, UserRoleRepository>();
+
+            container.RegisterType<IRoleService, RoleService>();
+            container.RegisterType<IRoleRepository, RoleRepository>();
+            //   container.RegisterType<ApplicationUserStore>().RegisterType<IUserStore<AspNetUser>>();
+            
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 

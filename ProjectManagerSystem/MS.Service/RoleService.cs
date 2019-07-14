@@ -1,4 +1,5 @@
-﻿using MS.DataAccess.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using MS.DataAccess.Models;
 using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service.Interface;
@@ -21,37 +22,37 @@ namespace MS.Service
             _roleRepository = roleRepository;          
         }
 
-        public AspNetRole AddAspNetRole(AspNetRole item)
+        public IdentityRole AddAspNetRole(IdentityRole item)
         {
             var result = _unitOfWork.RoleRepository.Add(item);
      
             return result;
         }
 
-        public AspNetRole AddAspNetRole(AspNetRole item, string Role, string Pass)
+        public IdentityRole AddAspNetRole(IdentityRole item, string Role, string Pass)
         {
             throw new NotImplementedException();
         }
 
-        public AspNetRole DeleteAspNetRole(AspNetRole item)
+        public IdentityRole DeleteAspNetRole(IdentityRole item)
         {
             var result = _unitOfWork.RoleRepository.Delete(item);
             return result;
         }
 
-        public IEnumerable<AspNetRole> GetAll()
+        public IEnumerable<IdentityRole> GetAll()
         {
             var result = _unitOfWork.RoleRepository.GetAll();
             return result;
         }
 
-        public AspNetRole GetAspNetRole(int ID)
+        public IdentityRole GetAspNetRole(int ID)
         {
             var result = _unitOfWork.RoleRepository.Get(ID);
             return result;
         }
 
-        public AspNetRole GetAspNetRole(string ID)
+        public IdentityRole GetAspNetRole(string ID)
         {
             var result = _unitOfWork.RoleRepository.Get(ID);
             return result;
@@ -62,7 +63,7 @@ namespace MS.Service
             _unitOfWork.Commit();
         }
 
-        public bool UpdateAspNetRole(AspNetRole item)
+        public bool UpdateAspNetRole(IdentityRole item)
         {
             bool result = _unitOfWork.RoleRepository.Update(item);
             return result;

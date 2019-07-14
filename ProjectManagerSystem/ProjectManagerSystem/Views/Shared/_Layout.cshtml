@@ -6,6 +6,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     <script src="~/Scripts/plugins/mustache.min.js"></script>
     @*<script src="~/Scripts/share/common.js"></script>*@
 </head>
@@ -27,6 +30,8 @@
                     <li>@Html.ActionLink("Status", "Index", "Status")</li>
                     <li>@Html.ActionLink("MyAccount", "Index", "MyAccount")</li>
                     <li>@Html.ActionLink("Tasks", "Index", "Tasks")</li>
+                    <li>@Html.ActionLink("Project", "Index", "Project")</li>
+                    <li>@Html.ActionLink("User", "Index", "User")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -44,9 +49,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+   
 
 </body>
 </html>

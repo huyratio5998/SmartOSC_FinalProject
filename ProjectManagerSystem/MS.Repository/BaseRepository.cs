@@ -144,8 +144,8 @@ namespace MS.Repository
             public AspNetUser Add(AspNetUser item, string Role, string Pass)
             {
                 var store = new UserStore<AspNetUser>(_context);
-                var manager = new UserManager<AspNetUser>(store);
-                manager.Create(item, Pass);
+                var manager = new UserManager<AspNetUser>(store);            
+                manager.Create(item, Pass);            
                 manager.AddToRole(item.Id, Role);
                 return item;
             }

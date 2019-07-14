@@ -39,38 +39,38 @@ namespace MS.Service
 
         public AspNetUser DeleteAspNetUser(AspNetUser item)
         {
-            var result = _userRepository.Delete(item);
+            var result = _unitOfWork.UserRepository.Delete(item);
             return result;
         }
 
         public IEnumerable<AspNetUser> GetAll()
         {
-            var result = _userRepository.GetAll();
+            var result = _unitOfWork.UserRepository.GetAll();
             return result;
         }
 
         public AspNetUser GetAspNetUser(int ID)
         {
-            var result = _userRepository.Get(ID);
+            var result = _unitOfWork.UserRepository.Get(ID);
             return result;
         }
 
         public AspNetUser GetAspNetUser(string ID)
         {
-            var result = _userRepository.Get(ID);
+            var result = _unitOfWork.UserRepository.Get(ID);
             return result;
         }
 
-
-
-        public bool UpdateAspNetUser(AspNetUser item)
-        {
-            bool result = _userRepository.Update(item);
-            return result;
-        }
         public void SaveChange()
         {
             _unitOfWork.Commit();
         }
+
+        public bool UpdateAspNetUser(AspNetUser item)
+        {
+            bool result = _unitOfWork.UserRepository.Update(item);
+            return result;
+        }
+       
     }
 }

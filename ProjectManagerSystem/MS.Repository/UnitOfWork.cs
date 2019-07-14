@@ -14,11 +14,13 @@ namespace MS.Repository
         
         private readonly MsContext _context;
         private IProjectRepository _projectRepository;
-        private IUserRepository _userRepository;
+        private IProjectMemberRepository _projectMemberRepository;
         private IFunctionRepository _functionRepository;
-        private IPermissionRepository _permissionRepository;
-        private IRoleRepository _roleRepository;
+        private IPermissionRepository _permissionRepository;        
         private ITasksRepository _tasksRepository;
+        private IUserRepository _userRepository;
+        private IRoleRepository _roleRepository;
+        private IUserRoleRepository _userRoleRepository;
         private bool disposed = false;
 
 
@@ -31,6 +33,10 @@ namespace MS.Repository
         public IProjectRepository ProjectRepository
         {
             get { return _projectRepository ?? (_projectRepository = new ProjectRepository(_context)); }
+        }
+        public IProjectMemberRepository ProjectMemberRepository
+        {
+            get { return _projectMemberRepository ?? (_projectMemberRepository = new ProjectMemberRepository(_context)); }
         }
         public IUserRepository UserRepository
         {
@@ -51,6 +57,10 @@ namespace MS.Repository
         public ITasksRepository TasksRepository
         {
             get { return _tasksRepository ?? (_tasksRepository = new TasksRepository(_context)); }
+        }
+        public IUserRoleRepository UserRoleRepository
+        {
+            get { return _userRoleRepository ?? (_userRoleRepository = new UserRoleRepository(_context)); }
         }
 
         public void Commit()

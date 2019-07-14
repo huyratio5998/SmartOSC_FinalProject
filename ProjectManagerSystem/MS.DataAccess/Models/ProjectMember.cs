@@ -13,19 +13,22 @@ namespace MS.DataAccess.Models
         public ProjectMember()
         {
         }
+      
 
-        public ProjectMember(string userId, int projectId)
+        public ProjectMember(int id, string userId, int projectId)
         {
+            Id = id;
             UserId = userId;
             ProjectId = projectId;
         }
+
         [Key]
         public int Id { get; set; }        
         public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public AspNetUser User { get; set; }        
+        public virtual AspNetUser User { get; set; }        
         public int ProjectId { get; set; }    
         [ForeignKey("ProjectId")]
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
     }
 }
