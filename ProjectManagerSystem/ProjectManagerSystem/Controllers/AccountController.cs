@@ -156,7 +156,6 @@ namespace ProjectManagerSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-
             // var lstRole = (new MsContext()).Roles.ToList().Select(p=>new SelectListItem { Value=p.Name.ToString(),Text=p.Name});
             //var lstRole = (new MsContext()).Roles.ToList();
             var list = new List<SelectListItem>();
@@ -187,7 +186,7 @@ namespace ProjectManagerSystem.Controllers
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddToRoleAsync(user.Id, model.Role);
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                   // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -195,7 +194,7 @@ namespace ProjectManagerSystem.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "User");
                 }
                 AddErrors(result);
                 }
@@ -265,7 +264,7 @@ namespace ProjectManagerSystem.Controllers
                             UserManager.AddToRole(user.Id, model.Role);
                         }   
                         //
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                     //   await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                      
 

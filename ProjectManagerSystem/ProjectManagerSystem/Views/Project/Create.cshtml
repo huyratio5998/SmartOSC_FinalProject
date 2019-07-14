@@ -178,7 +178,9 @@
                         url: '@Url.Action("SavePM", "Project")',
                         data: { projectMember: JSON.stringify(pMember) },
                         type: "POST",
-                        success: alert("Thanh cong")
+                        success: function (data) {
+                            window.location.href = data;
+                        }
                     });
                 }
             },

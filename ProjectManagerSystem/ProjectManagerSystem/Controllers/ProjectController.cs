@@ -38,13 +38,25 @@ namespace ProjectManagerSystem.Controllers
         public ActionResult Index()
         {
           
-            var x = _userService.GetAll();
-            var model = (from p in _projectService.GetAll().Where(p=>p.isDeleted==false)
+
+//select P.Id as PID , P.SortNameProject,P.Name,u.FullName as PM,P.Tasks  from AspNetUsers u
+//join 
+// ( select p.Id,p.SortNameProject, p.Name, p.PmId ,COUNT(t.Id) as Tasks from Projects p 
+// join Tasks t on p.Id=t.ProjectId
+// join AspNetUsers u on t.UserId=u.Id
+// where p.isDeleted ='false'
+//group by p.Id, p.Name, p.SortNameProject, p.PmId) as P
+//on P.PmId = u.Id
+            var x = _userService.GetAll();            
+            var Pdemo = (from p in _projectService.GetAll().Where(p=>p.isDeleted==false)
                          join t in _taskService.GetAll() on p.Id equals t.ProjectId                         
                          join u in _userService.GetAll() on t.UserId equals u.Id
-                         group new { p, t, u } by new {p.Id, p.SortNameProject, p.Name, u.FullName } into g                         
-                         select new {g.Key.Id, g.Key.SortNameProject, g.Key.Name, g.Key.FullName, Tasks = (g.Count(p => p.t.Id != null)) }).ToList();
-            var projects = new List<ProjectViewModel>();
+                         group new { p, t, u } by new {p.Id, p.SortNameProject, p.Name, p.PmId} into g                         
+                         select new {g.Key.Id, g.Key.SortNameProject, g.Key.Name, g.Key.PmId, Tasks = (g.Count(p => p.t.Id != null)) }).ToList();
+            var model = (from u in _userService.GetAll().ToList()
+                         join P in Pdemo on u.Id equals P.PmId
+                         select new { P.Id, P.SortNameProject, P.Name, u.FullName, P.Tasks }).ToList();
+var projects = new List<ProjectViewModel>();
             foreach (var item in model)
             {
                 var project = new ProjectViewModel();
@@ -67,7 +79,7 @@ namespace ProjectManagerSystem.Controllers
                 var model = (from u in _userService.GetAll()
                              join ur in _userRoleService.GetAll() on u.Id equals ur.UserId
                              join r in _roleService.GetAll() on ur.RoleId equals r.Id
-                             where r.Name == "ProjectManager"
+                             where r.Name == "Project Manager"
                              select new { u.Id, u.FullName }).ToList();
                 var lstPM = new List<PMViewModel>();
                 foreach (var item in model)
@@ -178,7 +190,7 @@ namespace ProjectManagerSystem.Controllers
                 var model = (from u in _userService.GetAll()
                              join ur in _userRoleService.GetAll() on u.Id equals ur.UserId
                              join r in _roleService.GetAll() on ur.RoleId equals r.Id
-                             where r.Name == "ProjectManager"
+                             where r.Name == "Project Manager"
                              select new { u.Id, u.FullName }).ToList();
                 var lstPM = new List<PMViewModel>();
                 if (model != null)

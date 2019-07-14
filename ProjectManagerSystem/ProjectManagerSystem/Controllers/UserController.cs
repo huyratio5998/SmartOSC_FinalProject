@@ -54,16 +54,17 @@ namespace ProjectManagerSystem.Controllers
                      select new { b.Key.UrlAvatar, Role = b.Key.Name, b.Key.Id, b.Key.UserName, b.Key.Email, TotalProject = (b.Count(m => m.j2?.ProjectId != null)) }).ToList();
 
             var B = (from tt in _taskService.GetAll()
-                     join u in _userService.GetAll() on tt.UserId equals u.Id
-                     group new { tt, u } by new { u.Id } into dd
-                     select new { dd.Key.Id, TotalU = (dd.Count(m => m.tt.Id != null)) }
+                     join u in _userService.GetAll() on tt.UserId equals u.Id                     
+                     join p in _projectService.GetAll().Where(p => p.isDeleted == false) on tt.ProjectId equals p.Id
+                     group new { tt, u } by new { u.Id,taskID= tt.Id } into dd
+                     select new { dd.Key.Id,dd.Key.taskID , TotalU = (dd.Count(m => m.tt.Id != null)) }
                     ).ToList();
 
             var model = (from a in A
                          join bb in B on a.Id equals bb.Id into j1
                          from j2 in j1.DefaultIfEmpty()
                          group new { a, j2 } by new { a.Id, a.UserName, a.TotalProject, a.UrlAvatar, a.Role } into mo
-                         select new {mo.Key.Id, mo.Key.UrlAvatar, mo.Key.UserName, mo.Key.Role, Projects = mo.Key.TotalProject, Tasks = (mo.Count(m => m.j2?.Id != null)) }).ToList();
+                         select new {mo.Key.Id, mo.Key.UrlAvatar, mo.Key.UserName, mo.Key.Role, Projects = mo.Key.TotalProject, Tasks = (mo.Count(m => m.j2?.taskID != null)) }).ToList();
             //
             var Users = new List<AspNetUsersViewModel>();
             foreach (var item in model)
