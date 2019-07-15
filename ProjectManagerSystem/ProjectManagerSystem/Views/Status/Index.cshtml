@@ -1,0 +1,71 @@
+﻿@model ProjectManagerSystem.Models.StatusViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <script src="~/Scripts/Status/Index.js"></script>
+    <script>
+        var userObj = new statusController();
+        userObj.init();
+
+    </script>
+
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        @*<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" id="txt-search-keyword" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" id="btn-search" type="button">Search!</button>
+                </span>
+            </div>
+        </div>*@
+        <button id="btnAdd" class="btn btn-success ">Add Status</button>
+        @*<div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Seatch</label>
+            <div class="col-sm-10">
+                <input type="text" name="txtFullName" class="form-control" id="Search">
+            </div>
+        </div>*@
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List Status</h6>
+
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" style="width:600px" cellspacing="0">
+                    <thead>
+                        <tr>
+                            @*<th>ID</th>*@
+                            <th style="width:400px">Name</th>
+                            <th style="width:200px">tool</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblData"></tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script id="dataStatus" type="x-tmpl-mustache">
+
+    <tr>
+        @*<td>{{Id}}</td>*@
+        <td>{{Name}}</td>
+        <td>
+            <button class="btn btn-primary btn-edit" data-id="{{Id}}" id="EditPartial">Edit</button>
+            <button class="btn btn-danger btn-delete" data-id="{{Id}}" id="Delete">Delete</button>
+        </td>
+    </tr>
+
+</script>
+@RenderPage("StatusInfomation.cshtml")
+
+

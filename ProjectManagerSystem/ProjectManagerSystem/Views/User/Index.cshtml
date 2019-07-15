@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ProjectManagerSystem.Models.AspNetUsersViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3 class="header smaller lighter blue">User</h3>
+
+        <div class="clearfix">
+            <div class="pull-right tableTools-container"></div>
+        </div>
+
+
+        <p>
+            @Html.ActionLink("Create New", "Register", "Account",null, new { @class = "btn btn-success" })
+        </p>
+        <div>
+            <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Avatar)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Role)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Projects)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tasks)
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.Avatar == null)
+                                {
+                                    <img src="~/Img/noImage.png" width="150" height="150" alt="@item.UserName" />
+                                }
+                                else
+                                {
+                                    <img src="~/Img/@item.Avatar" width="150" height="150" alt="@item.UserName" />
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Role)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Projects)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tasks)
+                            </td>
+                            <td>
+                                <div class="hidden-sm hidden-xs action-buttons">
+
+                                    <a class="green" href="@Url.Action("Edit", "Account",new {  id = item.Id})">
+                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                    </a>
+
+                                    <a class="red" href="@Url.Action("Delete", "Account",new {  id = item.Id})">
+                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                    </a>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#dynamic-table').DataTable({
+            "lengthMenu": [[3, 10, 25, 50], [3, 10, 25, 50]]
+        });
+    });
+</script>

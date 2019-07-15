@@ -1,0 +1,219 @@
+﻿@model ProjectManagerSystem.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ProjectViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SortNameProject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SortNameProject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SortNameProject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectManagerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PmId", (SelectList)ViewBag.lstPM, "---choose PM---", new { @class = "form-control", @id = "PmName" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", id="start" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", id = "end" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label  class="control-label col-md-2">Member</label>
+            <div class="col-md-10">
+                <div class="col-md-5">
+                    <select name="FromSelect" id="FromSelect" size="5" multiple class="form-control">
+                        @if (ViewBag.lstUser != null)
+                        {
+                            foreach (var item in ViewBag.lstUser)
+                            {
+                                <option value="@item.Id"> @item.FullName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button id="Send" class="btn btn-primary" style="margin-bottom: 10px; width: 150px;">
+                        Add
+                        <i class="fa fa-arrow-right"></i>
+                        <i class="fa fa-arrow-right"></i>
+                    </button>
+
+                    <button id="Remove" class="btn btn-danger" style="width: 150px;">
+                        <i class="fa fa-arrow-left"></i>
+                        <i class="fa fa-arrow-left"></i>
+                        Remove
+                    </button>
+                </div>
+                <div class="col-md-5">
+                    <select name="ToSelect" id="ToSelect" size="5" multiple class="form-control">
+
+                        @if (ViewBag.lstUPM != null)
+                        {
+                            foreach (var item in ViewBag.lstUPM)
+                            {
+                                if (item.Id == Model.PmId)
+                                {
+                                    <option id="PM" value="@item.Id" class="Pmanager">@item.FullName</option>
+                                }
+                            }
+                            foreach (var item in ViewBag.lstUPM)
+                            {
+                                if (item.Id != Model.PmId)
+                                {
+                                    <option value="@item.Id"> @item.FullName</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+                <input type="submit" value="Edit" id="Edit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    $(function () {        
+        //date picker
+        $('#start').datepicker({
+            onSelect: function (dateText, inst) {
+                $('#end').datepicker('option', 'minDate', new Date(dateText));
+            },
+        });
+
+        $('#end').datepicker({
+            onSelect: function (dateText, inst) {
+                $('#start').datepicker('option', 'maxDate', new Date(dateText));
+            }
+        });
+        //
+        $("#PmName").change(function () {
+            var id = $("option:selected", this).val();
+            var name = $("option:selected", this).text();
+            $("#PM").attr('value', id);
+            $("#PM").text(name);
+            $("#PM").removeAttr('hidden');
+            if ($("#PM").text() == '---choose PM---') $("#PM").attr('hidden',true);
+
+        });
+        $("#Send").click(function (e) {
+            e.preventDefault();
+            var selectedMember = $("#FromSelect").find(":selected");
+            $(selectedMember).each(function (i, selected) {
+                var id = $(selected).val();
+                var name = $(selected).text();
+                $(selected).remove();
+                $("#ToSelect").append(' <option value="' + id + '">' + name + '</option>');
+            })
+
+        });
+        //
+        $("#Remove").click(function (e) {
+            e.preventDefault();
+            var selectedMember = $("#ToSelect").find(":selected");
+            $(selectedMember).each(function (i, selected) {
+                var id = $(selected).val();
+                var name = $(selected).text();
+                if (selected.className != "Pmanager") {
+                    $(selected).remove();
+                    $("#FromSelect").append(' <option value="' + id + '">' + name + '</option>');
+                }
+            })
+        });
+    });
+    // ajax
+    $("#Edit").click(function (e) {
+        e.preventDefault();
+        // list project
+        var project = {
+            Id: @Model.Id,
+            Name: $("input[name='Name']").val(),
+            SortNameProject: $("input[name='SortNameProject']").val(),
+            PmId: $("#PmName").find(":selected").val(),
+            StartDate: $("input[name='StartDate']").val(),
+            EndDate: $("input[name='EndDate']").val(),
+            isDeleted: false
+        };
+
+        $.ajax({
+            url: '@Url.Action("SaveProject", "Project")',
+            data: {  project: JSON.stringify(project) , edit: true},
+            type: "POST",
+            success: function (data) {
+                if (data == null) {
+                    alert("id null roi"); return;
+                } else {
+                    // list user (userid, projectid);
+                    var pMember = [];
+                    var projectId = data;
+                    $("#ToSelect option").each(function () {
+                        var userId = $(this).val();
+                        console.log(projectId);
+                        var item = { userId, projectId };
+                        pMember.push(item);
+                    });
+                    console.log(pMember);
+                    $.ajax({
+                        url: '@Url.Action("SavePM", "Project")',
+                        data: { projectMember: JSON.stringify(pMember), edit: true },
+                        type: "POST",
+                        success: function (data) {
+                            window.location.href = data;
+                        }
+                    });
+                }
+            },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        });
+</script>
