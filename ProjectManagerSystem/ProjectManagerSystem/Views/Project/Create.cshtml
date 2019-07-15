@@ -13,137 +13,154 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>ProjectViewModel</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.SortNameProject, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SortNameProject, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SortNameProject, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ProjectManagerName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("PmId", (SelectList)ViewBag.lstPM, "---choose PM---", new { @class = "form-control" , @id="PmName" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.isDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.isDeleted)
-                @Html.ValidationMessageFor(model => model.isDeleted, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>ProjectViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Member</label>
-        <div class="col-md-10">
-            <div class="col-md-6">
-                <select name="FromSelect" id="FromSelect" multiple>
-                    @if (ViewBag.lstUser != null)
-                    {
-                        foreach (var item in ViewBag.lstUser)
+        <div class="form-group">
+            @Html.LabelFor(model => model.SortNameProject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SortNameProject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SortNameProject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectManagerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PmId", (SelectList)ViewBag.lstPM, "---choose PM---", new { @class = "form-control", @id = "PmName" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                       
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control ", id="start" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control ", id = "end" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Member</label>
+            <div class="col-md-10">
+                <div class="col-md-5">
+                    <select name="FromSelect" id="FromSelect" size="5" multiple class="form-control">
+                        @if (ViewBag.lstUser != null)
                         {
-                            <option value="@item.Id"> @item.FullName</option>
+                            foreach (var item in ViewBag.lstUser)
+                            {
+                                <option value="@item.Id"> @item.FullName</option>
+                            }
                         }
-                    }
                     </select>
-            </div>
-            <button id="Send">Add Member</button>
-            <button id="Remove">Remove Member</button>
-            <div class="col-md-6">
-                <select name="ToSelect" id="ToSelect" multiple>
-                    <option id="PM" hidden class="Pmanager"></option>
-                </select>
+                </div>
+                <div class="col-md-2">
+                    <button id="Send" class="btn btn-primary" style="margin-bottom: 10px; width: 150px;">
+                        Add
+                        <i class="fa fa-arrow-right"></i>
+                        <i class="fa fa-arrow-right"></i>
+                    </button>
+
+                    <button id="Remove" class="btn btn-danger" style="width: 150px;">
+                        <i class="fa fa-arrow-left"></i>
+                        <i class="fa fa-arrow-left"></i>
+                        Remove
+                    </button>
+                </div>
+                <div class="col-md-5">
+                    <select name="ToSelect" id="ToSelect" size="5" multiple class="form-control">
+                        <option id="PM" hidden class="Pmanager"></option>
+                    </select>
+                </div>
             </div>
         </div>
-        </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" id="Create" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+                <input type="submit" value="Create" id="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
 <script type="text/javascript">
     $(function () {
+    // date picker:
+     
+    $('#start').datepicker({
+        onSelect: function (dateText, inst) {
+            $('#end').datepicker('option', 'minDate', new Date(dateText));
+        },
+    });
 
+    $('#end').datepicker({
+        onSelect: function (dateText, inst) {
+            $('#start').datepicker('option', 'maxDate', new Date(dateText));
+        }
+    });
+        //
         $("#PmName").change(function () {
             var id = $("option:selected", this).val();
-            var name = $("option:selected", this).text();            
+            var name = $("option:selected", this).text();
             $("#PM").attr('value', id);
             $("#PM").text(name);
             // khong nen dùng hidden, vi khi an đi==> lấy list, thì vẫn còn.
-            $("#PM").removeAttr('hidden');                    
+            $("#PM").removeAttr('hidden');
             if ($("#PM").text() == '---choose PM---') $("#PM").attr('hidden',true);
-          
+
         });
-        $("#Send").click(function (e) { 
+        $("#Send").click(function (e) {
             e.preventDefault();
             var selectedMember = $("#FromSelect").find(":selected");
-            console.log(selectedMember);
+            //console.log(selectedMember);
             $(selectedMember).each(function (i, selected) {
                 var id = $(selected).val();
-                var name = $(selected).text();              
+                var name = $(selected).text();
                 $(selected).remove();
                 $("#ToSelect").append(' <option value="' + id + '">' + name + '</option>');
             })
-            
+
         });
         //
         $("#Remove").click(function (e) {
             e.preventDefault();
             var selectedMember = $("#ToSelect").find(":selected");
-            console.log(selectedMember);
+          //  console.log(selectedMember);
             $(selectedMember).each(function (i, selected) {
                 var id = $(selected).val();
-                var name = $(selected).text(); 
+                var name = $(selected).text();
                 if (selected.className != "Pmanager") {
                     $(selected).remove();
                     $("#FromSelect").append(' <option value="' + id + '">' + name + '</option>');
-                }                                
+                }
             })
         });
-    });    
+    });
     // ajax
     $("#Create").click(function (e) {
         e.preventDefault();
@@ -156,7 +173,7 @@
             EndDate: $("input[name='EndDate']").val(),
             isDeleted: false
         };
-             
+
         $.ajax({
             url: '@Url.Action("SaveProject", "Project")',
             data: { project: JSON.stringify(project)},
@@ -165,15 +182,15 @@
                 if (data == null) {
                     alert("id null roi"); return;
                 } else {
-                    // list user (userid, projectid); 
+                    // list user (userid, projectid);
                     var pMember = [];
                     var projectId = data;
                     $("#ToSelect option").each(function () {
-                        var userId = $(this).val();                        
+                        var userId = $(this).val();
                         console.log(projectId);
                         var item = { userId, projectId };
                         pMember.push(item);
-                    });  
+                    });
                     console.log(pMember);
                     $.ajax({
                         url: '@Url.Action("SavePM", "Project")',

@@ -3,6 +3,7 @@ using MS.DataAccess.Models;
 using MS.Repository.Interface;
 using MS.Service;
 using MS.Service.Interface;
+using ProjectManagerSystem.Authorization;
 using ProjectManagerSystem.Models;
 using ProjectManagerSystem.Models.CustomTasksViewModels;
 using System;
@@ -32,13 +33,14 @@ namespace ProjectManagerSystem.Controllers
         }
 
         // GET: Tasks
+        [CustomAuthorize]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: Tasks/Details/5
-
+        [CustomAuthorize]
         public JsonResult LoadProject()
         {
             var listProject = _ProjectService.GetAll().OrderBy(x => x.StartDate);
@@ -51,7 +53,7 @@ namespace ProjectManagerSystem.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-
+        [CustomAuthorize]
         public JsonResult LoadAssignee()
         {
             var listUser = _UserService.GetAll().ToList();
@@ -63,6 +65,7 @@ namespace ProjectManagerSystem.Controllers
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
+        [CustomAuthorize]
         public JsonResult LoadStatus()
         {
             var listStatus = _StatusService.GetAll();
@@ -74,7 +77,7 @@ namespace ProjectManagerSystem.Controllers
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
-
+        [CustomAuthorize]
         public JsonResult GetTasks(int projectId, string userId)
         {
             var ListTasks = _TasksService.GetAll().Where(x => x.ProjectId == projectId && x.UserId == userId);
@@ -86,7 +89,7 @@ namespace ProjectManagerSystem.Controllers
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
-
+        [CustomAuthorize]
         public JsonResult SearchTasks(string tasksName)
         {
             var Result = _TasksService.GetAll().Where(x => x.Name.Contains(tasksName) || x.Description.Contains(tasksName) || x.prt.Name.Contains(tasksName) || x.sts.Name.Contains(tasksName));
@@ -97,12 +100,12 @@ namespace ProjectManagerSystem.Controllers
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
-
+        [CustomAuthorize(Roles = "Admin, Project Manager")]
         public ActionResult AddTasks()
         {
             return View();
         }
-
+        [CustomAuthorize(Roles = "Admin, Project Manager")]
         public JsonResult CreateTasks(TasksViewModel tasksView)
         {
 
@@ -145,6 +148,8 @@ namespace ProjectManagerSystem.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize]
+        
         public JsonResult UpdateTasks(TasksViewModel model)
         {
             var Oldtasks = _TasksService.GetTasks(model.Id);
@@ -169,6 +174,7 @@ namespace ProjectManagerSystem.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin, Project Manager")]
         public JsonResult DeleteTasks(int taskId)
         {
             var TasksTarget = _TasksService.DeleteTasksbyId(taskId);

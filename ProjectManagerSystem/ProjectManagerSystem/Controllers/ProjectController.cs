@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using MS.DataAccess;
 using MS.DataAccess.Models;
 using MS.Service.Interface;
+using ProjectManagerSystem.Authorization;
 using ProjectManagerSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace ProjectManagerSystem.Controllers
         private IUserService _userService;
         private IUserRoleService _userRoleService;
         private IRoleService _roleService;
-
+        private string lstPM;
         public ProjectController(IProjectService projectService, IProjectMemberService projectMemberService, ITasksService taskService, IUserService userService, IUserRoleService userRoleService, IRoleService roleService)
         {
             _projectService = projectService;
@@ -35,6 +36,7 @@ namespace ProjectManagerSystem.Controllers
 
         //
         // GET: Project
+        [CustomAuthorize(Roles = "Admin,Project Manager")]
         public ActionResult Index()
         {
           
@@ -71,6 +73,7 @@ var projects = new List<ProjectViewModel>();
             //var projects = Mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(_projectService.GetAll());
             return View(projects);
         }
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Create()
         {
             // lay list ProjectMember
@@ -87,6 +90,7 @@ var projects = new List<ProjectViewModel>();
                     var k = new PMViewModel();
                     k.Id = item.Id;
                     k.Name = item.FullName;
+                    
                     lstPM.Add(k);
                 }
                 ViewBag.lstPM = new SelectList(lstPM, "Id", "Name");
@@ -119,7 +123,7 @@ var projects = new List<ProjectViewModel>();
           
             return View();
         }
-        [HttpPost]
+        [HttpPost]        
         public int SaveProject(string project, bool  edit=false)
         {
             JavaScriptSerializer seri = new JavaScriptSerializer();
@@ -182,6 +186,7 @@ var projects = new List<ProjectViewModel>();
             return Json(Url.Action("Index", "Project"));
             //return RedirectToAction("Index", "Project");
         }
+        [CustomAuthorize(Roles = "Admin,Project Manager")]
         public ActionResult Edit(int id)
         {
             try
@@ -267,7 +272,8 @@ var projects = new List<ProjectViewModel>();
 
             return View(Project);
         }
-       public ActionResult Delete(int id)
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult Delete(int id)
         {
             var x = _projectService.GetProject(id);
             if (x != null)

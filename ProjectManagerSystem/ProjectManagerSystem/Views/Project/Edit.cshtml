@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", id="start" } })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,37 +51,40 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", id = "end" } })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.isDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label  class="control-label col-md-2">Member</label>
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.isDeleted)
-                    @Html.ValidationMessageFor(model => model.isDeleted, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Member</label>
-            <div class="col-md-10">
-                <div class="col-md-6">
-                    <select name="FromSelect" id="FromSelect" multiple>
-                       @if(ViewBag.lstUser != null) { 
-                       foreach (var item in ViewBag.lstUser)
-                       {
-                            <option value="@item.Id"> @item.FullName</option>
-                        }
+                <div class="col-md-5">
+                    <select name="FromSelect" id="FromSelect" size="5" multiple class="form-control">
+                        @if (ViewBag.lstUser != null)
+                        {
+                            foreach (var item in ViewBag.lstUser)
+                            {
+                                <option value="@item.Id"> @item.FullName</option>
+                            }
                         }
                     </select>
                 </div>
-                <button id="Send">Add Member</button>
-                <button id="Remove">Remove Member</button>
-                <div class="col-md-6">
-                    <select name="ToSelect" id="ToSelect" multiple>
+                <div class="col-md-2">
+                    <button id="Send" class="btn btn-primary" style="margin-bottom: 10px; width: 150px;">
+                        Add
+                        <i class="fa fa-arrow-right"></i>
+                        <i class="fa fa-arrow-right"></i>
+                    </button>
+
+                    <button id="Remove" class="btn btn-danger" style="width: 150px;">
+                        <i class="fa fa-arrow-left"></i>
+                        <i class="fa fa-arrow-left"></i>
+                        Remove
+                    </button>
+                </div>
+                <div class="col-md-5">
+                    <select name="ToSelect" id="ToSelect" size="5" multiple class="form-control">
 
                         @if (ViewBag.lstUPM != null)
                         {
@@ -97,7 +100,7 @@
                                 if (item.Id != Model.PmId)
                                 {
                                     <option value="@item.Id"> @item.FullName</option>
-                                }                              
+                                }
                             }
                         }
                     </select>
@@ -106,21 +109,32 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
                 <input type="submit" value="Edit" id="Edit" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script type="text/javascript">
     $(function () {        
+        //date picker
+        $('#start').datepicker({
+            onSelect: function (dateText, inst) {
+                $('#end').datepicker('option', 'minDate', new Date(dateText));
+            },
+        });
+
+        $('#end').datepicker({
+            onSelect: function (dateText, inst) {
+                $('#start').datepicker('option', 'maxDate', new Date(dateText));
+            }
+        });
+        //
         $("#PmName").change(function () {
             var id = $("option:selected", this).val();
             var name = $("option:selected", this).text();

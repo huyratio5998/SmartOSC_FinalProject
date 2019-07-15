@@ -17,6 +17,7 @@ using MS.Repository;
 using MS.Repository.Interface;
 using MS.Service;
 using MS.Service.Interface;
+using ProjectManagerSystem.Authorization;
 using ProjectManagerSystem.Models;
 using static ProjectManagerSystem.Controllers.ManageController;
 
@@ -47,7 +48,7 @@ namespace ProjectManagerSystem.Controllers
           
 
         }
-
+        [CustomAuthorize]
         public ActionResult Index()
         {
             return View();

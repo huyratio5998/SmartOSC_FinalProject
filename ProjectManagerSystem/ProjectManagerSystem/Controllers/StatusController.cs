@@ -10,6 +10,7 @@ using AutoMapper;
 using MS.DataAccess.Models;
 using MS.Repository.Interface;
 using MS.Service.Interface;
+using ProjectManagerSystem.Authorization;
 using ProjectManagerSystem.Models;
 
 namespace ProjectManagerSystem.Controllers
@@ -29,6 +30,7 @@ namespace ProjectManagerSystem.Controllers
             _unitOfWork = unitOfWork;
         }
         [Route("configuration.html")]
+        [CustomAuthorize]
         public ActionResult Index()
         {
             var Status = Mapper.Map<IEnumerable<Status>, IEnumerable<StatusViewModel>>(_statusService.GetAll());
@@ -45,6 +47,7 @@ namespace ProjectManagerSystem.Controllers
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
+        [CustomAuthorize]
         [HttpPost]
         public ActionResult Delete(int ID)
         {
@@ -63,6 +66,7 @@ namespace ProjectManagerSystem.Controllers
             var mode = (from s in statusdata where s.Name == Name select s).ToList();
             return mode;
         }
+        [CustomAuthorize]
         [HttpPost]
         public ActionResult save([Bind(Include = "Id,Name")] StatusViewModel statusView)
         {

@@ -194,6 +194,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Authorization\CustomAuthorizeAttribute.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMapping.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMapping.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -365,6 +366,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\noImage.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\font-awesome\4.5.0\fonts\fontawesome-webfont.eot" />
@@ -1128,10 +1130,10 @@
     <Content Include="Views\Tasks\DeleteModal.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\Modal.cshtml" />
+    <Content Include="Views\Shared\AuthorizeFail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Img\" />
     <Folder Include="Scripts\ckfinder\userfiles\files\" />
     <Folder Include="Scripts\ckfinder\userfiles\flash\" />
   </ItemGroup>

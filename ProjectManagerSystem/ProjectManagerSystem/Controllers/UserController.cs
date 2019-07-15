@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using MS.DataAccess;
 using MS.DataAccess.Models;
 using MS.Service.Interface;
+using ProjectManagerSystem.Authorization;
 using ProjectManagerSystem.Models;
 
 namespace ProjectManagerSystem.Controllers
@@ -41,6 +42,7 @@ namespace ProjectManagerSystem.Controllers
             _taskService = taskService;
         }
         // GET: User
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Index()
         {
              // lay list user index          
@@ -82,126 +84,6 @@ namespace ProjectManagerSystem.Controllers
             return View(Users);
         }
 
-        // GET: User/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
-            if (aspNetUsersViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUsersViewModel);
-        }
-
-        // GET: User/Create
-        public ActionResult Create()
-        {
-            var lstRole = (new MsContext()).Roles.ToList();
-            ViewBag.lstRole = new SelectList(lstRole, "Name", "Name");
-            return View();
-        }
-
-        // POST: User/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(AspNetUsersViewModel aspNetUsersViewModel, string Role)
-        {
-            if (ModelState.IsValid)
-            {
-                aspNetUsersViewModel.Role = Role;
-                var model = Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel);
-                _userService.AddAspNetUser(model, aspNetUsersViewModel.Role, aspNetUsersViewModel.Password);
-
-                return RedirectToAction("Index");
-            }
-
-            return View(aspNetUsersViewModel);
-        }
-
-        // GET: User/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var lstRole = (new MsContext()).Roles.ToList();
-            ViewBag.lstRole = new SelectList(lstRole, "Name", "Name");
-            var user = _userService.GetAspNetUser(id);            
-            AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(user);
-            var x = _userRoleService.GetAll().Where(p=>p.UserId== aspNetUsersViewModel.Id).First();
-            var y = _roleService.GetAspNetRole(x.RoleId);
-            aspNetUsersViewModel.Role = y.Name.ToString();
-
-            if (aspNetUsersViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUsersViewModel);
-        }
-
-        // POST: User/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,Password,UserName,Avatar,Role")] AspNetUsersViewModel aspNetUsersViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                
-                var roleId=_roleService.GetAll().Where(p => p.Name == aspNetUsersViewModel.Role).First().Id;
-                var aspuser = Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel);
-                _userService.UpdateAspNetUser(aspuser);
-                var ur = _userRoleService.GetAll().Where(p => p.UserId == aspuser.Id).First();
-                ur.RoleId = roleId;
-                _userRoleService.UpdateAspNetUserRole(ur);
-                 _userService.SaveChange();                
-
-                return RedirectToAction("Index");
-            }
-            return View(aspNetUsersViewModel);
-        }
-
-        // GET: User/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
-            if (aspNetUsersViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUsersViewModel);
-        }
-
-        // POST: User/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            AspNetUsersViewModel aspNetUsersViewModel = Mapper.Map<AspNetUser, AspNetUsersViewModel>(_userService.GetAspNetUser(id));
-            _userService.DeleteAspNetUser(Mapper.Map<AspNetUsersViewModel, AspNetUser>(aspNetUsersViewModel));
-            //    _userService.SaveChange();
-            return RedirectToAction("Index");
-        }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+      
     }
 }

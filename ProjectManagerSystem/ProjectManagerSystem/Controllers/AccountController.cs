@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MS.DataAccess;
 using MS.DataAccess.Models;
+using ProjectManagerSystem.Authorization;
 using ProjectManagerSystem.Models;
 
 namespace ProjectManagerSystem.Controllers
@@ -89,16 +90,16 @@ namespace ProjectManagerSystem.Controllers
             {
                 return View(model);
             }
-
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index","Tasks");
                 case SignInStatus.LockedOut:
-                    return View("Lockout");
+                    return RedirectToAction("Login", "Account");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
@@ -154,6 +155,7 @@ namespace ProjectManagerSystem.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Register()
         {
             // var lstRole = (new MsContext()).Roles.ToList().Select(p=>new SelectListItem { Value=p.Name.ToString(),Text=p.Name});
@@ -172,6 +174,7 @@ namespace ProjectManagerSystem.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = "Admin")]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -207,7 +210,7 @@ namespace ProjectManagerSystem.Controllers
             return View(model);
         }
         //Edit
-        
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             
@@ -227,6 +230,7 @@ namespace ProjectManagerSystem.Controllers
         // POST: /Account/Register
         [HttpPost]        
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(AspNetUsersViewModel model )
         {
             
@@ -268,7 +272,7 @@ namespace ProjectManagerSystem.Controllers
 
                      
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index");
                     }
                     AddErrors(result);
                 }
@@ -281,7 +285,7 @@ namespace ProjectManagerSystem.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        
+        [CustomAuthorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(string id)
         {
             try
@@ -515,7 +519,7 @@ namespace ProjectManagerSystem.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

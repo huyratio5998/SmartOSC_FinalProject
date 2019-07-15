@@ -14,11 +14,14 @@ namespace ProjectManagerSystem.Models
         public string Name { get; set; }
 
         [Required, StringLength(4, MinimumLength = 1)]
+
         public string SortNameProject { get; set; }
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime? StartDate { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime? EndDate { get; set; }
 
         public bool isDeleted { get; set; }        
