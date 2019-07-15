@@ -124,15 +124,11 @@
     $(function () {        
         //date picker
         $('#start').datepicker({
-            onSelect: function (dateText, inst) {
-                $('#end').datepicker('option', 'minDate', new Date(dateText));
-            },
+ 
         });
 
         $('#end').datepicker({
-            onSelect: function (dateText, inst) {
-                $('#start').datepicker('option', 'maxDate', new Date(dateText));
-            }
+         
         });
         //
         $("#PmName").change(function () {

@@ -3,7 +3,7 @@
     this.init = function () {
         loadData();
         registerEvents();
-    }
+    };
 
     var registerEvents = function () {
         $('body').on('click', '#btnAdd', function (e) {
@@ -12,14 +12,14 @@
         });
         $('body').on('click', '#EditPartial', function (e) {
             e.preventDefault();
-            
+
             var id = $(this).data('id');
             GetDetails(id);
         });
         $('body').on('click', '#Savechanges', function (e) {
             e.preventDefault();
             var id = $('#txtid').val();
-            var Name = $('#txtName').val();     
+            var Name = $('#txtName').val();
             save(id, Name);
         });
         $('body').on('click', '#Delete', function (e) {
@@ -33,7 +33,7 @@
             loadDataSearch(name);
         });
 
-    }
+    };
     function resetFormMaintainance() {
         $('#txtName').val('');
         $('#txtid').val('');

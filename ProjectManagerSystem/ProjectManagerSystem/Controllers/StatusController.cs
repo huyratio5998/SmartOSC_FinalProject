@@ -71,7 +71,14 @@ namespace ProjectManagerSystem.Controllers
         public ActionResult save([Bind(Include = "Id,Name")] StatusViewModel statusView)
         {
             bool status = false;
-
+            if ((statusView.Id == 0) && (statusView.Name == null))
+            {
+                status = false;
+                return Json(new
+                {
+                    status = status
+                }, JsonRequestBehavior.AllowGet);
+            }
             if (statusView.Id == 0)
             {
 

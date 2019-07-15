@@ -9,7 +9,10 @@
         loadProject();
         loadAssignee();
         loadStatus();
+
+        //changeProjectData();
     }
+
 
     function loadProject() {
         $(document).ready(function () {
@@ -24,33 +27,44 @@
                         render += Mustache.render(template, {
                             projectName: item.Name,
                             projectId: item.Id,
-                        })
-                    })
+                        });
+                    });
                     $('#ProjectData').html(render);
                 }
-            })
-        })
+            });
+        });
     }
 
-    function loadAssignee() {
-        $(document).ready(function () {
+    //function changeProjectData() {
+    //    $('#ProjectData').change(function (e) {
+    //        ProjectId = $('#ProjectData').val();
+    //        console.log(ProjectId);
+    //        loadAssignee(ProjectId);
+    //    });
+    //}
+
+    function loadAssignee(ProjectId) {
+        $(function () {
             var render = '';
             var template = $('#OptionAssignee').html();
             $.ajax({
                 url: "/Tasks/LoadAssignee",
                 type: 'GET',
+                data: {
+                    projectId: ProjectId
+                },
                 datatype: 'json',
                 success: function (response) {
                     $.each(response.data, function (i, item) {
                         render += Mustache.render(template, {
                             assigneeName: item.FullName,
                             assigneeId: item.Id
-                        })
-                    })
+                        });
+                    });
                     $('#AssigneeData').html(render);
                 }
-            })
-        })
+            });
+        });
     }
 
     function loadStatus() {

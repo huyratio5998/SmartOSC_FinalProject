@@ -1,7 +1,7 @@
 ﻿var TaskController = function () {
 
     this.intialize = function () {
-        GetTasks("1", "8e32afeb-f538-4a76-9d3b-c8d77f371ded");
+        loadAllTasks();
         loadDataSelectList();
         registerEvent();
     }
@@ -11,6 +11,31 @@
         loadAssignee()
         loadAssigneeToModal();
         loadStatusToModal();
+    }
+
+    function loadAllTasks() {
+        $(document).ready(function () {
+            var render = '';
+            var template = $('#dataTasks').html();
+            $.ajax({
+                url: "/Tasks/LoadAllTasks",
+                type: 'GET',
+                datatype: 'json',
+                success: function (response) {
+                    console.log(response);
+                    $.each(response.data, function (i, item) {
+                        render += Mustache.render(template, {
+                            TaskId: item.Id,
+                            DeleteId: item.Id,
+                            TasksCode: item.SortNameTask,
+                            TaskName: item.Name,
+                            Status: item.sts.Name
+                        })
+                    })
+                    $('#tblTasks').html(render);
+                }
+            })
+        })
     }
 
     function loadProject() {
@@ -174,6 +199,7 @@
             dataType: 'json',
             success: function (response) {
                 alert("Delete Success !")
+                loadAllTasks();
             }
         })
     }
@@ -283,7 +309,7 @@
                 success: function (response) {
                     $.each(response.data, function (i, item) {
                         render += Mustache.render(template, {
-                            TaskId: item.Id,
+                            TasksCode: item.SortNameTask,
                             TaskName: item.Name,
                             Status: item.sts.Name
                         })

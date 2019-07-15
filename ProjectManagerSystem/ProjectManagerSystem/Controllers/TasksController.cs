@@ -23,13 +23,15 @@ namespace ProjectManagerSystem.Controllers
         private readonly IProjectService _ProjectService;
         private readonly IUserService _UserService;
         private readonly IStatusService _StatusService;
+        private readonly IProjectMemberService _ProjectMemberService;
 
-        public TasksController(ITasksService tasksService, IProjectService projectService, IUserService userService, IStatusService statusService)
+        public TasksController(ITasksService tasksService, IProjectService projectService, IUserService userService, IStatusService statusService,IProjectMemberService projectMemberService)
         {
             _TasksService = tasksService;
             _ProjectService = projectService;
             _UserService = userService;
             _StatusService = statusService;
+            _ProjectMemberService = projectMemberService;
         }
 
         // GET: Tasks
@@ -66,6 +68,38 @@ namespace ProjectManagerSystem.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
         [CustomAuthorize]
+        public JsonResult LoadAssigneeInProject(int projectId)
+        {
+            var lstUPM = new List<AspNetUsersViewModel>();
+
+            try
+            {
+                var uPM = (from u in _UserService.GetAll()
+                           join pm in _ProjectMemberService.GetAll().OrderBy(p => p.Id) on u.Id equals pm.UserId
+                           where pm.ProjectId == projectId
+                           select new {u.Id, u.FullName}).ToList();
+
+                if (uPM != null)
+                {
+                    foreach (var item in uPM)
+                    {
+                        var k = new AspNetUsersViewModel();
+                        k.Id = item.Id;
+                        k.FullName = item.FullName;
+                        lstUPM.Add(k);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                lstUPM = null;
+            }
+            return Json(new
+            {
+                data = lstUPM
+            }, JsonRequestBehavior.AllowGet);
+        }
+        [CustomAuthorize]
         public JsonResult LoadStatus()
         {
             var listStatus = _StatusService.GetAll();
@@ -74,6 +108,19 @@ namespace ProjectManagerSystem.Controllers
 
             return Json(new
             {
+                data = models
+            }, JsonRequestBehavior.AllowGet);
+        }
+        [CustomAuthorize]
+        public JsonResult LoadAllTasks()
+        {
+            var AllTasks = _TasksService.GetAll();
+
+            var models = Mapper.Map<IEnumerable<Tasks>, IEnumerable<TasksViewModel>>(AllTasks);
+
+            return Json(new
+            {
+
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
@@ -100,18 +147,15 @@ namespace ProjectManagerSystem.Controllers
                 data = models
             }, JsonRequestBehavior.AllowGet);
         }
-        [CustomAuthorize(Roles = "Admin, Project Manager")]
+        [CustomAuthorize(Roles = "Admin,Project Manager")]
         public ActionResult AddTasks()
         {
             return View();
         }
-        [CustomAuthorize(Roles = "Admin, Project Manager")]
+        [CustomAuthorize(Roles = "Admin,Project Manager")]
         public JsonResult CreateTasks(TasksViewModel tasksView)
         {
-
-
-
-            tasksView.SortNameTask = _ProjectService.GetProject(tasksView.ProjectId).SortNameProject + "- Hieu";
+            tasksView.SortNameTask = _ProjectService.GetProject(tasksView.ProjectId).SortNameProject + "- HHHH";
 
             var status = false;
 
@@ -149,7 +193,6 @@ namespace ProjectManagerSystem.Controllers
 
         [HttpPost]
         [CustomAuthorize]
-        
         public JsonResult UpdateTasks(TasksViewModel model)
         {
             var Oldtasks = _TasksService.GetTasks(model.Id);
@@ -174,7 +217,7 @@ namespace ProjectManagerSystem.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "Admin, Project Manager")]
+        [CustomAuthorize(Roles = "Admin,Project Manager")]
         public JsonResult DeleteTasks(int taskId)
         {
             var TasksTarget = _TasksService.DeleteTasksbyId(taskId);

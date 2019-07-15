@@ -113,15 +113,11 @@
     // date picker:
      
     $('#start').datepicker({
-        onSelect: function (dateText, inst) {
-            $('#end').datepicker('option', 'minDate', new Date(dateText));
-        },
+       
     });
 
     $('#end').datepicker({
-        onSelect: function (dateText, inst) {
-            $('#start').datepicker('option', 'maxDate', new Date(dateText));
-        }
+       
     });
         //
         $("#PmName").change(function () {
@@ -173,14 +169,16 @@
             EndDate: $("input[name='EndDate']").val(),
             isDeleted: false
         };
-
+        var list
         $.ajax({
             url: '@Url.Action("SaveProject", "Project")',
             data: { project: JSON.stringify(project)},
             type: "POST",
             success: function (data) {
                 if (data == null) {
-                    alert("id null roi"); return;
+
+                    alert("Project sort name đã tồn tại");
+                    return;
                 } else {
                     // list user (userid, projectid);
                     var pMember = [];

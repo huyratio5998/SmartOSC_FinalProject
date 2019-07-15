@@ -217,7 +217,7 @@
                         <i class="menu-icon glyphicon glyphicon-user"></i>
                         <span class="menu-text"> Users </span>
                     </a>
-                    
+
                     <b class="arrow"></b>
                 </li>
                 <li class="">
@@ -237,7 +237,7 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="">
-                    <a href="@Url.Action("Index", "MyAccount")">
+                    <a href="@Url.Action("EditAcc", "Account")">
                         <i class="menu-icon fa fa-asterisk"></i>
                         <span class="menu-text"> MyAccount </span>
                     </a>
@@ -341,8 +341,8 @@
     <script src="~/assets/js/buttons.print.min.js"></script>
     <script src="~/assets/js/buttons.colVis.min.js"></script>
     <script src="~/assets/js/dataTables.select.min.js"></script>
-
-
+    @RenderSection("jsupload", required: false)
+    @RenderSection("status", required: false)
 
 
 

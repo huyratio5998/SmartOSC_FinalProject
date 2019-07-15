@@ -153,6 +153,82 @@ namespace ProjectManagerSystem.Controllers
         }
 
         //
+        [CustomAuthorize]
+        public ActionResult EditAcc()
+        {
+            string id = User.Identity.GetUserId();
+            //var list = new List<SelectListItem>();
+            //foreach (var item in RoleManager.Roles)
+            //{
+            //    list.Add(new SelectListItem { Value = item.Name, Text = item.Name });
+            //}
+            //ViewBag.lstRole = list;
+            var user = UserManager.FindById(id);
+            var x = Mapper.Map<AspNetUser, RegisterViewModel>(user);
+            var oldRoleId = user.Roles.SingleOrDefault().RoleId;
+            var roleName = RoleManager.Roles.SingleOrDefault(p => p.Id == oldRoleId).Name;
+            x.Role = roleName;
+            return View(x);
+        }
+        // POST: /Account/Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [CustomAuthorize]
+        public async Task<ActionResult> EditAcc(AspNetUsersViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(model.Id);
+                user.UrlAvatar = model.Avatar;
+                user.UserName = model.UserName;
+                user.FullName = model.FullName;
+                user.Email = model.Email;
+
+                try
+                {
+                    if (model.Password != user.PasswordHash)
+                    {
+                        //UserManager.RemovePassword(model.Id);
+                        //var x=UserManager.AddPassword(model.Id, model.Password);
+                        var token = await UserManager.GeneratePasswordResetTokenAsync(model.Id);
+                        var result1 = await UserManager.ResetPasswordAsync(model.Id, token, model.Password);
+                    }
+
+
+                    // update user
+                    var result = await UserManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        // update role
+                        var oldUser = UserManager.FindById(model.Id);
+                        var oldRoleId = oldUser.Roles.First().RoleId;
+                        var oldRoleName = RoleManager.Roles.SingleOrDefault(p => p.Id == oldRoleId).Name;
+                        if (oldRoleName != model.Role)
+                        {
+                            UserManager.RemoveFromRole(user.Id, oldRoleName);
+                            UserManager.AddToRole(user.Id, model.Role);
+                        }
+                        //
+                        //   await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+
+
+                        return RedirectToAction("EditAcc");
+                    }
+                    AddErrors(result);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        //
         // GET: /Account/Register
         [AllowAnonymous]
         [CustomAuthorize(Roles = "Admin")]
@@ -168,7 +244,7 @@ namespace ProjectManagerSystem.Controllers
             ViewBag.lstRole = list;
             return View();
         }
-
+        //
         //
         // POST: /Account/Register
         [HttpPost]
@@ -272,7 +348,7 @@ namespace ProjectManagerSystem.Controllers
 
                      
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index","User");
                     }
                     AddErrors(result);
                 }

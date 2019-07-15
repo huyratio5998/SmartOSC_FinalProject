@@ -41,20 +41,18 @@ namespace ProjectManagerSystem.Controllers
         {
           
 
-//select P.Id as PID , P.SortNameProject,P.Name,u.FullName as PM,P.Tasks  from AspNetUsers u
-//join 
-// ( select p.Id,p.SortNameProject, p.Name, p.PmId ,COUNT(t.Id) as Tasks from Projects p 
-// join Tasks t on p.Id=t.ProjectId
-// join AspNetUsers u on t.UserId=u.Id
-// where p.isDeleted ='false'
-//group by p.Id, p.Name, p.SortNameProject, p.PmId) as P
-//on P.PmId = u.Id
+ // select p.Id, p.SortNameProject, p.Name, p.PmId, COUNT(t.Id) as Tasks from Projects p
+ //left join AspNetUsers u on u.Id=p.PmId
+ //left join Tasks t on p.Id = t.ProjectId 
+ //where p.isDeleted = 'false' group by p.Id, p.Name, p.SortNameProject, p.PmId
             var x = _userService.GetAll();            
-            var Pdemo = (from p in _projectService.GetAll().Where(p=>p.isDeleted==false)
-                         join t in _taskService.GetAll() on p.Id equals t.ProjectId                         
-                         join u in _userService.GetAll() on t.UserId equals u.Id
-                         group new { p, t, u } by new {p.Id, p.SortNameProject, p.Name, p.PmId} into g                         
-                         select new {g.Key.Id, g.Key.SortNameProject, g.Key.Name, g.Key.PmId, Tasks = (g.Count(p => p.t.Id != null)) }).ToList();
+            var Pdemo = (from p in _projectService.GetAll().Where(p=>p.isDeleted==false)                                              
+                         join u in _userService.GetAll() on p.PmId equals u.Id into j1
+                         from j2 in j1.DefaultIfEmpty() 
+                         join t in _taskService.GetAll() on p.Id equals t.ProjectId into j3
+                         from j4 in j3.DefaultIfEmpty()
+                         group new { p, j2, j4 } by new {p.Id, p.SortNameProject, p.Name, p.PmId} into g                         
+                         select new {g.Key.Id, g.Key.SortNameProject, g.Key.Name, g.Key.PmId, Tasks = (g.Count(p => p.j4?.Id != null )) }).ToList();
             var model = (from u in _userService.GetAll().ToList()
                          join P in Pdemo on u.Id equals P.PmId
                          select new { P.Id, P.SortNameProject, P.Name, u.FullName, P.Tasks }).ToList();
@@ -120,6 +118,7 @@ var projects = new List<ProjectViewModel>();
             {
                 ViewBag.lstUser = null;
             }
+            
           
             return View();
         }
@@ -129,22 +128,23 @@ var projects = new List<ProjectViewModel>();
             JavaScriptSerializer seri = new JavaScriptSerializer();
             // take project object.
             ProjectViewModel objProject = seri.Deserialize<ProjectViewModel>(project);
-            var Project=new Project();
-            if (edit == false)
-            {
-                // take pm object            
-                Project = _projectService.AddProject(Mapper.Map<ProjectViewModel, Project>(objProject));
-            }else
-            {
-                Project = Mapper.Map<ProjectViewModel, Project>(objProject);
-                _projectService.UpdateProject(Project);
-                
-            }
-          
-            _projectService.SaveChange();
-            
-            return Project.Id;    
-         
+           
+                var Project = new Project();
+                if (edit == false)
+                {
+                    // take pm object            
+                    Project = _projectService.AddProject(Mapper.Map<ProjectViewModel, Project>(objProject));
+                }
+                else
+                {
+                    Project = Mapper.Map<ProjectViewModel, Project>(objProject);
+                    _projectService.UpdateProject(Project);
+
+                }
+
+                _projectService.SaveChange();
+                return Project.Id;
+                    
         }
         [HttpPost]        
         public JsonResult SavePM(string projectMember, bool edit=false)

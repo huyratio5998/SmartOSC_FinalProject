@@ -6,12 +6,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/modernizr-2.8.3.js"></script>
 <script src="~/Scripts/plugins/mustache.min.js"></script>
 <script src="~/Scripts/TasksJsController/Index.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.2/mustache.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
 <script>
     var tas = new TaskController();
     tas.intialize();
@@ -30,7 +31,6 @@
     <div class="col-md-12">
         <input class="form-group" style="margin-left:795px;margin-bottom:0px" id="InputSearch" />
         <button class="form-group" id="SearchTasks">Search</button>
-        <button class="form-group" id="Refresh">Refresh</button>
     </div>
 </div>
 
